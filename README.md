@@ -95,8 +95,128 @@ This application will allow you to make **scavenger hunts** while exploring the 
 
 ---
 
-### RESTful Routes(To be Updated):
-|Description| Method | Route Name| View rendered|
+### Routes:
+
+#### HTML (front-end) Routes ####
+
+| Routes | Components |
+| ------ | ---------- |
+| GET / | Redirect to Login/Signup |
+| GET /login | Login |
+| GET /signup | Login |
+| GET /logout | None |
+| GET /hunts | HuntList |
+| GET /hunts/new | HuntForm |
+| GET /hunts/:id | HuntShow |
+
+#### Users JSON Routes ####
+
+Summary Table:
+
+| Routes | Auth |
+| ------ | ---- |
+| POST /api/v1/users | NO   |
+| POST /api/v1/users/login | NO |
+
+Request (POST /api/v1/users/login & /api/v1/users):
+```
+{
+  username: String,
+  password: String
+}
+```
+
+Response:
+```
+ {
+   success: true,
+   data: {
+     token: String
+   }
+ }
+```
+
+#### Scavenger Hunts JSON Routes ####
+
+Summary Table:
+
+| Routes | Auth |
+| ------ | ---- |
+| GET /api/v1/hunts | YES |
+| GET /api/v1/hunts/:id | YES |
+| POST /api/v1/hunts | YES |
+| PUT /api/v1/hunts/:id | YES |
+| DELETE /api/v1/hunts/:id | YES |
+
+Request (PUT/POST api/v1/hunts):
+```
+{
+   wager: String,
+   deadline: datetime,
+   participants: [Number, ...], // By user_id
+   clues: [
+    {
+      description: String,
+      clue_number: Number,
+      lat: Number,
+      lng: Number
+    }, ...
+  ]
+ }
+ ```
+
+Response (GET /hunts ):
+```
+{
+  success: true,
+  data: [
+    {
+      hunt_id: Number,
+      owner_id: Number,
+      wager: String,
+      winner: String,
+      deadline: datetime
+    }, ...
+  ]
+}
+```
+Params GET api/v1/hunts/:id
+* lat: Latitude in decimal degrees
+* lng: Longitude in decimal degrees
+* Example: ```/api/v1/hunts/:id?lat=25.07656&lng=-80.37478```
+
+Response (GET/PUT api/v1/hunts/:id & POST /api/v1/hunts):
+ ```
+ {
+   success: true,
+   data: {
+     hunt_id: Number,
+     owner_id: Number,
+     wager: String
+     deadline: datetime,
+     participants: [
+     {
+      participant_id: Number,
+      username: String,
+      progress: Number // Generated from clue-users table  
+     }, ...],
+     clues: [
+      {
+        clue_id: Number,
+        clue_number: Number,
+        description: String,
+        lat: Number,
+        lng: Number
+      }, ...
+     ]
+   }
+ }
+ ```
+
+ Response (DELETE):
+
+{success: true}
+
 
 ---
 
