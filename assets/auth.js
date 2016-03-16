@@ -1,12 +1,12 @@
-module.exports = {                              // module.exports = {} ??
+module.exports = {
   login(email, pass, cb) {
-    cb = arguments[arguments.length - 1]        // what|where is arguments coming from?   what is arguments storing?
+    cb = arguments[arguments.length - 1]
     if (localStorage.token) {
       if (cb) cb(true)
-      this.onChange(true)         // is this just setting cb to true?
+      this.onChange(true)
       return
     }
-    pretendRequest(email, pass, (res) => {    // why just res? 
+    loginRequest(email, pass, (res) => {
       if (res.authenticated) {
         localStorage.token = res.token
         if (cb) cb(true)
@@ -19,7 +19,7 @@ module.exports = {                              // module.exports = {} ??
   },
 
   getToken() {
-    return localStorage.token         // what is localStorage.token?? object? array?
+    return localStorage.token
   },
 
   logout(cb) {
@@ -32,18 +32,23 @@ module.exports = {                              // module.exports = {} ??
     return !!localStorage.token
   },
 
-  onChange() {}                 // what is the purpose of this?
+  onChange() {}
 }
 
-function pretendRequest(email, pass, cb) {
-  setTimeout(() => {
-    if (email === 'joe@example.com' && pass === 'password1') {
-      cb({
-        authenticated: true,
-        token: Math.random().toString(36).substring(7)
-      })
-    } else {
-      cb({ authenticated: false })
-    }
-  }, 0)
+
+
+function loginRequest(email, pass, cb) {
+  $.post('users/login', {email: email, password: pass})
+  .done((data) => {
+    cb({
+      authenticated: true,
+      token: data.token
+    })
+  })
+  .fail ((data) => {
+    cb({
+      status:202,
+      data: data
+    })
+  })
 }
