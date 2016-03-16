@@ -48,7 +48,7 @@ This is application will allow the you to make **scavenger hunts** and share the
 
 ### DataBase Design:
 #### Entity Relationship Diagram version 1:
-#![](scavenger-erd.png)
+#![](scavenger_erd.png)
 
 ### Wireframes version 1(To be Added):
 
