@@ -31,11 +31,13 @@ This is application will allow the you to make **scavenger hunts** and share the
 * As a user, I should be able to log in if i already have an account
 * As a user, after I log-in, the page should be welcoming and it should let me complete most of the application functions from this page.
 * As a user, I should be able to log out of the application
+
 #### Creating a New Scavenger Hunt
 * As a user, I should be able make a new scavenger hunt
 * As a user, I should be able to add clues to the scavenger hunt that I created
 * As a user, I should be able to add location and text associated to a clue
 * As a user, I should be able to share my scavenger hunt with other users/friends
+
 #### Tracking Progress of Scavenger-hunts I created
 * As a user, I should be able to see the scavenger hunts that I created
 * As a user, I should be able to track the progress of all the people participating in the hunt
@@ -43,6 +45,7 @@ This is application will allow the you to make **scavenger hunts** and share the
 * As a user, I should be able to delete clues
 * As a user, I should be able to edit the clues
 * As a user, I should be able to deactivate/end the hunt
+
 #### Tracking Progress of Scavenger-hunts I am a member of
 * As a user, I should be able to see all the hunts that I completed
 * As a user, I should be able to see the hunt I am currently participating in
@@ -62,16 +65,16 @@ This is application will allow the you to make **scavenger hunts** and share the
 ### Wireframes version 1(To be Added):
 
 #### Sign in|Log in Page
-#![](images/signin_login.png)
+#![](./images/signin_login.png)
 
 #### User Home Page
-#![](images/user_homepage.png)
+#![](./images/user_homepage.png)
 
 #### Create Scavenger Hunt and Clues Page
-#![](images/hunt_form.png)
+#![](./images/hunt_form.png)
 
 #### Game View Page
-#![](images/game_view.png)
+#![](./images/game_view.png)
 
 --- 
 
