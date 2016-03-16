@@ -62,16 +62,16 @@ This is application will allow the you to make **scavenger hunts** and share the
 ### Wireframes version 1(To be Added):
 
 #### Sign in|Log in Page
-#![](SignIn-LogIn.png)
+#![](images/signin_login.png)
 
 #### User Home Page
-#![](user homepage.png)
+#![](images/user_homepage.png)
 
 #### Create Scavenger Hunt and Clues Page
-#![](Hunt Form.png)
+#![](images/hunt_form.png)
 
 #### Game View Page
-#![](Game View.png)
+#![](images/game_view.png)
 
 --- 
 
