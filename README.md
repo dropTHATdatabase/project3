@@ -29,33 +29,41 @@ This application will allow you to make **scavenger hunts** while exploring the 
 
 ### User Stories version 1:
 #### Authentication
-* As a user, there should be a landing page that allows me to sign up/login for the application
-* As a user, I should be able to sign up for the application
-* As a user, I should be able to log in if i already have an account
-* As a user, after I log-in, the page should be welcoming and it should let me complete most of the application functions from this page.
-* As a user, I should be able to log out of the application
+* As a guest, there should be a landing page that allows me to sign up/login for the application
+* As a guest, I should be able to sign up for the application
+* As a member, I should be able to log in if i already have an account
+* As a member, after I log-in, the page should be welcoming and it should let me complete most of the application functions from this page
+* As a member, my homepage should let me create new hunts
+* As a member, my homepage should let me see the hunts that I am a part of
+* As a member, I should be able to log out of the application
 
 #### Creating a New Scavenger Hunt
-* As a user, I should be able make a new scavenger hunt
-* As a user, I should be able to add clues to the scavenger hunt that I created
-* As a user, I should be able to add location and text associated to a clue
-* As a user, I should be able to share my scavenger hunt with other users/friends
+* As a member, I should be able make a new scavenger hunt
+* As a creator, I should be able to add clues to the scavenger hunt that I have created
+* As a creator, I should be able to add location and text associated to a clue
+* As a creator, I should be able to set the end time for the hunt
+* As a creator, I should be able to share my scavenger hunt with other users/friends
 
 #### Tracking Progress of Scavenger-hunts I created
-* As a user, I should be able to see the scavenger hunts that I created
-* As a user, I should be able to track the progress of all the people participating in the hunt
-* As a user, I should be able to see the time left until the end of the hunt
-* As a user, I should be able to delete clues
-* As a user, I should be able to edit the clues
-* As a user, I should be able to deactivate/end the hunt
+* As a creator, I should be able to see the scavenger hunts that I have created
+* As a creator, I should be able to track the progress of all the people participating in the hunt
+* As a creator, I should be able to see the time left until the end of the hunt
+* As a creator, I should be able to see all the clues associated with the hunt
+* As a creator, I should be able to delete clues
+* As a creator, I should be able to edit the clues
+* As a creator, I should be able to deactivate/end the hunt
 
 #### Tracking Progress of Scavenger-hunts I am a member of
-* As a user, I should be able to see all the hunts that I completed
-* As a user, I should be able to see the hunt I am currently participating in
-* As a user, I should be able to see the progress of all the members in the hunt
-* As a user, I should be able to check-in to the location associated with a particular clue
-* As a user when i check-in to a location, I should know if it is right location associated with that particular clue
-* As a user when i complete the hunt, I should see a message letting me know that I finished the hunt
+* As a player, I should be able to see all the hunts that I have completed
+* As a player, I should be able to see the clues that I have completed in a hunt
+* As a player, I should be able to see the hunt I am currently participating in
+* As a player, I should be able to see the hunt I am currently participating in
+* As a player, I should be able to see the progress of all the players in the hunt
+* As a player, I should be able to check-in to the location associated with a particular clue
+* As a player, I should be able to see the time left until the end of the hunt
+* As a player when I check-in to a location, I should know if it is right location associated with that particular clue
+* As a player when I complete the hunt, I should get a notification saying that I finished the hunt
+
 
 ---
 
