@@ -21,5 +21,10 @@ module.exports = {
     add: function(values){
       return db.one(sql.users.add, values);
     }
+  },
+  hunts: {
+    create: function(){
+      return db.none(sql.hunts.create);
+    }
   }
 };

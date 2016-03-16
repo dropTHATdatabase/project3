@@ -7,10 +7,12 @@ const db = require(path.join(__dirname, 'index.js'));
 // Only intended to be run from the console
 db.users.create()
   .then(() => {
+    db.hunts.create()
+      .then(() => {
+        console.log('hunts table created');
+        process.exit();
+      })
+      .catch(console.log);
     console.log('users table created');
-    process.exit();
   })
-  .catch((err) => {
-    console.error('There was an error creating users table ', err);
-    process.exit(1);
-  });
+  .catch(console.log);
