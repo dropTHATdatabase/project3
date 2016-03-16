@@ -30,7 +30,7 @@ function get(req, res, next){
   var username = req.body.username;
   var password = req.body.password;
 
-  auth.getHashedPassword
+  auth.getHashedPassword(password)
     .then((hash) => {
       db.users.get(username)
       .then((user) => {
