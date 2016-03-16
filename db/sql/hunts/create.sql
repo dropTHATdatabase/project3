@@ -5,3 +5,5 @@ CREATE TABLE IF NOT EXISTS hunts (
   wager VARCHAR(255) NOT NULL,
   winner_id INT
 );
+
+CREATE INDEX ON hunts (owner_id);
