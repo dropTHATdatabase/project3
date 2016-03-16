@@ -34,9 +34,9 @@ const Signup = React.createClass({
       <form onSubmit={this.handleSubmit}>
         <label><input ref="username" placeholder="Create a Username" /></label>
         <label><input ref="password" placeholder="Create a Password" /></label><br />
-        <button type="submit">login</button>
+        <button type="submit">Sign Me Up!</button>
         {this.state.error && (
-          <p>Bad Sign Up Information!</p>
+          <p>Oops! Something went wrong, please try again!</p>
         )}
       </form>
     )

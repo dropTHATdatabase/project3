@@ -1,4 +1,3 @@
-
 const React = require('react');
 const auth = require('../auth');
 const Login = React.createClass({
@@ -15,11 +14,10 @@ const Login = React.createClass({
 
   handleSubmit(event) {
     event.preventDefault()
+    const username = this.refs.username.value
+    const password = this.refs.password.value
 
-    const name = this.refs.email.value
-    const pass = this.refs.pass.value
-
-    auth.login(email, pass, (loggedIn) => {
+    auth.login(username, password, (loggedIn) => {
       if (!loggedIn)
         return this.setState({ error: true })
 
@@ -36,11 +34,11 @@ const Login = React.createClass({
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label><input ref="name" placeholder="name"/></label>
-        <label><input ref="pass" placeholder="password" /></label><br />
-        <button type="submit">login</button>
+        <label><input ref="username" placeholder="Create A Username"/></label>
+        <label><input ref="password" placeholder="Create a Password" /></label><br />
+        <button type="submit">Login</button>
         {this.state.error && (
-          <p>Bad login information</p>
+          <p>Invalid login information!</p>
         )}
       </form>
     )
