@@ -64,7 +64,6 @@ This application will allow you to make **scavenger hunts** while exploring the 
 * As a player when I check-in to a location, I should know if it is right location associated with that particular clue
 * As a player when I complete the hunt, I should get a notification saying that I finished the hunt
 
-
 ---
 
 ### DataBase Design:
