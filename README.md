@@ -66,17 +66,20 @@ This application will allow you to make **scavenger hunts** while exploring the 
 
 ### Wireframes version 1(To be Added):
 
-#### Sign in|Log in Page
+#### Sign in | Log in Page
 #![](./images/signin_login.png)
 
-#### User Home Page
-#![](./images/user_homepage.png)
+#### Member Home Page
+#![](./images/member_homepage.png)
 
-#### Create Scavenger Hunt and Clues Page
+#### Creating New Scavenger Hunt & Clues Page
 #![](./images/hunt_form.png)
 
-#### Game View Page
-#![](./images/game_view.png)
+#### Creator Game View Page
+#![](./images/creator_game_view.png)
+
+#### Player Game View Page
+#![](./images/player_game_view.png)
 
 ---
 
