@@ -6,6 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "bundle": "watchify -t [ babelify --presets [react es2015 ] ] assets/app.js -o public/js/bundle.js -d",
+    "createdb": "createdb project3_dev && node db/init.js",
+    "dropdb": "dropdb --if-exists project3_dev", 
     "start": "node server.js"
   },
   "author": "",
