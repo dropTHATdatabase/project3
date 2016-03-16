@@ -10,7 +10,7 @@ const Login = require('./authComponents/login.js');
 const Logout = require('./authComponents/logout.js');
 
 const App = React.createClass({
-  // setting the initial state of the app
+
   getInitialState() {
     return {
       loggedIn: auth.loggedIn()
@@ -36,11 +36,17 @@ const App = React.createClass({
             {this.state.loggedIn ? (
               <Link to="/logout">Log out</Link>
             ) : (
+
               <Link to="/login">Sign in</Link>
             )}
           </li>
           <li><Link to="/signup">Sign Up</Link></li>
           <li><Link to="/createhunt">Create hunt</Link></li>
+
+              <Link to="/login">Log In</Link>
+            )}
+          </li>
+
         </ul>
         {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
       </div>
@@ -50,7 +56,7 @@ const App = React.createClass({
 
 function requireAuth(nextState, replace) {
   if (!auth.loggedIn()) {
-    replace({
+    replace({                               // replace? is this a JS thing?
       pathname: '/login',
       state: { nextPathname: nextState.location.pathname }
     })
@@ -59,11 +65,13 @@ function requireAuth(nextState, replace) {
 
 render((
   <Router history={browserHistory}>
+
     <Route path="/" component={App}>
       <Route path="login" component={Login} />
       <Route path="signup" component={SignUp} />
       <Route path="logout" component={Logout} />
       <Route path="createhunt" component={Createhunt} onEnter={requireAuth} />
+
     </Route>
   </Router>
 ), document.getElementById('container'))

@@ -1,12 +1,15 @@
 module.exports = {
-  login(username, pass, cb) {
+
+  login(username, password, cb) {
     cb = arguments[arguments.length - 1]
     if (localStorage.token) {
       if (cb) cb(true)
       this.onChange(true)
       return
     }
-    loginRequest(username, pass, (res) => {
+
+    loginRequest(username, password, (res) => {
+
       if (res.authenticated) {
         localStorage.token = res.token
         if (cb) cb(true)
@@ -37,8 +40,9 @@ module.exports = {
 
 
 
-function loginRequest(username, pass, cb) {
-  $.post('users/login', {username: username, password: pass})
+
+function loginRequest(username, password, cb) {
+  $.post('users/login', {username: username, password: password})
   .done((data) => {
     cb({
       authenticated: true,
