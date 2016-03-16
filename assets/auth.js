@@ -16,7 +16,6 @@ module.exports = {
         this.onChange(false)
       }
     })
-
   },
 
   getToken() {

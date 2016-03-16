@@ -1,3 +1,4 @@
+
 const React = require('react');
 const auth = require('../auth');
 const Logout = React.createClass({
