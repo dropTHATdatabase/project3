@@ -1,1 +1,1 @@
-console.error("TypeError: /Users/razaikboparai/dev/projects/project3/assets/app.js: Duplicate declaration \"auth\" while parsing file: /Users/razaikboparai/dev/projects/project3/assets/app.js");
+console.error("TypeError: /Users/PeterNguyen/wdi-bowie/project3/assets/app.js: Duplicate declaration \"auth\" while parsing file: /Users/PeterNguyen/wdi-bowie/project3/assets/app.js");
