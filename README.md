@@ -5,7 +5,7 @@ GA-Bowie Group Project
 #![](http://salidarec.com/wp-content/uploads/2014/07/scavenger-hunt.gif)
 
 ### Introduction
-This is application will allow the you to make **scavenger hunts** and share them with other your friends or participate in scavenger-hunts created by your friends. You can create your own scavenger-hunt, create clues and associate them to particular locations. Your friends can use these clues to check-in to a location and complete the hunt.
+This application will allow you to make **scavenger hunts** while exploring the places around you and share the hunt with your friends or participate in scavenger-hunts created by your friends. You can create your own scavenger-hunt with clues leading to particular locations which will point to the next clue. You must be physically at the location in order to check-in.The last person to complete all the clues looses. 
 
 ---
 
