@@ -1,11 +1,14 @@
 
-### Project #3: Scavenger Hunt
+### Project #3: Citydipity
 GA-Bowie Group Project
 
 #![](http://salidarec.com/wp-content/uploads/2014/07/scavenger-hunt.gif)
 
+### Mission Statement
+Fun way of exploring the areas around you with your friends
+
 ### Introduction
-This application will allow you to make **scavenger hunts** while exploring the places around you and share the hunt with your friends or participate in scavenger-hunts created by your friends. You can create your own scavenger-hunt with clues leading to particular locations which will point to the next clue. You must be physically at the location in order to check-in.The last person to complete all the clues looses. 
+This application will allow you to make **scavenger hunts** while exploring the places around you and share the hunt with your friends or participate in scavenger-hunts created by your friends. You can create your own scavenger-hunt with clues leading to particular locations which will point to the next clue. You must be physically at the location in order to check-in.The last person to complete all the clues looses.
 
 ---
 
