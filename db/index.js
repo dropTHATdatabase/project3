@@ -10,6 +10,11 @@ module.exports = {
   users: {
     create: function(){
       return db.none(sql.users.create);
+    },
+    // Expects {username:, password_digest:}
+    // Returns: {user_id:, username: }
+    get: function(values){
+      return db.oneOrNone(sql.users.get, values);
     }
   }
 };
