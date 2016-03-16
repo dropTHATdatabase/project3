@@ -7,6 +7,8 @@ GA-Bowie Group Project
 ### Introduction
 This is application will allow the you to make **scavenger hunts** and share them with other your friends or participate in scavenger-hunts created by your friends. You can create your own scavenger-hunt, create clues and associate them to particular locations. Your friends can use these clues to check-in to a location and complete the hunt.
 
+---
+
 ### Technologies Used(To be updated):
 * HTML/CSS
 * JavaScript
@@ -16,7 +18,11 @@ This is application will allow the you to make **scavenger hunts** and share the
 * node modules -brcrypt,pg,body-parser,dotenv,morgan,express-session,pg-promise,path
 * React
 
+---
+
 ### Installation Instructions(To be Added):
+
+---
 
 ### User Stories version 1:
 #### Authentication
@@ -25,11 +31,13 @@ This is application will allow the you to make **scavenger hunts** and share the
 * As a user, I should be able to log in if i already have an account
 * As a user, after I log-in, the page should be welcoming and it should let me complete most of the application functions from this page.
 * As a user, I should be able to log out of the application
+
 #### Creating a New Scavenger Hunt
 * As a user, I should be able make a new scavenger hunt
 * As a user, I should be able to add clues to the scavenger hunt that I created
 * As a user, I should be able to add location and text associated to a clue
 * As a user, I should be able to share my scavenger hunt with other users/friends
+
 #### Tracking Progress of Scavenger-hunts I created
 * As a user, I should be able to see the scavenger hunts that I created
 * As a user, I should be able to track the progress of all the people participating in the hunt
@@ -37,6 +45,7 @@ This is application will allow the you to make **scavenger hunts** and share the
 * As a user, I should be able to delete clues
 * As a user, I should be able to edit the clues
 * As a user, I should be able to deactivate/end the hunt
+
 #### Tracking Progress of Scavenger-hunts I am a member of
 * As a user, I should be able to see all the hunts that I completed
 * As a user, I should be able to see the hunt I am currently participating in
@@ -45,18 +54,37 @@ This is application will allow the you to make **scavenger hunts** and share the
 * As a user when i check-in to a location, I should know if it is right location associated with that particular clue
 * As a user when i complete the hunt, I should see a message letting me know that I finished the hunt
 
+---
 
 ### DataBase Design:
 #### Entity Relationship Diagram version 1:
 #![](scavenger_erd.png)
 
+
 ### Wireframes version 1(To be Added):
+
+#### Sign in|Log in Page
+#![](./images/signin_login.png)
+
+#### User Home Page
+#![](./images/user_homepage.png)
+
+#### Create Scavenger Hunt and Clues Page
+#![](./images/hunt_form.png)
+
+#### Game View Page
+#![](./images/game_view.png)
+
+---
 
 ### Views Used:
 * index.html - Renders the signup page/login page, with data dynamically rendering on the client-side
 
+---
+
 ### RESTful Routes(To be Updated):
 |Description| Method | Route Name| View rendered|
 
+---
 
 ### Future Implementations(To be Added):
