@@ -16,7 +16,7 @@ const Login = React.createClass({
   handleSubmit(event) {
     event.preventDefault()
 
-    const name = this.refs.email.value
+    const username = this.refs.email.value
     const pass = this.refs.pass.value
 
     auth.login(email, pass, (loggedIn) => {
@@ -36,7 +36,7 @@ const Login = React.createClass({
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label><input ref="name" placeholder="name"/></label>
+        <label><input ref="username" placeholder="username"/></label>
         <label><input ref="pass" placeholder="password" /></label><br />
         <button type="submit">login</button>
         {this.state.error && (

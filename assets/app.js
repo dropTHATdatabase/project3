@@ -5,7 +5,65 @@ import auth from './auth'
 
 const Nav = require('./authComponents/nav.js');
 const SignUp = require('./authComponents/signup.js');
-const CreateHunt = require('./authComponents/createhunt.js');
+const Createhunt = require('./authComponents/createhunt.js');
 const Login = require('./authComponents/login.js');
 const Logout = require('./authComponents/logout.js');
-const auth = require('./auth');
+
+const App = React.createClass({
+  // setting the initial state of the app
+  getInitialState() {
+    return {
+      loggedIn: auth.loggedIn()
+    }
+  },
+
+  updateAuth(loggedIn) {
+    this.setState({
+      loggedIn: loggedIn
+    })
+  },
+
+  componentWillMount() {
+    auth.onChange = this.updateAuth
+    auth.login()
+  },
+
+  render() {
+    return (
+      <div>
+        <ul>
+          <li>
+            {this.state.loggedIn ? (
+              <Link to="/logout">Log out</Link>
+            ) : (
+              <Link to="/login">Sign in</Link>
+            )}
+          </li>
+          <li><Link to="/signup">Sign Up</Link></li>
+          <li><Link to="/createhunt">Create hunt</Link></li>
+        </ul>
+        {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+      </div>
+    )
+  }
+})
+
+function requireAuth(nextState, replace) {
+  if (!auth.loggedIn()) {
+    replace({
+      pathname: '/login',
+      state: { nextPathname: nextState.location.pathname }
+    })
+  }
+}
+
+render((
+  <Router history={browserHistory}>
+    <Route path="/" component={App}>
+      <Route path="login" component={Login} />
+      <Route path="signup" component={SignUp} />
+      <Route path="logout" component={Logout} />
+      <Route path="createhunt" component={Createhunt} onEnter={requireAuth} />
+    </Route>
+  </Router>
+), document.getElementById('container'))
