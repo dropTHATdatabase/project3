@@ -95,7 +95,46 @@ This application will allow you to make **scavenger hunts** while exploring the 
 
 ---
 
-### RESTful Routes(To be Updated):
+### Routes:
+
+#### HTML (front-end) Routes ####
+
+| Routes | Components |
+| ------ | ---------- |
+| GET / | Redirect to Login/Signup |
+| GET /login | Login |
+| GET /signup | Login |
+| GET /logout | None |
+| GET /hunts | HuntList |
+| GET /hunts/new | HuntForm |
+| GET /hunts/:id | HuntShow |
+
+#### Users JSON Routes ####
+
+Summary Table:
+
+| Routes | Auth |
+| ------ | ---- |
+| POST /api/v1/users | NO   |
+| POST /api/v1/users/login | NO |
+
+Request (POST /api/v1/users/login & /api/v1/users):
+```
+{
+  username: String,
+  password: String
+}
+```
+
+Response:
+```
+ {
+   success: true,
+   data: {
+     token: String
+   }
+ }
+```
 
 #### Scavenger Hunts JSON Routes ####
 
