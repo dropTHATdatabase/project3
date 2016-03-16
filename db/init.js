@@ -10,7 +10,12 @@ db.users.create()
     db.hunts.create()
       .then(() => {
         console.log('hunts table created');
-        process.exit();
+        db.clues.create()
+          .then(() => {
+            console.log('clues table created');
+            process.exit();
+          })
+          .catch(console.log);
       })
       .catch(console.log);
     console.log('users table created');

@@ -18,5 +18,8 @@ module.exports = {
   },
   hunts: {
     create: sql('hunts/create.sql')
+  },
+  clues: {
+    create: sql('clues/create.sql')
   }
 };

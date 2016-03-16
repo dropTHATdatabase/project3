@@ -26,5 +26,10 @@ module.exports = {
     create: function(){
       return db.none(sql.hunts.create);
     }
+  },
+  clues: {
+    create: function(){
+      return db.none(sql.clues.create);
+    }
   }
 };
