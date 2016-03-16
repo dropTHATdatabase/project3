@@ -13,6 +13,7 @@ function sql(file){
 module.exports = {
   users: {
     create: sql('users/create.sql'),
-    get: sql('users/get.sql')
+    get: sql('users/get.sql'),
+    add: sql('users/add.sql')
   }
 };

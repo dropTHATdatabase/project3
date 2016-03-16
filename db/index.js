@@ -15,6 +15,11 @@ module.exports = {
     // Returns: {user_id:, username: }
     get: function(values){
       return db.oneOrNone(sql.users.get, values);
+    },
+    // Expects {username:, password_digest:}
+    // Returns {user_id: , username: }
+    add: function(values){
+      return db.one(sql.users.add, values);
     }
   }
 };
