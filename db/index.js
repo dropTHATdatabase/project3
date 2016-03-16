@@ -13,8 +13,8 @@ module.exports = {
     },
     // Expects {username:, password_digest:}
     // Returns: {user_id:, username: }
-    get: function(values){
-      return db.oneOrNone(sql.users.get, values);
+    get: function(username){
+      return db.oneOrNone(sql.users.get, username);
     },
     // Expects {username:, password_digest:}
     // Returns {user_id: , username: }
