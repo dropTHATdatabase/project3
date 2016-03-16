@@ -1,4 +1,4 @@
-import React from 'react'
+const React = require('react');
 const auth = require('../auth');
 
 const Signup = React.createClass({
@@ -18,13 +18,17 @@ const Signup = React.createClass({
     const password = this.refs.password.value
 
     // AJAX post to db here
+    // $.POST('/users', {username: username, password: password})
+    //  .done((data)=>{
+      
+    //  })
 
     const{ location } = this.props
 
     if (location.state && location.state.nextPathname) {
       this.context.router.replace(location.state.nextPathname)
     } else {
-      this.context.router.replace('/')
+      this.context.router.replace('/login')      // redirects to login
     }
 
   },
