@@ -1,6 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { browserHistory, Router, Route, Link } from 'react-router'
+import { GoogleMap, Marker } from "react-google-maps";
 import auth from './auth'
 
 const Nav = require('./authComponents/nav.js');
@@ -8,7 +9,9 @@ const SignUp = require('./authComponents/signup.js');
 const Createhunt = require('./authComponents/createhunt.js');
 const Login = require('./authComponents/login.js');
 const Logout = require('./authComponents/logout.js');
-const Dashboard = require('./authComponents/dashboard.js');
+const Map = require('./map.js');
+const Searchbar = require('./searchbar.js')
+
 
 const App = React.createClass({
 
@@ -29,6 +32,11 @@ const App = React.createClass({
     auth.login()
   },
 
+  componentDidMount() {
+
+
+  },
+
   render() {
     return (
       <div>
@@ -41,9 +49,10 @@ const App = React.createClass({
             )}
           </li>
           <li><Link to="/signup">Sign Up</Link></li>
-          <li><Link to="/dashboard">Dashboard</Link> (authenticated)</li>
         </ul>
         {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+        <Searchbar />
+        
       </div>
     )
   }
@@ -64,7 +73,7 @@ render((
       <Route path="signup" component={SignUp} />
       <Route path="login" component={Login} />
       <Route path="logout" component={Logout} />
-      <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
+
     </Route>
   </Router>
 ), document.getElementById('container'))
