@@ -78,3 +78,11 @@ function remove(req, res, next){
 
   next();
 }
+
+module.exports = {
+  list: list,
+  add: add,
+  get: get,
+  update: update,
+  remove: remove
+};
