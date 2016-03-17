@@ -13,11 +13,12 @@ db.users.create()
         db.clues.create()
           .then(() => {
             console.log('clues table created');
-            process.exit();
-          })
-          .catch(console.log);
-      })
-      .catch(console.log);
+            db.participants.create()
+              .then(() => {
+                console.log('participants table created');
+                process.exit();
+              }).catch(console.log);
+          }).catch(console.log);
+      }).catch(console.log);
     console.log('users table created');
-  })
-  .catch(console.log);
+  }).catch(console.log);

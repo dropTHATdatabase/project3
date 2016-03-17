@@ -7,6 +7,7 @@ const db = pgp(cn);
 const sql = require(path.join(__dirname, 'sql'));
 
 module.exports = {
+  pg: db,
   users: {
     create: function(){
       return db.none(sql.users.create);
@@ -30,6 +31,11 @@ module.exports = {
   clues: {
     create: function(){
       return db.none(sql.clues.create);
+    }
+  },
+  participants: {
+    create: function(){
+      return db.none(sql.participants.create);
     }
   }
 };
