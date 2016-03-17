@@ -16,19 +16,24 @@ const Signup = React.createClass({
     event.preventDefault()
     const username = this.refs.username.value
     const password = this.refs.password.value
+    // console.log('user: ', username, 'pass: ', password)
 
     // AJAX post to db here
-    // $.POST('/users', {username: username, password: password})
-    //  .done((data)=>{
-      
-    //  })
+    $.post('/users', {username: username, password: password})
+     .done((data)=>{
+        console.log('user created', data)
+     })
+     .fail((error)=>{
+      console.log('error', error)
+      return this.setState({ error: true })
+     })
 
     const{ location } = this.props
 
     if (location.state && location.state.nextPathname) {
       this.context.router.replace(location.state.nextPathname)
     } else {
-      this.context.router.replace('/login')      // redirects to login
+      this.context.router.replace('/')      // redirects to login
     }
 
   },

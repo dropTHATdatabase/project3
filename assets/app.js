@@ -38,6 +38,7 @@ const App = React.createClass({
               <Link to="/login">Log In</Link>
             )}
           </li>
+          <li><Link to="/signup">Sign Up</Link></li>
         </ul>
         {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
       </div>
@@ -56,7 +57,8 @@ function requireAuth(nextState, replace) {
 
 render((
   <Router history={browserHistory}>
-    <Route path="/" component={SignUp}>
+    <Route path="/" component={App}>
+      <Route path="signup" component={SignUp} />
       <Route path="login" component={Login} />
       <Route path="logout" component={Logout} />
     </Route>
