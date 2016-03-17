@@ -26,10 +26,13 @@
     "morgan": "^1.7.0",
     "path": "^0.12.7",
     "pg-promise": "^3.3.0",
+    "points-cluster": "^0.1.4",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-google-maps": "^4.9.1",
+    "react-motion": "^0.4.2",
     "react-router": "^2.0.1",
+    "recompose": "^0.15.0",
     "watchify": "^3.7.0"
   }
 }

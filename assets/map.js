@@ -1,32 +1,28 @@
-const React = require('react');
 
+import { default as React, Component } from "react";
+import { GoogleMap } from "react-google-maps";
 
-var Map = React.createClass({
-    getDefaultProps: function () {
-        return {
-            initialZoom: 8,
-            mapCenterLat: 43.6425569,
-            mapCenterLng: -79.4073126,
-        };
-    },
-    componentDidMount: function (rootNode) {
-        var mapOptions = {
-            center: this.mapCenterLatLng(),
-            zoom: this.props.initialZoom
-        },
-        map = new google.maps.Map(document.getElementById('react-valuation-map'), mapOptions);
-        var marker = new google.maps.Marker({position: this.mapCenterLatLng(), title: 'Hi', map: map});
-        this.setState({map: map});
-    },
-    mapCenterLatLng: function () {
-        var props = this.props;
-        // return new google.maps.LatLng(props.mapCenterLat, props.mapCenterLng);
-    },
-    render: function () {
-        return (
-            <div className='map-gic'></div>
-        );
-    }
-});
+//Google maps component
+// var Map = React.createClass({
+//
+//   //Render search input
+//   render: function() {
+//     return (
+//       <div id="map">
+//         <p>Map Goes here</p>
+//       </div>
+//     );
+//   }
+// });
 
-module.exports = Map;
+// module.exports = Map;
+export default class Map extends Component {
+  render() {
+    return (
+      <GoogleMap
+        defaultZoom={8}
+        defaultCenter={{ lat: -34.397, lng: 150.644 }}
+      />
+    );
+  }
+}

@@ -23,7 +23,6 @@ const Login = React.createClass({
         return this.setState({ error: true })
 
       const { location } = this.props
-
       if (location.state && location.state.nextPathname) {
         this.context.router.replace(location.state.nextPathname)
       } else {
