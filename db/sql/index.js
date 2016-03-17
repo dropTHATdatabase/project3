@@ -15,7 +15,8 @@ module.exports = {
     create: sql('users/create.sql'),
     get: sql('users/get.sql'),
     add: sql('users/add.sql'),
-    list: sql('users/list.sql')
+    list: sql('users/list.sql'),
+    findById: sql('users/findById.sql')
   },
   hunts: {
     create: sql('hunts/create.sql')

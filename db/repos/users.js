@@ -22,6 +22,9 @@ module.exports = function(db) {
     // hunts_completed, hunts_won}
     list: function(){
       return db.any(sql.users.list);
+    },
+    findById: function(id) {
+      return db.any(sql.users.findById, id);
     }
   };
 };
