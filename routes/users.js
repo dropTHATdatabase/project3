@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 require('dotenv').config();
 const express = require('express');
 const users = express.Router();
@@ -28,12 +29,5 @@ users.use(function (error, request, response, next) {
 });
 
 users.use('/me', expressJWT({secret: secret}));
-
-module.exports = users;
-
-
-
-
-
 
 module.exports = users;

@@ -31,20 +31,18 @@ const App = React.createClass({
   render() {
     return (
       <div>
-      <ul>
-        <li>
-          {this.state.loggedIn ? (
-            <Link to="/logout">Log out</Link>
-          ) : (
-            <Link to="/login">Sign in</Link>
-          )}
-        </li>
-        <li><Link to="/signup">Sign Up</Link></li>
-        <li><Link to="/about">About</Link></li>
-
-      </ul>
-      {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
-    </div>
+        <ul>
+          <li>
+            {this.state.loggedIn ? (
+              <Link to="/logout">Log out</Link>
+            ) : (
+              <Link to="/login">Log In</Link>
+            )}
+          </li>
+          <li><Link to="/signup">Sign Up</Link></li>
+        </ul>
+        {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+      </div>
     )
   }
 })
@@ -60,13 +58,10 @@ function requireAuth(nextState, replace) {
 
 render((
   <Router history={browserHistory}>
-
     <Route path="/" component={App}>
-      <Route path="login" component={Login} />
       <Route path="signup" component={SignUp} />
+      <Route path="login" component={Login} />
       <Route path="logout" component={Logout} />
-  
-
     </Route>
   </Router>
 ), document.getElementById('container'))
