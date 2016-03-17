@@ -45,6 +45,7 @@ function add(req, res, next){
   hunts.insertHunt(newHunt)
   .then((data) => {
     res.data = data;
+    next();
   })
   .catch((err) => {
     console.error(err);
