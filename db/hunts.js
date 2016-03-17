@@ -33,7 +33,7 @@ var mockHunt = {
       lng: -80.344214
     }
   ]
-}
+};
 
 
 function add(req, res, next){
