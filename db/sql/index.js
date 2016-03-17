@@ -19,7 +19,8 @@ module.exports = {
     findById: sql('users/findById.sql')
   },
   hunts: {
-    create: sql('hunts/create.sql')
+    create: sql('hunts/create.sql'),
+    add: sql('hunts/add.sql')
   },
   clues: {
     create: sql('clues/create.sql')
