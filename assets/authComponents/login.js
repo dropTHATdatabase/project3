@@ -26,6 +26,7 @@ const Login = React.createClass({
       if (location.state && location.state.nextPathname) {
         this.context.router.replace(location.state.nextPathname)
       } else {
+        console.log('logged in, now going to: ', this.context.router)
         this.context.router.replace('/')
       }
     })

@@ -16,7 +16,7 @@ const Createhunt = React.createClass({
     $.ajax({
      url: 'users/me',
      beforeSend: function( xhr ) {
-       xhr.setRequestHeader("Authorization", auth.getToken() );
+       xhr.setRequestHeader("Authorization", "Bearer" + auth.getToken() );
      }
     }).done((data) => {
      console.log();

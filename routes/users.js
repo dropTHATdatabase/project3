@@ -6,9 +6,14 @@ const expressJWT = require('express-jwt');
 const jwt = require('jsonwebtoken');
 const db = require('./../db/users.js');
 
-users.get('/', (req,res)=>{
-  res.json({data:'success'});
+users.get('/', expressJWT({ secret: secret }), (req,res)=>{
+  var query = req.query.me;
+  console.log(req.user)
+  // if(query) {
 
+  // } else {
+    res.json({data:'success'});
+  // }
 });
 
 users.post('/', db.add,(req,res)=>{
@@ -20,10 +25,6 @@ users.post('/login', db.get, (req,res) =>{
   // console.log('res.data: ', res.data)
   // console.log('token: ', token)
   res.json({agent: res.data, token: token });
-});
-
-users.get('/test', (req,res)=>{
-  console.log('token? ', req.user)
 });
 
 users.use(function (error, request, response, next) {

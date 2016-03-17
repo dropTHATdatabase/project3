@@ -6,6 +6,9 @@ const path        = require('path');
 const bodyParser  = require('body-parser');
 const app         = express();
 // add pg file
+const secret = process.env.SECRET;
+const expressJWT = require('express-jwt');
+const jwt = require('jsonwebtoken');
 
 const userRoutes = require( path.join(__dirname, '/routes/users'));
 const huntRoutes = require( path.join(__dirname, '/routes/hunts'));
