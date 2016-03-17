@@ -28,7 +28,7 @@ function add(req, res, next) {
 function get(req, res, next){
   var username = req.body.username;
   var password = req.body.password;
-  
+
   auth.getHashedPassword(password)
     .then((hash) => {
       db.users.get(username)
@@ -62,7 +62,29 @@ function get(req, res, next){
     });
 }
 
+function list(req, res, next){
+  res.data = [
+    {
+      user_id: 1,
+      username: 'ColinRobot',
+      hunts_entered: 3,
+      hunts_completed: 2,
+      hunts_won: 0
+    },
+    {
+      user_id: 2,
+      username: 'PPPetrov',
+      hunts_entered: 3,
+      hunts_completed: 3,
+      hunts_won: 1
+    }
+  ];
+
+  next();
+}
+
 module.exports = {
   get: get,
-  add: add
+  add: add,
+  list: list
 };
