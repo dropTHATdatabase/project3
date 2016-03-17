@@ -69,7 +69,7 @@ function insertCluesUsers(user_ids, clue_ids){
 
 // Takes a hunt object of the form
 // {
-// owner_id: "Harry",
+// owner_id: 1,
 // wager: "Loser buys a beer",
 // deadline: "2016-12-17 07:37:16-08",
 // participants: [1, 2, 3],
@@ -100,7 +100,7 @@ function insertHunt(hunt) {
     .then((data) => {
       result = {
         hunt_id: data.hunt_id,
-        isOwner: null,
+        isOwner: true,
         wager: data.wager,
         deadline: data.deadline,
       };

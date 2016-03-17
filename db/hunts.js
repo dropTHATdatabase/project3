@@ -1,5 +1,7 @@
 'use strict';
 
+const hunts = require('./transactions/hunts');
+
 var mockHunt = {
   hunt_id: 1,
   isOwner: true,
@@ -37,8 +39,17 @@ var mockHunt = {
 
 
 function add(req, res, next){
-  res.data = mockHunt;
-  next();
+  var user_id = req.user.user_id;
+  var newHunt = req.body;
+  newHunt.owner_id = user_id;
+  hunts.insertHunt(newHunt)
+  .then((data) => {
+    res.data = data;
+  })
+  .catch((err) => {
+    console.error(err);
+    res.json({success: false, data: 'Server error'});
+  });
 }
 
 function list(req, res, next){
