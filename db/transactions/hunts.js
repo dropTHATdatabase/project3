@@ -98,11 +98,16 @@ function insertHunt(hunt) {
       owner_id: hunt.owner_id
     })
     .then((data) => {
-      result = data;
-      insertClues(hunt.hunt_id, hunt.clues)
+      result = {
+        hunt_id: data.hunt_id,
+        isOwner: null,
+        wager: data.wager,
+        deadline: data.deadline,
+      };
+      insertClues(data.hunt_id, hunt.clues)
       .then((clues) => {
         result.clues = clues;
-        insertParticipants(result.hunt_id, hunt.participants)
+        insertParticipants(hunt.hunt_id, hunt.participants)
         .then(() => {
           db.users.listWithProgress(hunt.participants)
           .then((participants) => {
