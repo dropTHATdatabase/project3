@@ -16,7 +16,11 @@ db.users.create()
             db.participants.create()
               .then(() => {
                 console.log('participants table created');
-                process.exit();
+                db.clues_users.create()
+                  .then(() => {
+                    console.log('clues_users table created');
+                    process.exit();
+                  }).catch(console.log);
               }).catch(console.log);
           }).catch(console.log);
       }).catch(console.log);

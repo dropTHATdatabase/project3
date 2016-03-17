@@ -24,5 +24,8 @@ module.exports = {
   },
   participants: {
     create: sql('participants/create.sql')
+  },
+  clues_users: {
+    create: sql('clues_users/create.sql')
   }
 };
