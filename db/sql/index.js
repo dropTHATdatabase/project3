@@ -30,6 +30,7 @@ module.exports = {
     create: sql('participants/create.sql')
   },
   clues_users: {
-    create: sql('clues_users/create.sql')
+    create: sql('clues_users/create.sql'),
+    add: sql('clues_users/add.sql')
   }
 };
