@@ -31,25 +31,20 @@ const App = React.createClass({
   render() {
     return (
       <div>
-        <ul>
-          <li>
-            {this.state.loggedIn ? (
-              <Link to="/logout">Log out</Link>
-            ) : (
+      <ul>
+        <li>
+          {this.state.loggedIn ? (
+            <Link to="/logout">Log out</Link>
+          ) : (
+            <Link to="/login">Sign in</Link>
+          )}
+        </li>
+        <li><Link to="/signup">Sign Up</Link></li>
+        <li><Link to="/about">About</Link></li>
 
-              <Link to="/login">Sign in</Link>
-            )}
-          </li>
-          <li><Link to="/signup">Sign Up</Link></li>
-          <li><Link to="/createhunt">Create hunt</Link></li>
-
-              <Link to="/login">Log In</Link>
-            )}
-          </li>
-
-        </ul>
-        {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
-      </div>
+      </ul>
+      {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+    </div>
     )
   }
 })
@@ -70,7 +65,7 @@ render((
       <Route path="login" component={Login} />
       <Route path="signup" component={SignUp} />
       <Route path="logout" component={Logout} />
-      <Route path="createhunt" component={Createhunt} onEnter={requireAuth} />
+  
 
     </Route>
   </Router>
