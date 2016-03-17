@@ -8,6 +8,7 @@ const SignUp = require('./authComponents/signup.js');
 const Createhunt = require('./authComponents/createhunt.js');
 const Login = require('./authComponents/login.js');
 const Logout = require('./authComponents/logout.js');
+const Map = require('./map.js');
 
 const App = React.createClass({
 
@@ -42,6 +43,7 @@ const App = React.createClass({
           <li><Link to="/signup">Sign Up</Link></li>
         </ul>
         {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+        <Map mlat="55.0000" mlong="-113.0000"/>
       </div>
     )
   }

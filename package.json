@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "bundle": "watchify -t [ babelify --presets [react es2015 ] ] assets/app.js -o public/js/bundle.js -d",
     "createdb": "createdb project3_dev && node db/init.js",
-    "dropdb": "dropdb --if-exists project3_dev", 
+    "dropdb": "dropdb --if-exists project3_dev",
     "start": "node server.js"
   },
   "author": "",
@@ -28,6 +28,7 @@
     "pg-promise": "^3.3.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+    "react-google-maps": "^4.9.1",
     "react-router": "^2.0.1",
     "watchify": "^3.7.0"
   }
