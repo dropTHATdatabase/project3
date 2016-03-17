@@ -11,6 +11,7 @@ module.exports = {
     loginRequest(username, password, (res) => {
 
       if (res.authenticated) {
+        console.log('res.token: ', res.token)
         localStorage.token = res.token
         if (cb) cb(true)
         this.onChange(true)
