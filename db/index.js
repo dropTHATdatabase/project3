@@ -21,5 +21,25 @@ module.exports = {
     add: function(values){
       return db.one(sql.users.add, values);
     }
+  },
+  hunts: {
+    create: function(){
+      return db.none(sql.hunts.create);
+    }
+  },
+  clues: {
+    create: function(){
+      return db.none(sql.clues.create);
+    }
+  },
+  participants: {
+    create: function(){
+      return db.none(sql.participants.create);
+    }
+  },
+  clues_users: {
+    create: function(){
+      return db.none(sql.clues_users.create);
+    }
   }
 };
