@@ -103,14 +103,16 @@ function insertHunt(hunt) {
       .then((clues) => {
         result.clues = clues;
         insertParticipants(result.hunt_id, hunt.participants)
-        .then((participants) => {
-          result.participants = participants;
-          var clue_ids = result.clues.map(el => el.clue_id);
-          insertCluesUsers(hunt.participants, clue_ids)
-          .then(() => {
-            resolve(result);
-          })
-          .catch(reject);
+        .then(() => {
+          db.users.listWithProgress(hunt.participants)
+          .then((participants) => {
+            result.participants = participants;
+            var clue_ids = result.clues.map(el => el.clue_id);
+            insertCluesUsers(hunt.participants, clue_ids)
+            .then(() => {
+              resolve(result);
+            }).catch(reject);
+          }).catch(reject);
         }).catch(reject);
       }).catch(reject);
     })
