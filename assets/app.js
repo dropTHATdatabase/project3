@@ -59,6 +59,12 @@ function requireAuth(nextState, replace) {
   }
 }
 
+const Error = React.createClass({
+  render(){
+    return(<h1>401 Error - You f*cked up somewhere</h1>)    
+  }
+});
+
 render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
@@ -67,6 +73,7 @@ render((
       <Route path="logout" component={Logout} />
       <Route path="createhunt" component={Createhunt} />
       {/* homepage, nav, gameview, form, map*/}
+      <Route path="*" component={Error} />
     </Route>
   </Router>
 ), document.getElementById('container'))
