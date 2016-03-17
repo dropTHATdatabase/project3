@@ -4,7 +4,7 @@ import { browserHistory, Router, Route, Link } from 'react-router'
 
 const Createhunt = require('./createhunt.js');
 const Logout = require('./logout.js');
-const Homepage = require('./homepage.js');
+const Homepage = require('./../homepage.js');
 
 const Nav = React.createClass({
 

@@ -16,7 +16,8 @@ const Homepage = React.createClass({
         <Nav />
         <h1>Welcome back, {/* Username */}</h1>
         <section>
-          <Hunt /> {/* Edit & Delete buttons for each Hunt */}
+          <div>Display Hunts here</div>
+          {/*<Hunt /> - Edit & Delete buttons for each Hunt */}
         </section>
         <aside>
           <div>{/* hunts completed, hunted entered, hunts won */}</div>
@@ -39,7 +40,7 @@ render((
       <Route path="nav" component={Nav} />
       {/* <Route path="hunt" component={Hunt} /> */}
       <Route path="createhunt" component={Createhunt} />
-      <Route path="userinfo" component={UserInfo} />      {/* is this a component? */}
+      {/* is this a component? -- <Route path="userinfo" component={UserInfo} /> */}
       <Route path="*" component={Error} />
     </Route>
   </Router>
