@@ -26,5 +26,6 @@ users.use(function (error, request, response, next) {
     response.status(401).json({message: 'You need an authorization token to view confidential information.'});
   }
 });
+users.use('/me', expressJWT({secret: secret}));   // for decrypting user token!!!
 
 module.exports = users;
