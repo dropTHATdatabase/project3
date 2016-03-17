@@ -17,6 +17,8 @@ users.post('/', db.add,(req,res)=>{
 
 users.post('/login', db.get, (req,res) =>{
   var token = jwt.sign(res.data, secret);
+  // console.log('res.data: ', res.data)
+  // console.log('token: ', token)
   res.json({agent: res.data, token: token });
 });
 

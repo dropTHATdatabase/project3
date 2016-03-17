@@ -2,24 +2,27 @@ module.exports = {
 
   login(username, password, cb) {
     cb = arguments[arguments.length - 1]
-    if (localStorage.token) {
+
+    if (localStorage.token) {     // checks if a token is 
       if (cb) cb(true)
       this.onChange(true)
       return
     }
 
-    loginRequest(username, password, (res) => {
+    if(username && password){  
+      loginRequest(username, password, (res) => {
 
-      if (res.authenticated) {
-        console.log('res.token: ', res.token)
-        localStorage.token = res.token
-        if (cb) cb(true)
-        this.onChange(true)
-      } else {
-        if (cb) cb(false)
-        this.onChange(false)
-      }
-    })
+        if (res.authenticated) {
+          // console.log('res.token: ', res.token)
+          localStorage.token = res.token
+          if (cb) cb(true)
+          this.onChange(true)
+        } else {
+          if (cb) cb(false)
+          this.onChange(false)
+        }
+      })
+    }
   },
 
   getToken() {
@@ -43,7 +46,7 @@ module.exports = {
 
 
 function loginRequest(username, password, cb) {
-  $.post('users/login', {username: username, password: password})
+  $.post('/api/v1/users/login', {username: username, password: password})
   .done((data) => {
     cb({
       authenticated: true,

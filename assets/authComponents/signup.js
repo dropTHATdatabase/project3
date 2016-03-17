@@ -17,7 +17,7 @@ const Signup = React.createClass({
     const username = this.refs.username.value
     const password = this.refs.password.value
 
-    $.post('/users', {username: username, password:password})
+    $.post('/api/v1/users', {username: username, password:password})
       .done((data) => {
         console.log('user created');
 
