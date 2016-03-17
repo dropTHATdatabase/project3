@@ -1,4 +1,17 @@
-module.exports = {
+const auth = {
+
+  getUsers(cb){
+    $.ajax({
+      url: "/api/v1/users",
+      type: "get",
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken() );
+      }
+    })
+    .fail((error)=>{
+      console.log('error: ', error)
+    })
+  },
 
   login(username, password, cb) {
     cb = arguments[arguments.length - 1]
@@ -13,7 +26,6 @@ module.exports = {
       loginRequest(username, password, (res) => {
 
         if (res.authenticated) {
-          // console.log('res.token: ', res.token)
           localStorage.token = res.token
           if (cb) cb(true)
           this.onChange(true)
@@ -52,6 +64,7 @@ function loginRequest(username, password, cb) {
       authenticated: true,
       token: data.token
     })
+    auth.getUsers();
   })
   .fail ((data) => {
     cb({
@@ -60,3 +73,5 @@ function loginRequest(username, password, cb) {
     })
   })
 }
+
+module.exports = auth;
