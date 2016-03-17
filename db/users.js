@@ -1,5 +1,4 @@
 'use strict';
-
 const path = require('path');
 const db = require('./index');
 const auth = require(path.join(__dirname, '../auth/index'));
@@ -29,7 +28,7 @@ function add(req, res, next) {
 function get(req, res, next){
   var username = req.body.username;
   var password = req.body.password;
-
+  
   auth.getHashedPassword(password)
     .then((hash) => {
       db.users.get(username)

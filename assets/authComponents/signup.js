@@ -16,7 +16,6 @@ const Signup = React.createClass({
     event.preventDefault()
     const username = this.refs.username.value
     const password = this.refs.password.value
-    // console.log('user: ', username, 'pass: ', password)
 
     // AJAX post to db here
     $.post('/users', {username: username, password: password})

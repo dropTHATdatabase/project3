@@ -15,8 +15,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use('/users', userRoutes);
-app.use('/hunts', huntRoutes);
+app.use('/api/v1/users', userRoutes);      
+app.use('/api/v1/hunts', huntRoutes);
 
 // HOMEPAGE
 app.get('/', (req, res) => {
