@@ -1,7 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { browserHistory, Router, Route, Link } from 'react-router'
-import { GoogleMap, Marker } from "react-google-maps"
 import auth from './auth'
 
 
