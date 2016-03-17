@@ -14,14 +14,16 @@ users.use(function (error, request, response, next) {
 });
 
 users.get('/', expressJWT({ secret: secret }), db.list, (req,res)=>{
-  // var query = req.query.me;
-  console.log('req.user: ', req.user)
-  console.log('res.data: ', res.data)
-  // if(query) {
+  var query = req.query.me;
 
-  // } else {
-    res.json({data:'success'});
-  // }
+  console.log('req.user: ', req.user)       // gets token info of the current user
+  console.log('res.data: ', res.data)       // gets list of all users
+  
+  if(query) {
+    res.json({ data: res.user })
+  } else {
+    res.json({ data: res.data })
+  }
 });
 
 users.post('/', db.add,(req,res)=>{

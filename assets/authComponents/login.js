@@ -21,8 +21,6 @@ const Login = React.createClass({
       if (!loggedIn)
         return this.setState({ error: true })
 
-
-
       const { location } = this.props
       if (location.state && location.state.nextPathname) {
         this.context.router.replace(location.state.nextPathname)
