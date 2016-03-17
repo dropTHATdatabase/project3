@@ -18,15 +18,15 @@ const Login = React.createClass({
     const password = this.refs.password.value
 
     auth.login(username, password, (loggedIn) => {
-
       if (!loggedIn)
         return this.setState({ error: true })
+
+
 
       const { location } = this.props
       if (location.state && location.state.nextPathname) {
         this.context.router.replace(location.state.nextPathname)
       } else {
-        console.log('logged in, now going to: ', this.context.router)
         this.context.router.replace('/')
       }
     })

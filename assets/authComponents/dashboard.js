@@ -3,6 +3,12 @@ const auth = require('../auth');
 
 
 const Dashboard = React.createClass({
+  // handleClick: function(event){
+  //   event.preventDefault();
+  //   var info = this.test.value;
+  //   console.log('info')
+  // },
+
 
   render() {
     const token = auth.getToken()
