@@ -1,4 +1,5 @@
 module.exports = {
+
   login(username, password, cb) {
     cb = arguments[arguments.length - 1]
     if (localStorage.token) {
@@ -6,7 +7,9 @@ module.exports = {
       this.onChange(true)
       return
     }
+
     loginRequest(username, password, (res) => {
+
       if (res.authenticated) {
         localStorage.token = res.token
         if (cb) cb(true)
@@ -34,6 +37,7 @@ module.exports = {
 
   onChange() {}
 }
+
 
 
 

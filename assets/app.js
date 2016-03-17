@@ -5,11 +5,12 @@ import auth from './auth'
 
 const Nav = require('./authComponents/nav.js');
 const SignUp = require('./authComponents/signup.js');
-const CreateHunt = require('./authComponents/createhunt.js');
+const Createhunt = require('./authComponents/createhunt.js');
 const Login = require('./authComponents/login.js');
 const Logout = require('./authComponents/logout.js');
 
 const App = React.createClass({
+
   getInitialState() {
     return {
       loggedIn: auth.loggedIn()

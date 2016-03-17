@@ -17,15 +17,17 @@ const Signup = React.createClass({
     const username = this.refs.username.value
     const password = this.refs.password.value
 
-    // AJAX post to db here
-    $.post('/users', {username: username, password: password})
-     .done((data)=>{
-        console.log('user created', data)
-     })
-     .fail((error)=>{
-      console.log('error', error)
+    $.post('/users', {username: username, password:password})
+      .done((data) => {
+        console.log('user created');
+
+    })
+    .fail((data) => {
+      console.log('error in creating an user');
       return this.setState({ error: true })
-     })
+   })
+
+
 
     const{ location } = this.props
 
@@ -52,5 +54,3 @@ const Signup = React.createClass({
 })
 
 module.exports = Signup;
-
-

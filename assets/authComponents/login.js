@@ -18,6 +18,7 @@ const Login = React.createClass({
     const password = this.refs.password.value
 
     auth.login(username, password, (loggedIn) => {
+
       if (!loggedIn)
         return this.setState({ error: true })
 
@@ -34,8 +35,8 @@ const Login = React.createClass({
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label><input ref="username" placeholder="Create A Username"/></label>
-        <label><input ref="password" placeholder="Create a Password" /></label><br />
+        <label><input ref="username" placeholder="Enter Username"/></label>
+        <label><input ref="password" placeholder="Password" /></label><br />
         <button type="submit">Login</button>
         {this.state.error && (
           <p>Invalid login information!</p>
