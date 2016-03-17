@@ -63,24 +63,24 @@ function get(req, res, next){
 }
 
 function list(req, res, next){
-  res.data = [
-    {
-      user_id: 1,
-      username: 'ColinRobot',
-      hunts_entered: 3,
-      hunts_completed: 2,
-      hunts_won: 0
-    },
-    {
-      user_id: 2,
-      username: 'PPPetrov',
-      hunts_entered: 3,
-      hunts_completed: 3,
-      hunts_won: 1
-    }
-  ];
+  var query;
+  // If me=true in the query string get the current user
+  // from the token as an array with one object
+  // else get a list of all users as an array
+  if (req.query.me) {
+    query = db.users.findById(req.user.user_id);
+  } else {
+    query = db.users.list();
+  }
 
-  next();
+  query.then((users) => {
+    res.data = users;
+    next();
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).json({success: false, data: 'Server error'});
+  });
 }
 
 module.exports = {
