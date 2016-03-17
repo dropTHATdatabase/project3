@@ -14,7 +14,8 @@ users.use(function (error, request, response, next) {
 
 users.get('/', expressJWT({ secret: secret }), db.list, (req,res)=>{
   // var query = req.query.me;
-  console.log(req.user)
+  console.log('req.user: ', req.user)
+  console.log('res.data: ', res.data)
   // if(query) {
 
   // } else {
@@ -27,10 +28,7 @@ users.post('/', db.add,(req,res)=>{
 });
 
 users.post('/login', db.get, (req,res) =>{
-  // console.log(res.data)
   var token = jwt.sign(res.data, secret);
-  // console.log('res.data: ', res.data)
-  // console.log('token: ', token)
   res.json({agent: res.data, token: token });
 });
 
