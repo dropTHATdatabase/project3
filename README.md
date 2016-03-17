@@ -117,8 +117,9 @@ Summary Table:
 | ------ | ---- |
 | POST /api/v1/users | NO   |
 | POST /api/v1/users/login | NO |
+| GET /api/v1/users | NO |
 
-Request (POST /api/v1/users/login & /api/v1/users):
+Request (POST /api/v1/users/login & POST /api/v1/users):
 ```
 {
   username: String,
@@ -135,6 +136,18 @@ Response:
    }
  }
 ```
+
+Params GET /api/v1/users:
+* me = true - return only the current user
+* Example ```/api/v1/users?me=true```
+
+Response (GET /api/v1/users):
+{
+  success: true,
+  data: [
+    {user_id: Number, username: String}, ...
+  ]
+}
 
 #### Scavenger Hunts JSON Routes ####
 
@@ -172,7 +185,7 @@ Response (GET /hunts ):
   data: [
     {
       hunt_id: Number,
-      owner_id: Number,
+      isOwner: Boolean,
       wager: String,
       winner: String,
       deadline: datetime
@@ -191,7 +204,7 @@ Response (GET/PUT api/v1/hunts/:id & POST /api/v1/hunts):
    success: true,
    data: {
      hunt_id: Number,
-     owner_id: Number,
+     isOwner: Number,
      wager: String
      deadline: datetime,
      participants: [
