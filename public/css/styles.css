@@ -1,27 +1,4 @@
-/*nav.primary{
-margin: 0 auto;
- }
 
-nav.primary ul,
-nav.primary ul li {
-margin: 0px;
+#map {
+  text-align: center;
 }
-
-nav.primary select {
-display: none;
-width:  100%;
-height: 28px;
-margin: 21px 0;
-}
-
-
-
-nav.primary ul li a:hover {
-background: #2ecc71;
-cursor: pointer;
-}
-
-nav.primary ul li {
-display: inline;
-position: relative;
-}*/
