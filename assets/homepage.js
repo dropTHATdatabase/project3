@@ -1,8 +1,10 @@
+'use strict'
 import React from 'react'
-import { render } from 'react-dom'
+import { render, ReactDOM } from 'react-dom'
 import { browserHistory, Router, Route, Link } from 'react-router'
 import auth from './auth'
 
+const $   = require('jquery');
 const App = require('./app.js');
 const Nav = require('./authComponents/nav.js');
 // const Hunt = require('./authComponents/hunt.js');
@@ -10,6 +12,27 @@ const Createhunt = require('./authComponents/createhunt.js');
 // how do we get user info from token in front end??
 
 const Homepage = React.createClass({
+  // sets context type
+  childContextTypes() {
+    hunts: React.PropTypes.array
+  },
+
+  getInitialState() {
+    return (
+      hunts: []
+    )
+  },
+
+  componentDidMount() {
+    $.get('')
+  },
+
+  // gets returned context data
+  getChildContext() {
+    return {
+      hunts: this.state.hunts
+    }
+  },
 
   render() {
     return (
@@ -32,6 +55,8 @@ const Homepage = React.createClass({
                 </tr>
               </thead>
               <tbody>
+                {/* what does this.props.children look like? */}
+                { console.log('homepage children: ', this.props.children) }
                 {/* // {Object.keys(this.state.beverages)
                 //   .filter(this.remainingBeverage)
                 //   .map(this.renderBeverage)} */}

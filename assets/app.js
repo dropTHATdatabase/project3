@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from 'react-dom'
+import { render, ReactDOM } from 'react-dom'
 import { browserHistory, Router, Route, Link, Redirect } from 'react-router'
 import auth from './auth'
 

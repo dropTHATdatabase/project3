@@ -4,7 +4,13 @@ const hunts = express.Router();
 const secret = process.env.SECRET;
 const expressJWT = require('express-jwt');
 const jwt = require('jsonwebtoken');
-// add pg file
+const db = require('./../db/hunts.js');
+
+hunts.use(function (error, request, response, next) {
+  if (error.name === 'UnauthorizedError') {
+    response.status(401).json({message: 'You need an authorization token to view confidential information.'});
+  }
+});
 
 // route to get list of hunts for user
 // db function to be added
