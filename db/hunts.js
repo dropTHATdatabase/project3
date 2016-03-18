@@ -94,10 +94,15 @@ function remove(req, res, next){
   next();
 }
 
+function completeClue(req, res, next){
+  next();
+}
+
 module.exports = {
   list: list,
   add: add,
   get: get,
   update: update,
-  remove: remove
+  remove: remove,
+  completeClue: completeClue
 };
