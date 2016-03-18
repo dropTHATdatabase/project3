@@ -19,7 +19,7 @@ const Homepage = React.createClass({
 
   // sets context type
   childContextTypes: {
-      hunts: React.PropTypes.array
+    hunts: React.PropTypes.array
   },
 
   // gets returned context data
@@ -31,15 +31,8 @@ const Homepage = React.createClass({
 
   componentDidMount() {
     console.log('homepage componentDidMount activate')
-    $.ajax({
-      url: "/api/v1/hunts",
-      type: "get",
-      beforeSend: function( xhr ) {
-        xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
-      }
-    })
-    .done((data)=>{ console.log('Hunt List Success: ', data) })
-    .fail((error)=>{ console.log('Hunt List Error: ', error) })
+    var list = auth.getHuntsList()
+    console.log('homepage hunts list: ', list)
   },
 
 
