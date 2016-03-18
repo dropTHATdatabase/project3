@@ -1,5 +1,7 @@
 const React = require('react');
+import { browserHistory, Router, Route, Link, Redirect } from 'react-router'
 const auth = require('../auth');
+const Login = require('./login.js');
 
 const Signup = React.createClass({
   contextTypes: {

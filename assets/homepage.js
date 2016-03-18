@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import { browserHistory, Router, Route, Link } from 'react-router'
 import auth from './auth'
 
+const App = require('./app.js');
 const Nav = require('./authComponents/nav.js');
 // const Hunt = require('./authComponents/hunt.js');
 const Createhunt = require('./authComponents/createhunt.js');
@@ -13,37 +14,51 @@ const Homepage = React.createClass({
   render() {
     return (
       <div className="container">
-        <Nav />
-        <h1>Welcome back, {/* Username */}</h1>
-        <section>
-          <div>Display Hunts here</div>
-          {/*<Hunt /> - Edit & Delete buttons for each Hunt */}
+        <h1>Welcome back, {/* Username */}!</h1>
+
+        <section className="twelve columns">
+
+          {/* List of all User hunts + Edit|Delete options per hunt */}
+          <section className="eight columns">
+            <h5>Your Hunt History</h5>
+            <table className="u-full-width">
+              <thead>
+                <tr>
+                  <th>Hunt Wager</th>
+                  <th>Status</th>
+                  <th>Winner</th>
+                  <th>Deadline</th>
+                  <th>Edit|Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* // {Object.keys(this.state.beverages)
+                //   .filter(this.remainingBeverage)
+                //   .map(this.renderBeverage)} */}
+              </tbody>
+            </table>
+          </section>
+
+          {/* User Hunt Record + Create Hunt btn */}
+          <section className="four columns">
+            <aside className="card-panel">
+              <div className="row">Your Hunt Record:</div>
+              <ul>
+                <li>Hunts Entered: {/* {this.state.hunts.hunts_entered} */}</li>
+                <li>Hunts Completed: {/* {this.state.hunts.hunts_completed} */}</li>
+                <li>Hunts Won: {/* {this.state.hunts.hunts_won} */}</li>
+              </ul>
+              <button className="button-primary">
+                <Link to="/createhunt">Create A Hunt!</Link>
+              </button>
+            </aside>
+          </section>
+
         </section>
-        <aside>
-          <div>{/* hunts completed, hunted entered, hunts won */}</div>
-          <button><Link to="/createhunt">Create hunt</Link></button>
-        </aside>
       </div>
     )
   }
 })
 
-const Error = React.createClass({
-  render(){
-    return(<h1>401 Error - You f*cked up somewhere</h1>)    
-  }
-});
 
-render((
-  <Router history={browserHistory}>
-    <Route path="home" component={Homepage}>
-      <Route path="nav" component={Nav} />
-      {/* <Route path="hunt" component={Hunt} /> */}
-      <Route path="createhunt" component={Createhunt} />
-      {/* is this a component? -- <Route path="userinfo" component={UserInfo} /> */}
-      <Route path="*" component={Error} />
-    </Route>
-  </Router>
-), document.getElementById('container'))
-
-// module.exports = Homepage;
+module.exports = Homepage;

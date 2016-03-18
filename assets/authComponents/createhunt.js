@@ -17,9 +17,8 @@ const Map = React.createClass({
     return (
       <section style={{height: "50%", width:"50%"}}>
         <div id="map" style={style}>
-
         </div>
-    </section>
+      </section>
     )
   }
 });

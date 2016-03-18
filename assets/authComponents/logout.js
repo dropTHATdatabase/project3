@@ -10,7 +10,6 @@ const Logout = React.createClass({
     return (
       <div>
         Goodbye, friend!
-        
       </div>
     )
   }

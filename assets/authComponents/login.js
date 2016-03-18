@@ -1,5 +1,6 @@
 const React = require('react');
 const auth = require('../auth');
+const Homepage = require('./../homepage.js');
 
 
 const Login = React.createClass({
@@ -26,7 +27,7 @@ const Login = React.createClass({
       if (location.state && location.state.nextPathname) {
         this.context.router.replace(location.state.nextPathname)
       } else {
-        this.context.router.replace('/createhunt')      // redirect to member homepage
+        this.context.router.replace('/homepage')      // redirect to member homepage
       }
     })
   },
