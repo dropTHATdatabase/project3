@@ -3,8 +3,7 @@ import { render } from 'react-dom'
 import { browserHistory, Router, Route, Link, Redirect } from 'react-router'
 import auth from './auth'
 
-const Nav = require('./authComponents/nav.js');
-const Signup = require('./authComponents/signup.js');
+const SignUp = require('./authComponents/signup.js');
 const Createhunt = require('./authComponents/createhunt.js');
 const Login = require('./authComponents/login.js');
 const Logout = require('./authComponents/logout.js');
@@ -28,24 +27,20 @@ const App = React.createClass({
     auth.onChange = this.updateAuth
     auth.login()
 
-        // {this.state.loggedIn ? (<Link to="/logout">Log out</Link>) 
-        //                      : (<Link to="/login">Log in</Link> ) }
-        // {this.state.loggedIn ? (<Createhunt />) : (<Signup />) }
-
+    // {this.state.loggedIn ? (<Link to="/logout">Log out</Link>) 
+    //                      : (<Link to="/login">Log in</Link> ) }
+    // {this.state.loggedIn ? (<Createhunt />) : (<Signup />) }
   },
 
   render() {
     return (
       <div className="container">
         <h1><Link to="/">Welcome to Citydipity!</Link></h1>
-
-
-    <div>
-      {this.state.loggedIn ? (<Createhunt />) : (<Link to="/signup">Sign Up Now</Link>) }  {/* need to point to homepage, not createhunt */}
-      {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in. 
-        <Link to="/login">Log In Here</Link></p>}
-    </div>
-
+        <div>
+          {this.state.loggedIn ? (<Createhunt />) : (<Link to="/signup">Sign Up Now</Link>) }  {/* need to point to homepage, not createhunt */}
+          {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in. 
+            <Link to="/login">Log In Here</Link></p>}
+        </div>
       </div>
     )
   }
@@ -71,9 +66,9 @@ render((
     <Route path="/" component={App}>
       <Route path="signup" component={Signup} />
       <Route path="login" component={Login} />
-      <Route path="logout" component={Logout} />
+      <Route path="logout" component={Logout} /> 
       <Route path="createhunt" component={Createhunt} />
-      {/* <Route path="home" component={Homepage} /> */}
+      {/* <Route path="homepage" component={Homepage} /> */}
       <Route path="*" component={Error} />
     </Route>
   </Router>
