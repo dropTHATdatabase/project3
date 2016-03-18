@@ -1,13 +1,14 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { browserHistory, Router, Route, Link } from 'react-router'
+import { browserHistory, Router, Route, Link, Redirect } from 'react-router'
 import auth from './auth'
 
 const Nav = require('./authComponents/nav.js');
-const SignUp = require('./authComponents/signup.js');
+const Signup = require('./authComponents/signup.js');
 const Createhunt = require('./authComponents/createhunt.js');
 const Login = require('./authComponents/login.js');
 const Logout = require('./authComponents/logout.js');
+// const Homepage = require('./homepage.js');
 
 const App = React.createClass({
 
@@ -26,25 +27,25 @@ const App = React.createClass({
   componentWillMount() {
     auth.onChange = this.updateAuth
     auth.login()
-  },
 
-  componentDidMount() {
-
+        // {this.state.loggedIn ? (<Link to="/logout">Log out</Link>) 
+        //                      : (<Link to="/login">Log in</Link> ) }
+        // {this.state.loggedIn ? (<Createhunt />) : (<Signup />) }
 
   },
 
   render() {
     return (
-      <div>
-        <ul>
-          <li>
-            {this.state.loggedIn ? ( <Link to="/logout">Log out</Link> ) 
-                                 : ( <Link to="/login">Log In</Link> )}
-          </li>
-          <li><Link to="/signup">Sign Up</Link></li>
-          <li><Link to="/createhunt">Create hunt</Link></li>
-        </ul>
-        {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+      <div className="container">
+        <h1>Welcome to Citydipity!</h1>
+
+
+    <div>
+      {this.state.loggedIn ? (<Createhunt />) : (<Signup />) }  {/* need to point to homepage, not createhunt */}
+      {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in. 
+        <Link to="/login">Log In Here</Link></p>}
+    </div>
+
       </div>
     )
   }
@@ -52,27 +53,27 @@ const App = React.createClass({
 
 function requireAuth(nextState, replace) {
   if (!auth.loggedIn()) {
-    replace({                               // replace? is this a JS thing?
+    replace({                              
       pathname: '/login',
       state: { nextPathname: nextState.location.pathname }
     })
   }
 }
 
-const Error = React.createClass({
+const Error = React.createClass({     // 404 Error Page
   render(){
-    return(<h1>401 Error - You f*cked up somewhere</h1>)    
+    return(<h1>404 Error - You f*cked up somewhere</h1>)    
   }
 });
 
 render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
-      <Route path="signup" component={SignUp} />
+      <Route path="signup" component={Signup} />
       <Route path="login" component={Login} />
       <Route path="logout" component={Logout} />
       <Route path="createhunt" component={Createhunt} />
-      {/* homepage, nav, gameview, form, map*/}
+      {/* <Route path="home" component={Homepage} /> */}
       <Route path="*" component={Error} />
     </Route>
   </Router>

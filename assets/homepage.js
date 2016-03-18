@@ -35,7 +35,7 @@ const Error = React.createClass({
 
 render((
   <Router history={browserHistory}>
-    <Route path="/" component={Homepage}>
+    <Route path="home" component={Homepage}>
       <Route path="nav" component={Nav} />
       {/* <Route path="hunt" component={Hunt} /> */}
       <Route path="createhunt" component={Createhunt} />

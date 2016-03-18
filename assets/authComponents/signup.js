@@ -46,6 +46,7 @@ const Signup = React.createClass({
             <p id="invalid">Oops! Something went wrong, please try again!</p>
           )}
         </form>
+        {/* add login link here? */}
       </div>
     )
   }

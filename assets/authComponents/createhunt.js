@@ -1,5 +1,6 @@
 const React = require('react');
 const auth = require('../auth');
+const Logout = require('./logout.js');
 
 const Map = React.createClass({
   componentDidMount : function() {
@@ -49,6 +50,8 @@ const Createhunt = React.createClass({
     const state = this.state.me
     return (
       <div>
+        <Logout />
+        {/* add nav here */}
         <p>{token}</p>
         <Map />
       </div>

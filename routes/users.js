@@ -35,7 +35,4 @@ users.post('/login', db.get, (req,res) =>{
   res.json({agent: res.data, token: token });
 });
 
-// users.use('/me', expressJWT({secret: secret}));   // for decrypting user token!!!
-
-
 module.exports = users;
