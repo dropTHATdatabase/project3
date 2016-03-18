@@ -5,7 +5,7 @@ const db = require('./index');
 
 var mockHunt = {
   hunt_id: 1,
-  isOwner: true,
+  isOwner: false,
   showNextClue: true,
   wager: "Loser buys a beer",
   deadline: "2016-12-17 07:37:16-08",
