@@ -142,6 +142,7 @@ Params GET /api/v1/users:
 * Example ```/api/v1/users?me=true```
 
 Response (GET /api/v1/users):
+```
 {
   success: true,
   data: [
@@ -154,6 +155,7 @@ Response (GET /api/v1/users):
     }, ...
   ]
 }
+```
 
 #### Scavenger Hunts JSON Routes ####
 
