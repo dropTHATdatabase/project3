@@ -27,7 +27,8 @@ module.exports = {
   },
   clues: {
     create: sql('clues/create.sql'),
-    add: sql('clues/add.sql')
+    add: sql('clues/add.sql'),
+    listByHunt: sql('clues/listByHunt.sql')
   },
   participants: {
     create: sql('participants/create.sql'),

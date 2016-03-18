@@ -10,6 +10,9 @@ module.exports = function(db) {
     },
     add: function(values){
       return db.one(sql.clues.add, values);
+    },
+    listByHunt: function(hunt_id){
+      return db.any(sql.clues.listByHunt, hunt_id);
     }
   };
 };
