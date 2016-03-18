@@ -130,7 +130,6 @@ Request (POST /api/v1/users/login & POST /api/v1/users):
 Response:
 ```
  {
-   success: true,
    data: {
      token: String
    }
@@ -142,12 +141,19 @@ Params GET /api/v1/users:
 * Example ```/api/v1/users?me=true```
 
 Response (GET /api/v1/users):
+```
 {
-  success: true,
   data: [
-    {user_id: Number, username: String}, ...
+    {
+    user_id: Number, 
+    username: String,
+    hunts_entered: Number,
+    hunts_completed: Number,
+    hunts_won: Number
+    }, ...
   ]
 }
+```
 
 #### Scavenger Hunts JSON Routes ####
 
@@ -160,6 +166,7 @@ Summary Table:
 | POST /api/v1/hunts | YES |
 | PUT /api/v1/hunts/:id | YES |
 | DELETE /api/v1/hunts/:id | YES |
+| PUT api/v1/hunts/:huntId/clues/:id/complete | YES |
 
 Request (PUT/POST api/v1/hunts):
 ```
@@ -181,7 +188,6 @@ Request (PUT/POST api/v1/hunts):
 Response (GET /hunts ):
 ```
 {
-  success: true,
   data: [
     {
       hunt_id: Number,
@@ -201,12 +207,12 @@ Params GET api/v1/hunts/:id
 Response (GET/PUT api/v1/hunts/:id & POST /api/v1/hunts):
  ```
  {
-   success: true,
    data: {
      hunt_id: Number,
      isOwner: Number,
      wager: String
      deadline: datetime,
+     showNextClue: Boolean,
      participants: [
      {
       participant_id: Number,
@@ -226,10 +232,17 @@ Response (GET/PUT api/v1/hunts/:id & POST /api/v1/hunts):
  }
  ```
 
- Response (DELETE):
+Response (DELETE /):
 
-{success: true}
+{data: 'success'}
 
+Request (PUT api/v1/hunts/:huntId/clues/:id):
+
+{completed: true}
+
+Response (PUT api/v1/hunts/:huntId/clues/:id)
+
+{data: 'success'}
 
 ---
 

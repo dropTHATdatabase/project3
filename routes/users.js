@@ -16,11 +16,8 @@ users.use(function (error, request, response, next) {
 users.get('/', expressJWT({ secret: secret }), db.list, (req,res)=>{
   var query = req.query.me;
 
-  console.log('req.user: ', req.user)       // gets token info of the current user
-  console.log('res.data: ', res.data)       // gets list of all users
-  
   if(query) {
-    res.json({ data: res.user })
+    res.json({ data: req.user })
   } else {
     res.json({ data: res.data })
   }

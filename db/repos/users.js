@@ -2,6 +2,7 @@
 
 const path = require('path');
 const sql = require(path.join(__dirname, '../sql'));
+const pgp = require('pg-promise');
 
 module.exports = function(db) {
   return {
@@ -25,6 +26,9 @@ module.exports = function(db) {
     },
     findById: function(id) {
       return db.any(sql.users.findById, id);
+    },
+    listWithProgress: function(ids) {
+      return db.any(sql.users.listWithProgress, pgp.as.csv(ids));
     }
   };
 };
