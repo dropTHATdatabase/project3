@@ -142,12 +142,20 @@ Params GET /api/v1/users:
 * Example ```/api/v1/users?me=true```
 
 Response (GET /api/v1/users):
+```
 {
   success: true,
   data: [
-    {user_id: Number, username: String}, ...
+    {
+    user_id: Number, 
+    username: String,
+    hunts_entered: Number,
+    hunts_completed: Number,
+    hunts_won: Number
+    }, ...
   ]
 }
+```
 
 #### Scavenger Hunts JSON Routes ####
 
@@ -207,6 +215,7 @@ Response (GET/PUT api/v1/hunts/:id & POST /api/v1/hunts):
      isOwner: Number,
      wager: String
      deadline: datetime,
+     showNextClue: Boolean,
      participants: [
      {
       participant_id: Number,
