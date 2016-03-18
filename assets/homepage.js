@@ -12,19 +12,14 @@ const Createhunt = require('./authComponents/createhunt.js');
 // how do we get user info from token in front end??
 
 const Homepage = React.createClass({
-  // sets context type
-  childContextTypes() {
-    hunts: React.PropTypes.array
-  },
 
   getInitialState() {
-    return (
-      hunts: []
-    )
+    return { hunts: [] }
   },
 
-  componentDidMount() {
-    $.get('')
+  // sets context type
+  childContextTypes: {
+      hunts: React.PropTypes.array
   },
 
   // gets returned context data
@@ -33,6 +28,20 @@ const Homepage = React.createClass({
       hunts: this.state.hunts
     }
   },
+
+  componentDidMount() {
+    console.log('homepage componentDidMount activate')
+    $.ajax({
+      url: "/api/v1/hunts",
+      type: "get",
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
+      }
+    })
+    .done((data)=>{ console.log('Hunt List Success: ', data) })
+    .fail((error)=>{ console.log('Hunt List Error: ', error) })
+  },
+
 
   render() {
     return (

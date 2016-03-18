@@ -15,9 +15,9 @@ hunts.use(function (error, request, response, next) {
 // Use expressJWT for all hunts routes
 hunts.use(expressJWT({secret: secret}));
 
-
 // route to get list of hunts for user
 hunts.get('/', db.list, (req,res)=>{
+  console.log('HIT')
   res.json({success: true, data:res.data});
 });
 
