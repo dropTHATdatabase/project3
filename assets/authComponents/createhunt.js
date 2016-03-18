@@ -4,22 +4,56 @@ const auth = require('../auth');
 
 const Map = React.createClass({
   componentDidMount : function() {
-   loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyB2U33goCrZ0Hilh_cdksT1_F8jBgUTl4w&callback=initMap');
+   loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyB2U33goCrZ0Hilh_cdksT1_F8jBgUTl4w&libraries=places&callback=initMap');
   },
 
   render : function() {
-    let style ={
+    let divstyle ={
       height: "400px",
-      width: "550px",
-      margin: "0 auto"
+      width: "680px",
+      margin: '0 auto',
+      position: 'relative'
+
+    }
+
+    let sectionstyle ={
+      position: 'relative',
+      left: '11em'
     }
     return (
-      <section style={{height: "50%", width:"50%"}}>
-        <div id="map" style={style}>
+      <section style={sectionstyle}>
+        <div id="map" style={divstyle}>
 
         </div>
     </section>
     )
+  }
+});
+
+const Searchbar = React.createClass({
+  render: function() {
+    return (
+
+    <div id="hunt-form">
+
+          <label htmlFor="wager">Scavenger Hunt Wager: </label>
+          <input id="wager"type="text" placeholder="Enter Wager" />
+
+          <label htmlFor="timer">Set Timer: </label>
+          <input id="timer"type="datetime-local" placeholder="Set Timer" />
+
+          <label htmlFor="cluedesc">Clue Description: </label>
+          <input id="cluedesc"type="text" placeholder="Clue Description" />
+
+          <label htmlFor="clueinput">Clue Location</label>
+          <input id="clueinput" type="text" placeholder="Enter a Clue location" />
+
+          <button id="addclue">Add Clue</button>
+          <button id="startgame">Start Game</button>
+
+      </div>
+
+    );
   }
 });
 
@@ -36,7 +70,7 @@ const Createhunt = React.createClass({
     $.ajax({
      url: 'users/me',
      beforeSend: function( xhr ) {
-       xhr.setRequestHeader("Authorization", auth.getToken() );
+       xhr.setRequestHeader("Authorization", "Bearer" + auth.getToken() );
      }
     }).done((data) => {
      console.log();
@@ -50,8 +84,8 @@ const Createhunt = React.createClass({
     const state = this.state.me
     return (
       <div>
-        <p>{token}</p>
         <Map />
+        <Searchbar />
       </div>
     )
   }

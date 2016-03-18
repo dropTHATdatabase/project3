@@ -18,37 +18,35 @@ const Signup = React.createClass({
     const password = this.refs.password.value
 
     $.post('/api/v1/users', {username: username, password:password})
-      .done((data) => {
+     .done((data) => {
         console.log('user created');
-
-    })
-    .fail((data) => {
-      console.log('error in creating an user');
-      return this.setState({ error: true })
-   })
-
-
+     })
+     .fail((data) => {
+        console.log('error in creating an user');
+        return this.setState({ error: true })
+     })
 
     const{ location } = this.props
-
     if (location.state && location.state.nextPathname) {
       this.context.router.replace(location.state.nextPathname)
     } else {
-      this.context.router.replace('/')      // redirects to login
+      this.context.router.replace('/login')      // redirects to login
     }
-
   },
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label><input ref="username" placeholder="Create a Username" /></label>
-        <label><input ref="password" placeholder="Create a Password" /></label><br />
-        <button type="submit">Sign Me Up!</button>
-        {this.state.error && (
-          <p>Oops! Something went wrong, please try again!</p>
-        )}
-      </form>
+      <div className="container">
+        <h3>Sign Up Now!</h3>
+        <form onSubmit={this.handleSubmit}>
+          <input ref="username" placeholder="Create a Username" required />
+          <input ref="password" placeholder="Create a Password" required /><br/>
+          <button type="submit">Sign Me Up!</button>
+          {this.state.error && (
+            <p id="invalid">Oops! Something went wrong, please try again!</p>
+          )}
+        </form>
+      </div>
     )
   }
 })

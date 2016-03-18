@@ -1,13 +1,13 @@
-const React = require('react');
-
-var Searchbar = React.createClass({
-  render: function() {
-    return (
-      <div className="search-container">
-        <p>Test</p>
-      </div>
-    );
-  }
-});
-
-module.exports = Searchbar;
+// const React = require('react');
+//
+// var Searchbar = React.createClass({
+//   render: function() {
+//     return (
+//       <div className="search-container">
+//
+//       </div>
+//     );
+//   }
+// });
+//
+// module.exports = Searchbar;
