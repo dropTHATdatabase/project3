@@ -1,6 +1,7 @@
 'use strict';
 
 const hunts = require('./transactions/hunts');
+const db = require('./index');
 
 var mockHunt = {
   hunt_id: 1,
@@ -55,26 +56,27 @@ function add(req, res, next){
 }
 
 function list(req, res, next){
-  res.data = [
-    {
-      hunt_id: 1,
-      isOwner: true,
-      owner_id: 1,
-      wager: "Loser buys a beer",
-      winner: null,
-      deadline: "2016-12-17 07:37:16-08"
-    },
-    {
-      hunt_id: 2,
-      isOwner: false,
-      owner_id: 1,
-      wager: "Loser buys a beer",
-      winner: null,
-      deadline: "2016-05-17 07:37:16-08"
-    }
-  ];
+  var user_id = parseInt(req.user.user_id);
 
-  next();
+  db.hunts.list(user_id)
+  .then((data) => {
+
+    data.forEach((el) => {
+      el.isOwner = false;
+      if(el.owner_id === user_id){
+        el.isOwner = true;
+      }
+
+      delete el.owner_id;
+    });
+
+    res.data = data;
+    next();
+  })
+  .catch((err) => {
+    console.error(err);
+    res.json({success: false, data: 'Server error'});
+  });
 }
 
 function get(req, res, next){

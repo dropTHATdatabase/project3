@@ -107,7 +107,7 @@ function insertHunt(hunt) {
       insertClues(data.hunt_id, hunt.clues)
       .then((clues) => {
         result.clues = clues;
-        insertParticipants(hunt.hunt_id, hunt.participants)
+        insertParticipants(data.hunt_id, hunt.participants)
         .then(() => {
           db.users.listWithProgress(hunt.participants)
           .then((participants) => {
