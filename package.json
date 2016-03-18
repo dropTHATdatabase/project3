@@ -6,8 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "bundle": "watchify -t [ babelify --presets [react es2015 ] ] assets/app.js -o public/js/bundle.js -d",
+    "deploy": "./node_modules/browserify/bin/cmd.js -t [ babelify --presets [ react es2015 ] ] -t uglifyify ./assets/app.js -o ./public/js/bundle.js -d",
     "createdb": "createdb project3_dev && node db/init.js",
     "dropdb": "dropdb --if-exists project3_dev",
+    "postinstall": "./node_modules/browserify/bin/cmd.js -t [ babelify --presets [ react es2015 ] ] -t uglifyify -d -p [ minifyify --no-map ] ./assets/app.js -o ./public/js/bundle.js", 
     "start": "node server.js"
   },
   "author": "",
