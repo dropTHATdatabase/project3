@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import { browserHistory, Router, Route, Link, Redirect } from 'react-router'
 import auth from './auth'
 
-const SignUp = require('./authComponents/signup.js');
+const Signup = require('./authComponents/signup.js');
 const Createhunt = require('./authComponents/createhunt.js');
 const Login = require('./authComponents/login.js');
 const Logout = require('./authComponents/logout.js');
