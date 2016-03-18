@@ -29,13 +29,13 @@ const Homepage = React.createClass({
     }
   },
 
-  componentDidMount() {
+  componentDidMount() {       // after component is called
     console.log('homepage componentDidMount activate')
     // var list = auth.getHuntsList()    // needs to be passed from auth.js
     // console.log('homepage hunts list: ', list)
   },
 
-  componentWillMount() {
+  componentWillMount() {      // before component is called
     $.ajax({
       url: "/api/v1/hunts",
       type: "get",
