@@ -56,8 +56,20 @@ function add(req, res, next){
 }
 
 function list(req, res, next){
-  db.hunts.list(parseInt(req.user.user_id))
+  var user_id = parseInt(req.user.user_id);
+
+  db.hunts.list(user_id)
   .then((data) => {
+
+    data.forEach((el) => {
+      el.isOwner = false;
+      if(el.owner_id === user_id){
+        el.isOwner = true;
+      }
+
+      delete el.owner_id;
+    });
+
     res.data = data;
     next();
   })
