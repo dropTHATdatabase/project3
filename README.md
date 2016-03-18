@@ -145,7 +145,13 @@ Response (GET /api/v1/users):
 {
   success: true,
   data: [
-    {user_id: Number, username: String}, ...
+    {
+    user_id: Number, 
+    username: String,
+    hunts_entered: Number,
+    hunts_completed: Number,
+    hunts_won: Number
+    }, ...
   ]
 }
 
