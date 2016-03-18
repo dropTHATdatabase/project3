@@ -1,10 +1,12 @@
 'use strict';
 
 const hunts = require('./transactions/hunts');
+const db = require('./index');
 
 var mockHunt = {
   hunt_id: 1,
   isOwner: true,
+  showNextClue: true,
   wager: "Loser buys a beer",
   deadline: "2016-12-17 07:37:16-08",
   participants: [
@@ -54,24 +56,27 @@ function add(req, res, next){
 }
 
 function list(req, res, next){
-  res.data = [
-    {
-      hunt_id: 1,
-      owner_id: 1,
-      wager: "Loser buys a beer",
-      winner: null,
-      deadline: "2016-12-17 07:37:16-08"
-    },
-    {
-      hunt_id: 2,
-      owner_id: 1,
-      wager: "Loser buys a beer",
-      winner: null,
-      deadline: "2016-05-17 07:37:16-08"
-    }
-  ];
+  var user_id = parseInt(req.user.user_id);
 
-  next();
+  db.hunts.list(user_id)
+  .then((data) => {
+
+    data.forEach((el) => {
+      el.isOwner = false;
+      if(el.owner_id === user_id){
+        el.isOwner = true;
+      }
+
+      delete el.owner_id;
+    });
+
+    res.data = data;
+    next();
+  })
+  .catch((err) => {
+    console.error(err);
+    res.json({success: false, data: 'Server error'});
+  });
 }
 
 function get(req, res, next){
@@ -91,10 +96,15 @@ function remove(req, res, next){
   next();
 }
 
+function completeClue(req, res, next){
+  next();
+}
+
 module.exports = {
   list: list,
   add: add,
   get: get,
   update: update,
-  remove: remove
+  remove: remove,
+  completeClue: completeClue
 };

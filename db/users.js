@@ -64,16 +64,8 @@ function get(req, res, next){
 
 function list(req, res, next){
   var query;
-  // If me=true in the query string get the current user
-  // from the token as an array with one object
-  // else get a list of all users as an array
-  if (req.query.me) {
-    query = db.users.findById(req.user.user_id);
-  } else {
-    query = db.users.list();
-  }
 
-  query.then((users) => {
+  db.users.list().then((users) => {
     res.data = users;
     next();
   })

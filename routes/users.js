@@ -15,18 +15,15 @@ users.use(function (error, request, response, next) {
 users.get('/', expressJWT({ secret: secret }), db.list, (req,res)=>{
   var query = req.query.me;
 
-  console.log('req.user: ', req.user)       // gets token info of the current user
-  console.log('res.data: ', res.data)       // gets list of all users
-  
   if(query) {
-    res.json({ data: res.user })
+    res.json({ success: true, data: req.user });
   } else {
-    res.json({ data: res.data })
+    res.json({ success: true, data: res.data });
   }
 });
 
 users.post('/', db.add,(req,res)=>{
-  res.status(201).json({data:'success'});
+  res.status(201).json({success: true, data:'success'});
 });
 
 users.post('/login', db.get, (req,res) =>{

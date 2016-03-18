@@ -136,15 +136,21 @@ var styles =[
         ]
     }
 ];
+
+var wager, timer, cluedesc;
+var cluesarr =[];
+var cluesearch, map,clueinput,addclue;
+var cluenumber =1;
+
+// initliazes the map
 function initMap() {
-  var map = new google.maps.Map(document.getElementById('map'), {
-    // center: {lat: -34.397, lng: 150.644},
-    zoom: 5,
+    map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 36.580247, lng: -41.817628},
+    zoom: 6,
+    draggable: true,
     styles: styles
   });
-  var infoWindow = new google.maps.InfoWindow({map: map});
 
-  // Try HTML5 geolocation.
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = {
@@ -152,21 +158,98 @@ function initMap() {
         lng: position.coords.longitude
       };
 
-      infoWindow.setPosition(pos);
-      infoWindow.setContent('Current Location.');
+      var infoWindow = new google.maps.InfoWindow({map: map});
+      infoWindow.setContent('Current Location');
       map.setCenter(pos);
-    }, function() {
-      handleLocationError(true, infoWindow, map.getCenter());
-    });
-  } else {
-    // Browser doesn't support Geolocation
-    handleLocationError(false, infoWindow, map.getCenter());
+
+      var marker = new google.maps.Marker({
+            map: map,
+            position: pos,
+            animation: google.maps.Animation.DROP,
+            label: 'A'
+      });
+      marker.addListener('click', toggleBounce);
+      infoWindow.open(map, marker);
+       });
+
+    }
+
+  // add clue button
+  addclue = document.getElementById('addclue');
+  // input value for the location of the clue
+  clueinput = new google.maps.places.Autocomplete(document.getElementById('clueinput'));
+  // addaing places Autocomplete to the clueiput
+  google.maps.event.addListener(clueinput, 'places_changed', placesSearch);
+  addClick();
+}
+
+// uses google places library to auto complete the input entered by the user
+function placesSearch(){
+  var places = clueinput.getPlaces();
+  if (places.length) {
+    location = places[0].geometry.location;
+    var origin = new google.maps.LatLng(location.lat(), location.lng());
+      // plot origin
   }
 }
 
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-  infoWindow.setPosition(pos);
-  infoWindow.setContent(browserHasGeolocation ?
-                        'Error: The Geolocation service failed.' :
-                        'Error: Your browser doesn\'t support geolocation.');
+
+//plots the location of the value entered by the user
+function buttonSearch(location) {
+
+  var geocoder = new google.maps.Geocoder();
+  var address = {'address': location};
+  // var image = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+
+  geocoder.geocode(address, function (results, status) {
+
+    cluedesc =  document.getElementById('cluedesc').value;
+    var lat = results[0].geometry.location.lat();
+    var lng = results[0].geometry.location.lng();
+    var origin = new google.maps.LatLng(lat, lng);
+    var label = (cluenumber++).toString();
+    var clue_info = {
+      'description': cluedesc,
+      'clue_number': label,
+       'lat': lat,
+       'lng': lng
+     };
+     cluesarr.push(clue_info);
+     console.log(cluesarr);
+
+    if (status == google.maps.GeocoderStatus.OK) {
+       map.setCenter(results[0].geometry.location);
+       var marker = new google.maps.Marker({
+           map: map,
+           position: origin,
+           animation: google.maps.Animation.DROP,
+           label: label
+       });
+     } else {
+       alert("Geocode was not successful for the following reason: " + status);
+     }
+     // clearing the values of the clue desc and clue input so that next clue 
+     document.getElementById('cluedesc').value ="";
+     document.getElementById('clueinput').value ="";
+  });
+
+
+}
+
+//adds click to add clue button and calls buttonSearch function
+function addClick() {
+    clueinput = document.getElementById('clueinput');
+    addclue.addEventListener("click", function(){
+    var location = clueinput.value;
+    buttonSearch(location);
+ });
+}
+
+// for marker animation
+function toggleBounce() {
+  if (marker.getAnimation() !== null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
 }
