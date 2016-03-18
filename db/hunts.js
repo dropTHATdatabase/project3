@@ -80,6 +80,33 @@ function list(req, res, next){
 }
 
 function get(req, res, next){
+  var user_id = parseInt(req.user.user_id);
+  var hunt_id = parseInt(req.params.id);
+
+  // Get the hunt
+  db.hunts.get(hunt_id)
+    .then((hunt) => {
+      res.data = hunt;
+      // Get all the participants in the hunt
+      
+      // If user is owner get entire hunt
+      if(hunt.owner_id === user_id){
+        // Get all the clues for a hunt
+      }
+      // Else render view for user
+      else {
+        // Save hunt without clues to res.data
+        // Add completed hunts to res.data
+        // Get the next clue
+        // If the lat/lon from the next clue is
+        // within 100m of the add the next clue to
+        // to the list of clues
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({success: false, data: 'Server error'});
+    });
   res.data = mockHunt;
 
   next();
