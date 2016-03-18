@@ -13,6 +13,10 @@ module.exports = function(db) {
     },
     listByHunt: function(hunt_id){
       return db.any(sql.clues.listByHunt, hunt_id);
+    },
+    // values = {user_id: , hunt_id: }
+    listCompleted: function(values){
+      return db.any(sql.clues.listCompleted, values);
     }
   };
 };
