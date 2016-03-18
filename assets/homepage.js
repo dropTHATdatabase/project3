@@ -31,8 +31,26 @@ const Homepage = React.createClass({
 
   componentDidMount() {
     console.log('homepage componentDidMount activate')
-    var list = auth.getHuntsList()
-    console.log('homepage hunts list: ', list)
+    // var list = auth.getHuntsList()    // needs to be passed from auth.js
+    // console.log('homepage hunts list: ', list)
+  },
+
+  componentWillMount() {
+    $.ajax({
+      url: "/api/v1/hunts",
+      type: "get",
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
+      }
+    }).done((data)=>{ 
+      console.log('List Success: ', data) 
+      // res.data = data
+      // next()
+      
+
+    }).fail((error)=>{ 
+      console.log('Hunt List Error: ', error) 
+    })
   },
 
 

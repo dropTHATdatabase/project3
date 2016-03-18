@@ -19,6 +19,8 @@ hunts.use(expressJWT({secret: secret}));
 hunts.get('/', db.list, (req,res)=>{
   // req.user = 1
   // res.data = { user_id, username, pw_digest, hunts: completed, entered, won}
+  // console.log('hunt GET route: ', data)
+  console.log(req.user)
   res.json({success: true, data:res.data});
 });
 

@@ -7,9 +7,15 @@ const auth = {
       beforeSend: function( xhr ) {
         xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
       }
+    }).done((data)=>{ 
+      console.log('Hunt List Success: ', data) 
+      // res.data = data
+      // next()
+      return data
+
+    }).fail((error)=>{ 
+      console.log('Hunt List Error: ', error) 
     })
-    .done((data)=>{ console.log('Hunt List Success: ', data) })
-    .fail((error)=>{ console.log('Hunt List Error: ', error) })
   },
 
   getUsers(cb){
@@ -19,8 +25,7 @@ const auth = {
       beforeSend: function( xhr ) {
         xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken() );
       }
-    })
-    .fail((error)=>{
+    }).fail((error)=>{
       console.log('error: ', error)
     })
   },
