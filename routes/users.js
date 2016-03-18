@@ -17,14 +17,14 @@ users.get('/', expressJWT({ secret: secret }), db.list, (req,res)=>{
   var query = req.query.me;
 
   if(query) {
-    res.json({ data: req.user })
+    res.json({ success: true, data: req.user });
   } else {
-    res.json({ data: res.data })
+    res.json({ success: true, data: res.data });
   }
 });
 
 users.post('/', db.add,(req,res)=>{
-  res.status(201).json({data:'success'});
+  res.status(201).json({success: true, data:'success'});
 });
 
 users.post('/login', db.get, (req,res) =>{
