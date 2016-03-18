@@ -113,11 +113,16 @@ function get(req, res, next){
             // Set isOwner to false
             res.data.isOwner = false;
             // Add completed clues for user to res.data
-            // Get the next clue
-            // If the lat/lon from the next clue is
-            // within 100m of the add the next clue to
-            // to the list of clues
-            // set showNextClue to false
+            db.clues.listCompleted({user_id: user_id, hunt_id: hunt_id})
+              .then((clues) => {
+                res.data.clues = clues;
+                // next();
+                // Get the next clue
+                // If the lat/lon from the next clue is
+                // within 100m of the add the next clue to
+                // to the list of clues
+                // set showNextClue to false
+              });
           }
         });
     })
