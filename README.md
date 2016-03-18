@@ -215,6 +215,7 @@ Response (GET/PUT api/v1/hunts/:id & POST /api/v1/hunts):
      isOwner: Number,
      wager: String
      deadline: datetime,
+     showNextClue: Boolean,
      participants: [
      {
       participant_id: Number,
