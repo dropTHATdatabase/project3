@@ -5,6 +5,7 @@ const hunts = require('./transactions/hunts');
 var mockHunt = {
   hunt_id: 1,
   isOwner: true,
+  showNextClue: true,
   wager: "Loser buys a beer",
   deadline: "2016-12-17 07:37:16-08",
   participants: [
@@ -57,6 +58,7 @@ function list(req, res, next){
   res.data = [
     {
       hunt_id: 1,
+      isOwner: true,
       owner_id: 1,
       wager: "Loser buys a beer",
       winner: null,
@@ -64,6 +66,7 @@ function list(req, res, next){
     },
     {
       hunt_id: 2,
+      isOwner: false,
       owner_id: 1,
       wager: "Loser buys a beer",
       winner: null,
@@ -91,10 +94,15 @@ function remove(req, res, next){
   next();
 }
 
+function completeClue(req, res, next){
+  next();
+}
+
 module.exports = {
   list: list,
   add: add,
   get: get,
   update: update,
-  remove: remove
+  remove: remove,
+  completeClue: completeClue
 };
