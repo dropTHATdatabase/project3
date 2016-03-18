@@ -109,10 +109,10 @@ function get(req, res, next){
           // Else render view for user
           else {
             res.data = mockHunt;
-            next();
+            next(); // Move down when other logic is done;
             // Set isOwner to false
-            // Save hunt without clues to res.data
-            // Add completed hunts to res.data
+            res.data.isOwner = false;
+            // Add completed clues for user to res.data
             // Get the next clue
             // If the lat/lon from the next clue is
             // within 100m of the add the next clue to
