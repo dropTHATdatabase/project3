@@ -88,28 +88,46 @@ function get(req, res, next){
     .then((hunt) => {
       res.data = hunt;
       // Get all the participants in the hunt
-      
-      // If user is owner get entire hunt
-      if(hunt.owner_id === user_id){
-        // Get all the clues for a hunt
-      }
-      // Else render view for user
-      else {
-        // Save hunt without clues to res.data
-        // Add completed hunts to res.data
-        // Get the next clue
-        // If the lat/lon from the next clue is
-        // within 100m of the add the next clue to
-        // to the list of clues
-      }
+      db.participants.get(hunt_id)
+        .then((participants) => {
+          res.data.participants = participants;
+          // If user is owner get entire hunt
+          if(hunt.owner_id === user_id){
+            // Set isOwner to true
+            res.data.isOwner = true;
+            // Remove owner_id
+            delete res.data.owner_id;
+            // Get all the clues for a hunt
+            db.clues.listByHunt(hunt_id)
+              .then((clues) => {
+                res.data.clues = clues;
+                // set showNextClue to false
+                res.data.showNextClue = false;
+                next();
+              });
+          }
+          // Else render view for user
+          else {
+            res.data = mockHunt;
+            next();
+            // Set isOwner to false
+            // Save hunt without clues to res.data
+            // Add completed hunts to res.data
+            // Get the next clue
+            // If the lat/lon from the next clue is
+            // within 100m of the add the next clue to
+            // to the list of clues
+            // set showNextClue to false
+          }
+        });
     })
     .catch((err) => {
       console.log(err);
       res.status(500).json({success: false, data: 'Server error'});
     });
-  res.data = mockHunt;
+  // res.data = mockHunt;
 
-  next();
+  // next();
 }
 
 function update(req, res, next){
