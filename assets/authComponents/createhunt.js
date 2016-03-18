@@ -1,6 +1,7 @@
 const React = require('react');
 const auth = require('../auth');
 const Logout = require('./logout.js');
+import { browserHistory, Router, Route, Link, Redirect } from 'react-router'
 
 const Map = React.createClass({
   componentDidMount : function() {
@@ -50,7 +51,7 @@ const Createhunt = React.createClass({
     const state = this.state.me
     return (
       <div>
-        <Logout />
+        <Link to="/logout">Log Out</Link>
         {/* add nav here */}
         <p>{token}</p>
         <Map />

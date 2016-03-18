@@ -37,11 +37,11 @@ const App = React.createClass({
   render() {
     return (
       <div className="container">
-        <h1>Welcome to Citydipity!</h1>
+        <h1><Link to="/">Welcome to Citydipity!</Link></h1>
 
 
     <div>
-      {this.state.loggedIn ? (<Createhunt />) : (<Signup />) }  {/* need to point to homepage, not createhunt */}
+      {this.state.loggedIn ? (<Createhunt />) : (<Link to="/signup">Sign Up Now</Link>) }  {/* need to point to homepage, not createhunt */}
       {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in. 
         <Link to="/login">Log In Here</Link></p>}
     </div>

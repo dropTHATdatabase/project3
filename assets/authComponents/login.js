@@ -26,7 +26,7 @@ const Login = React.createClass({
       if (location.state && location.state.nextPathname) {
         this.context.router.replace(location.state.nextPathname)
       } else {
-        this.context.router.replace('/')      // redirect to member homepage
+        this.context.router.replace('/createhunt')      // redirect to member homepage
       }
     })
   },

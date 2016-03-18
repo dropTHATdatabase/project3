@@ -1,9 +1,10 @@
 const React = require('react');
 const auth = require('../auth');
-const App = require('../app.js');
-import { browserHistory, Router, Route } from 'react-router'
+// const App = require('../app.js');
+// const Signup = require('./signup.js');
+// import { browserHistory, Router, Route } from 'react-router'
 
-const Redirect = Router.Redirect;
+// const Redirect = Router.Redirect;
 
 const Logout = React.createClass({
   componentDidMount() {
@@ -14,18 +15,18 @@ const Logout = React.createClass({
     return (
       <div>
         Goodbye, friend!
-        <Redirect from="logout" to="/" />
+        
       </div>
     )
   }
 })
 
 
-const Error = React.createClass({     // 404 Error Page
-  render(){
-    return(<h1>404 Error - You f*cked up somewhere</h1>)    
-  }
-});
+// const Error = React.createClass({     // 404 Error Page
+//   render(){
+//     return(<h1>404 Error - You f*cked up somewhere</h1>)    
+//   }
+// });
 
 // render((
 //   <Router history={browserHistory}>
