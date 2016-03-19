@@ -139,11 +139,13 @@ var styles =[
 
 var wager, timer, cluedesc;
 var cluesarr =[];
-var cluesearch, map,clueinput,addclue;
-var cluenumber =1;
+var cluesearch, map,clueinput,addclue,cluenumber;
+
+
 
 // initliazes the map
 function initMap() {
+   cluenumber = 1;
     map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 36.580247, lng: -41.817628},
     zoom: 6,
@@ -168,7 +170,7 @@ function initMap() {
             animation: google.maps.Animation.DROP,
             label: 'A'
       });
-      marker.addListener('click', toggleBounce);
+      // marker.addListener('click', toggleBounce(marker));
       infoWindow.open(map, marker);
        });
 
@@ -178,7 +180,7 @@ function initMap() {
   addclue = document.getElementById('addclue');
   // input value for the location of the clue
   clueinput = new google.maps.places.Autocomplete(document.getElementById('clueinput'));
-  // addaing places Autocomplete to the clueiput
+  // adding places Autocomplete to the clueiput
   google.maps.event.addListener(clueinput, 'places_changed', placesSearch);
   addClick();
 }
@@ -186,11 +188,6 @@ function initMap() {
 // uses google places library to auto complete the input entered by the user
 function placesSearch(){
   var places = clueinput.getPlaces();
-  if (places.length) {
-    location = places[0].geometry.location;
-    var origin = new google.maps.LatLng(location.lat(), location.lng());
-      // plot origin
-  }
 }
 
 
@@ -199,25 +196,34 @@ function buttonSearch(location) {
 
   var geocoder = new google.maps.Geocoder();
   var address = {'address': location};
-  // var image = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+  var image = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
 
   geocoder.geocode(address, function (results, status) {
-
+    console.log(cluenumber);
     cluedesc =  document.getElementById('cluedesc').value;
+    // removing all the spaces and replacing them with +
+    var replacedec = cluedesc.split(' ').join('+');
     var lat = results[0].geometry.location.lat();
     var lng = results[0].geometry.location.lng();
     var origin = new google.maps.LatLng(lat, lng);
     var label = (cluenumber++).toString();
     var clue_info = {
-      'description': cluedesc,
+      'description': replacedec,
       'clue_number': label,
        'lat': lat,
        'lng': lng
      };
+     // pushing the each clue in to cluesarr
      cluesarr.push(clue_info);
-     console.log(cluesarr);
-
-    if (status == google.maps.GeocoderStatus.OK) {
+     // convertung cluesarr to a string
+     var cluesstring = JSON.stringify(cluesarr);
+     // getting the hidden div and appending input type hidden to the div to pass data to react
+      $hiddenDiv = $('#hidden');
+     // if the input type hidden is already there then remove it
+     $('#cluesdata').remove();
+     $hiddenDiv.append($('<input id="cluesdata" type="hidden" value='+cluesstring+'>'));
+     // to check the status og
+     if (status == google.maps.GeocoderStatus.OK) {
        map.setCenter(results[0].geometry.location);
        var marker = new google.maps.Marker({
            map: map,
@@ -228,11 +234,10 @@ function buttonSearch(location) {
      } else {
        alert("Geocode was not successful for the following reason: " + status);
      }
-     // clearing the values of the clue desc and clue input so that next clue 
+     // clearing the values of the clue desc and clue input for the next clue
      document.getElementById('cluedesc').value ="";
      document.getElementById('clueinput').value ="";
   });
-
 
 }
 
@@ -246,7 +251,7 @@ function addClick() {
 }
 
 // for marker animation
-function toggleBounce() {
+function toggleBounce(marker) {
   if (marker.getAnimation() !== null) {
     marker.setAnimation(null);
   } else {
