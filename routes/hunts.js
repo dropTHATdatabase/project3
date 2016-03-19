@@ -20,8 +20,8 @@ hunts.get('/', db.list, (req,res)=>{
   // req.user = 1
   // res.data = { user_id, username, pw_digest, hunts: completed, entered, won}
   // console.log('hunt GET route: ', data)
-  console.log(req.user)
-  res.json({success: true, data:res.data});
+  console.log('hunts.get user: ', req.user)
+  res.json({success: true, data: res.data, user: req.user});
 });
 
 // route to add a new hunt for the user

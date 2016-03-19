@@ -39,8 +39,7 @@ const App = React.createClass({
         <Nav />
         <div>
           {this.state.loggedIn ? (<Homepage />) : (<Link to="/signup">Sign Up Now</Link>) }  {/* need to point to homepage, not createhunt */}
-          {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in. 
-            </p>}
+          {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
         </div>
       </div>
     )
