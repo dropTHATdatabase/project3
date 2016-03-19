@@ -1,22 +1,22 @@
 const auth = {
 
-  getHuntsList(cb){
-    $.ajax({
-      url: "/api/v1/hunts",
-      type: "get",
-      beforeSend: function( xhr ) {
-        xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
-      }
-    }).done((data)=>{ 
-      console.log('Hunt List Success: ', data) 
-      // res.data = data
-      // next()
-      return data
+  // getHuntsList(cb){
+  //   $.ajax({
+  //     url: "/api/v1/hunts",
+  //     type: "get",
+  //     beforeSend: function( xhr ) {
+  //       xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
+  //     }
+  //   }).done((data)=>{ 
+  //     console.log('Hunt List Success: ', data) 
+  //     // res.data = data
+  //     // next()
+      
 
-    }).fail((error)=>{ 
-      console.log('Hunt List Error: ', error) 
-    })
-  },
+  //   }).fail((error)=>{ 
+  //     console.log('Hunt List Error: ', error) 
+  //   })
+  // },
 
   getUsers(cb){
     $.ajax({
