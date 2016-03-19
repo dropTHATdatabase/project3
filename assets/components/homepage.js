@@ -2,38 +2,33 @@
 import React from 'react'
 import { render, ReactDOM } from 'react-dom'
 import { browserHistory, Router, Route, Link } from 'react-router'
-import auth from './auth'
+import auth from './../auth'
 
 const $   = require('jquery');
-const App = require('./app.js');
-const Nav = require('./authComponents/nav.js');
-const Createhunt = require('./authComponents/createhunt.js');
-// how do we get user info from token in front end??
+const App = require('./../app.js');
+const Nav = require('./nav.js');
+const Createhunt = require('./createhunt.js');
+// const Gameview = require('./gameview.js');
+// how do we get user info from token in front end?? currently stored in user:{} 
 
 const Homepage = React.createClass({
-
   getInitialState() {
-    return { hunts: [],
-             user:  {}  }
+    return { 
+      hunts: [],
+      user:  {}         // bad practice? ill advised?
+    }
   },
-
-  // sets context type
+  // sets context type to be passed to child component
   childContextTypes: {
-    hunts: React.PropTypes.array
+    hunts: React.PropTypes.array,
+    user: React.PropTypes.object
   },
-
-  // gets returned context data
+  // gets returned context data from child component
   getChildContext() {
     return {
       hunts: this.state.hunts
     }
   },
-
-  // AFTER homepage is rendered
-  componentDidMount() {       
-    
-  },
-
   // BEFORE homepage is rendered
   componentWillMount() {      
     // gets list of hunts from user token
@@ -53,17 +48,26 @@ const Homepage = React.createClass({
       console.log('Hunt List Error: ', error) 
     })
   },
+  // AFTER homepage is rendered - when new hunt is added?
+  componentDidMount() {       
 
+  },
+  // Edit button - edits hunts/:id info (for owner_id ONLY)
+  handleEdit(event) {
+    event.preventDefault()
+    console.log('edit button clicked')
+  },
+  // View button - redirect to gameview component of hunts/:id
   handleView(event) {
     event.preventDefault()
     console.log('view button clicked')
   },
-
+  // Delete button - deletes /hunts/:id from user's hunts 
   handleDelete(event) {
     event.preventDefault()
     console.log('delete button clicked')
   },
-
+  // creates new row in table with hunt info
   renderHunt(hunt) {
     // console.log('renderHunt: ', hunt)
     return (
@@ -85,10 +89,11 @@ const Homepage = React.createClass({
     // console.log('user info: ', this.state.user)
     return (
       <div>
+        <Nav />
         <h1>Welcome back, {this.state.user.username}!</h1>
 
         <div className="row">
-          {/* List of all User hunts + Edit|Delete options per hunt */}
+          {/* List of all User hunts + Edit|View|Delete options per hunt */}
           <section className="eight columns">
             <h5>Hunt History:</h5>
             <table className="u-full-width">
@@ -98,7 +103,7 @@ const Homepage = React.createClass({
                   <th>Status</th>
                   <th>Winner</th>
                   <th>Deadline</th>
-                  <th>View|Delete</th>
+                  <th>Edit|View|Delete</th>
                 </tr>
               </thead>
               <tbody>

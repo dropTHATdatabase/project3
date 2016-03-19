@@ -57,7 +57,7 @@ function add(req, res, next){
 
 function list(req, res, next){
   var user_id = parseInt(req.user.user_id);
-  console.log('reading user id: ', user_id)
+  console.log('db/hunts.js user id: ', user_id)
 
   db.hunts.list(user_id)
   .then((data) => {

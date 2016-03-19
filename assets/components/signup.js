@@ -38,7 +38,7 @@ const Signup = React.createClass({
 
   render() {
     return (
-      <div className="container">
+      <div>
         <h3>Sign Up Now!</h3>
         <form onSubmit={this.handleSubmit}>
           <input ref="username" placeholder="Create a Username" required />
@@ -48,7 +48,7 @@ const Signup = React.createClass({
             <p id="invalid">Oops! Something went wrong, please try again!</p>
           )}
         </form>
-        {/* add login link here? */}
+        <Link to="/login">Log In here</Link>
       </div>
     )
   }

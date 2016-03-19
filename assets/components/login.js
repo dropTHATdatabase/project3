@@ -1,6 +1,8 @@
 const React = require('react');
+import { browserHistory, Router, Route, Link, Redirect } from 'react-router'
 const auth = require('../auth');
-const Homepage = require('./../homepage.js');
+const Homepage = require('./homepage.js');
+const Signup = require('./signup.js');
 
 
 const Login = React.createClass({
@@ -34,7 +36,7 @@ const Login = React.createClass({
 
   render() {
     return (
-      <div className="container">
+      <div>
         <h3>Please Log In!</h3>
         <form onSubmit={this.handleSubmit}>
           <input ref="username" placeholder="Enter Username" required />
@@ -44,7 +46,7 @@ const Login = React.createClass({
             <p id="invalid">Invalid login information!</p>
           )}
         </form>
-        {/* add sign up link here? */}
+        <Link to="/signup">Sign Up here</Link>
       </div>
     )
   }

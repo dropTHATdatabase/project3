@@ -7,11 +7,7 @@ const Logout = React.createClass({
   },
 
   render() {
-    return (
-      <div>
-        Goodbye, friend!
-      </div>
-    )
+    return null
   }
 })
 
