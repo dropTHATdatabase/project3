@@ -14,17 +14,11 @@ const Nav = React.createClass({
     return(
       <div id="nav">
         <div className="nav"><Link to="/">Citydipity</Link></div>
-        <div className="nav">
-          {auth.loggedIn() ? (<Link to="homepage">Home</Link>) 
-                           : (<Link to="deny">Home</Link>) }
-        </div>
-        <div className="nav">
-          {auth.loggedIn() ? (<Link to="createhunt">Create New Hunt</Link>) 
-                           : (<Link to="deny">Create New Hunt</Link>) }
-        </div>
+        <div className="nav"><Link to="homepage">Home</Link></div>
+        <div className="nav"><Link to="createhunt">Create New Hunt</Link></div>
         <div className="nav">
           {auth.loggedIn() ? (<Link to="logout">Log out</Link>) 
-                           : (<Link to="login">Log in</Link>) }
+                           : (<Link to="login">Log in</Link>  ) }
         </div>
       </div>
     )
