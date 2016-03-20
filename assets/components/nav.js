@@ -1,6 +1,6 @@
 const React = require('react');
 const auth = require('../auth');
-import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
+import { browserHistory, Router, Route, Link } from 'react-router'
 
 const Createhunt = require('./createhunt.js');
 const Logout = require('./logout.js');
@@ -9,18 +9,7 @@ const Homepage = require('./homepage.js');
 const App = require('./../app.js');
 
 
-const routes = (
-  <Route handler={Nav}>
-    <Route name='/' handler={App} />
-    <Route name='homepage' handler={Homepage} />
-    <Route name='createhunt' handler={Createhunt} />
-    <Route name='login' handler={Login} />
-    <Route name='logout' handler={Logout} />
-  </Route>
-);
-
 const Nav = React.createClass({
-
   render() {
     return(
       <div id="nav">

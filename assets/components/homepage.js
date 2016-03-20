@@ -1,7 +1,7 @@
 'use strict'
 import React from 'react'
 import { render, ReactDOM } from 'react-dom'
-import { browserHistory, Router, Route, Link, Navigation, RouteHandler } from 'react-router'
+import { browserHistory, Router, Route, Link } from 'react-router'
 import auth from './../auth'
 
 const $   = require('jquery');
@@ -11,15 +11,7 @@ const Createhunt = require('./createhunt.js').Createhunt;
 // const Gameview = require('./gameview.js');
 // how do we get user info from token in front end?? currently stored in user:{} 
 
-// const routes = (
-//   <Route name='home' handler={Homepage}>
-//     <Route name='createhunt' handler={Createhunt} />
-//   </Route>
-// );
-
 const Homepage = React.createClass({
-  mixins: [Navigation],
-
   getInitialState() {
     return { 
       hunts: [],
@@ -51,15 +43,13 @@ const Homepage = React.createClass({
       this.state.hunts = data.data
       this.state.user = data.user
       this.setState({ hunts: this.state.hunts, user: this.state.user })
-      console.log("this.state.hunts: ", this.state.hunts)
+      // console.log("this.state.hunts: ", this.state.hunts)
     }).fail((error)=>{ 
       console.log('Hunt List Error: ', error) 
     })
   },
   // AFTER homepage is rendered - when new hunt is added?
-  componentDidMount() {       
-
-  },
+  componentDidMount() {},
   // Edit button - edits hunts/:id info (for owner_id ONLY)
   editHunt(hunt) {
     console.log('making AJAX request to edit hunt')
@@ -69,11 +59,6 @@ const Homepage = React.createClass({
   deleteHunt(hunt) {
     console.log('making AJAX request to delete hunt')
     // AJAX DELETE request here
-  },
-  handleClick(event) {
-    event.preventDefault()
-    console.log('transitioning to createhunt component!!')
-    this.transitionTo('/createhunt')
   },
   // creates new row in table with hunt info
   renderHunt(hunt) {
@@ -103,6 +88,7 @@ const Homepage = React.createClass({
       <div>
         <h1>Welcome back, {this.state.user.username}!</h1>
 
+        <div className="row">
           {/* List of all User hunts + Edit|View|Delete options per hunt */}
           <section className="eight columns">
             <h5>Hunt History:</h5>
@@ -134,51 +120,52 @@ const Homepage = React.createClass({
                 <li>Hunts Completed: {this.state.user.hunts_completed} </li>
                 <li>Hunts Won: {this.state.user.hunts_won} </li>
               </ul>
-              {/* <button className="button-primary" onClick={this.handleClick}>Create A Hunt!</button> */}
-              <Link to='createhunt'>Create A Hunt!</Link>
             </div>
+            <button className="button-primary">
+              <Link to='createhunt'>Create A Hunt!</Link>
+            </button>
           </section>
-          {this.props.children}
-          
+        </div>
+        {/* {this.props.children} */}
       </div>
     )
   }
 });
 
-const Hunt = React.createClass({
-  handleEdit(event) {
-    event.preventDefault();
-    console.log('edit button clicked')
-    // send to App editHunt method
-    // this.props.editHunt(this.props.details)
-  },
-  handleDelete(event) {
-    event.preventDefault();
-    console.log('delete button clicked')
-    // send to App deleteHunt method
-    // this.props.deleteHunt(this.props.details)
-  },
+// const Hunt = React.createClass({
+//   handleEdit(event) {
+//     event.preventDefault();
+//     console.log('edit button clicked')
+//     // send to App editHunt method
+//     // this.props.editHunt(this.props.details)
+//   },
+//   handleDelete(event) {
+//     event.preventDefault();
+//     console.log('delete button clicked')
+//     // send to App deleteHunt method
+//     // this.props.deleteHunt(this.props.details)
+//   },
 
-  render() {
-    // console.log('Hunt this.props: ', this.props.details)
-    return (
-      <tr>
-        <td>{this.props.details.wager}</td>
-        <td>??</td>   {/* status - in session|ended */}
-        <td>??</td>   {/* winner - user_id's username */}
-        <td>{this.props.details.deadline}</td>
-        <td id="btn">
-          {/* if({this.props.details.isOwner}) {
-              (<button id="edit" className="button-primary" onClick={this.handleEdit}>Edit</button>)
-            } */}
+//   render() {
+//     // console.log('Hunt this.props: ', this.props.details)
+//     return (
+//       <tr>
+//         <td>{this.props.details.wager}</td>
+//         <td>??</td>   { status - in session|ended }
+//         <td>??</td>   {/* winner - user_id's username */}
+//         <td>{this.props.details.deadline}</td>
+//         <td id="btn">
+//           {/* if({this.props.details.isOwner}) {
+//               (<button id="edit" className="button-primary" onClick={this.handleEdit}>Edit</button>)
+//             } */}
           
-          <button id="view" className="button-primary"><Link to="/gameview">View</Link></button>
-          <button id="delete" className="button-primary" onClick={this.handleDelete}>Delete</button>
-        </td>
-      </tr>
-    )
-  }
-});
+//           <button id="view" className="button-primary"><Link to="/gameview">View</Link></button>
+//           <button id="delete" className="button-primary" onClick={this.handleDelete}>Delete</button>
+//         </td>
+//       </tr>
+//     )
+//   }
+// });
 
 
 module.exports = Homepage;

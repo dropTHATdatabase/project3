@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, ReactDOM } from 'react-dom'
-import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
+import { browserHistory, Router, Route, Link, IndexRoute } from 'react-router'
 import auth from './auth'
 
 const Signup = require('./components/signup.js');
@@ -57,13 +57,13 @@ const Error = React.createClass({     // 404 Error Page
 render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
-      <Route path="/signup" component={Signup} />
+      <IndexRoute component={Login} />
+      <Route path="/signup" component={Signup} /> 
       <Route path="/login" component={Login} />
       <Route path="/logout" component={Logout} /> 
       <Route path="/nav" component={Nav} />
-      <Route path="/homepage" component={Homepage}> 
-        <Route path="/createhunt" component={Createhunt} />
-      </Route>
+      <Route path="/homepage" component={Homepage} /> 
+      <Route path="/createhunt" component={Createhunt} />
     </Route>
     <Route path="*" component={Error} />
   </Router>
