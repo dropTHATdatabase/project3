@@ -11,7 +11,6 @@ const Nav = require('./components/nav.js');
 const Createhunt = require('./components/createhunt.js').Createhunt;
 const Gameview = require('./components/gameview.js');
 
-
 const App = React.createClass({
   getInitialState() {
     return {
@@ -109,3 +108,4 @@ render((
     <Route path="*" component={Error} />
   </Router>
 ), document.getElementById('container'));
+
