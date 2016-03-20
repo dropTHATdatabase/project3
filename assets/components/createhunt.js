@@ -29,7 +29,6 @@ const Map = React.createClass({
 });
 
 const Huntform = React.createClass({
-
   getInitialState: function() {
     return {
       hunt: {
@@ -41,7 +40,10 @@ const Huntform = React.createClass({
       data:{}  // capture all the users with their ids from the database
     }
   },
-
+  contextTypes: {
+    setCurrentHuntId: React.PropTypes.func,
+    router: React.PropTypes.object
+  },
   componentDidMount:function() {
     $.ajax({
       url:'/api/v1/users',
@@ -109,11 +111,10 @@ const Huntform = React.createClass({
           xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
         }
       }).done((result)=>{
-         console.log('line118',result);
-         console.log('line119',result.data.hunt_id);
-         localStorage.hid = result.data.hunt_id;
-         console.log('hunt created');
-         localStorage.hid = result.data.hunt_id;
+        // Set the hunt id of the App component
+         this.context.setCurrentHuntId(parseInt(result.data.hunt_id));
+         // Redirect to show page
+         this.context.router.replace('/gameview');
        }).fail((data)=>{
          console.log('error in creating  hunt');
        })
@@ -123,7 +124,6 @@ const Huntform = React.createClass({
   },
 
   render: function() {
-
     var options =[]
     var users = this.state.data;
     var count=0;
@@ -157,7 +157,6 @@ const Huntform = React.createClass({
           </div>
         </form>
           <button  className="waves-effect waves-light btn"id="addclue">Add Clue</button>
-          <Link to="/gameview"><button  className="waves-effect waves-light btn"id="startgame">Start Game</button></Link>
       </div>
     );
   }
@@ -165,29 +164,7 @@ const Huntform = React.createClass({
 
 
 const Createhunt = React.createClass({
-
-  getInitialState: function() {
-    return {
-      me:''
-    }
-  },
-  welcome: function(event) {
-    event.preventDefault();
-    $.ajax({
-     url: 'users/me',
-     beforeSend: function( xhr ) {
-       xhr.setRequestHeader("Authorization", "Bearer" + auth.getToken() );
-     }
-    }).done((data) => {
-     console.log();
-     this.setState({me: data.agent.email})
-     console.log(this.state);
-    })
-
-  },
   render() {
-    const token = auth.getToken()
-    const state = this.state.me
     return (
       <div>
         <Map />
