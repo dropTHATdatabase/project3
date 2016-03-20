@@ -31,11 +31,6 @@ const App = React.createClass({
     auth.login()
   },
 
-  componentDidMount() {
-  // console.log('test',$('#hidden').text());
-
-  },
-
   render() {
   if(this.state.loggedIn) {
     return (
@@ -54,17 +49,21 @@ const App = React.createClass({
       )
       } else {
       return (
-        <div className="welcome" >
-           <h1>Welcome to CityDipity</h1>
-           <ul>
-             <li>
-               {this.state.loggedIn ? ( <Link to="/logout">Log out</Link> )
+        <div id="bg-container">
+            <div className="box">
+              <div className="welcome" >
+                <h2>Welcome to CityDipity</h2>
+                <ul>
+                  <li>
+                    {this.state.loggedIn ? ( <Link to="/logout">Log out</Link> )
                                     : ( <Link to="/login">Log In</Link> )}
-             </li>
-             <li><Link to="/signup">Sign Up</Link></li>
-           </ul>
-           {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
-         </div>
+                  </li>
+                  <li><Link to="/signup">Sign Up</Link></li>
+                </ul>
+              {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+            </div>
+          </div>
+        </div>
        )
      }
    }
@@ -72,7 +71,7 @@ const App = React.createClass({
 
 function requireAuth(nextState, replace) {
   if (!auth.loggedIn()) {
-    replace({                              
+    replace({
       pathname: '/login',
       state: { nextPathname: nextState.location.pathname }
     })
@@ -87,7 +86,7 @@ render((
       <Route path="logout" component={Logout} />
       <Route path="createhunt" component={Createhunt} />
       <Route path="homepage" component={Homepage} />
-      {/* homepage, nav, gameview, form, map*/}
+      {/* homepage, gameview,*/}
     </Route>
   </Router>
 ), document.getElementById('container'))

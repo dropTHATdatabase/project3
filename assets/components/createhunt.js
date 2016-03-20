@@ -149,7 +149,6 @@ const Huntform = React.createClass({
               <label htmlFor="timer">Set Timer: </label>
               <input id="timer"type="datetime-local" placeholder="Set Timer" ref="timer" required/>
 
-
               Add Members:
               {options}
             <button  className="waves-effect waves-light btn"id="startgame">Start Game</button>
