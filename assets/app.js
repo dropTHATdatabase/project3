@@ -29,10 +29,8 @@ const App = React.createClass({
   render() {
     return (
       <div className="container">
-        <div>
-          <Nav />
-          {this.props.children}
-        </div>
+        <Nav />
+        {this.props.children}
       </div>
     )
   }
@@ -40,30 +38,45 @@ const App = React.createClass({
 
 function requireAuth(nextState, replace) {
   if (!auth.loggedIn()) {
-    replace({                              
+    replace({
       pathname: '/login',
       state: { nextPathname: nextState.location.pathname }
     })
   }
 }
 
-const Error = React.createClass({     // 404 Error Page
+// 404 Error Page
+const Error = React.createClass({     
   render(){
     return(<h1>404 Error - You f*cked up somewhere</h1>)    
   }
 });
 
+// Access Denied without user token
+const DenyAccess = React.createClass({     
+  render(){
+    return(<h3>Access Denied - You must log in first if you want a peek!</h3>)    
+  }
+});
+
+// Welcome Page
+const Welcome = React.createClass({     
+  render(){
+    return(<h2>Welcome to Citydipity!</h2>)    
+  }
+});
 
 render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
-      <IndexRoute component={Login} />
+      <IndexRoute component={Welcome} />
       <Route path="/signup" component={Signup} /> 
       <Route path="/login" component={Login} />
       <Route path="/logout" component={Logout} /> 
       <Route path="/nav" component={Nav} />
       <Route path="/homepage" component={Homepage} /> 
       <Route path="/createhunt" component={Createhunt} />
+      <Route path="/deny" component={DenyAccess} />
     </Route>
     <Route path="*" component={Error} />
   </Router>
