@@ -8,23 +8,24 @@ const Createhunt = require('./createhunt.js');
 
 const Map = React.createClass({
   componentDidMount : function() {
-   loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyB2U33goCrZ0Hilh_cdksT1_F8jBgUTl4w&libraries=places&callback=initMap');
+   loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyB2U33goCrZ0Hilh_cdksT1_F8jBgUTl4w&libraries=places&callback=plotlocation');
   },
   render : function() {
     let divstyle = {
-      height: "400px",
-      width: "380px",
+      height: "500px",
+      width: "580px",
       margin: '0 auto',
-      position: 'relative'
+      position: 'relative',
+      border: '2px solid black'
     }
     let sectionstyle = {
       position: 'relative',
-      left: '8em',
-      top: '4em'
+      left: '1em',
+      top: '-399px'
     }
     return (
       <section style={sectionstyle}>
-        <div id="map" style={divstyle}>
+        <div id="map2" style={divstyle}>
         </div>
       </section>
     )
@@ -57,6 +58,7 @@ const Gameview = React.createClass({
       }
     }).done((data)=>{ 
       this.state.game = data.data
+      // setting the state of the game
       this.setState({ game: this.state.game })
       console.log('hunt game: ', this.state.game)
     }).fail((error)=>{ 
@@ -96,8 +98,8 @@ const Gameview = React.createClass({
             </ul>
           </div>
 
-          <div className="gameview map">
-            map
+          <div className="map">
+            <Map />
           </div>
 
           {/* User Hunt Record + Create Hunt btn */}

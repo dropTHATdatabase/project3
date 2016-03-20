@@ -140,6 +140,7 @@ var styles =[
 var wager, timer, cluedesc;
 var cluesarr =[];
 var cluesearch, map,clueinput,addclue,cluenumber;
+var image = 'http://www.googlemapsmarkers.com/v1/009900';
 
 
 
@@ -196,7 +197,8 @@ function buttonSearch(location) {
 
   var geocoder = new google.maps.Geocoder();
   var address = {'address': location};
-  var image = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+
+
 
   geocoder.geocode(address, function (results, status) {
     console.log(cluenumber);
@@ -229,7 +231,8 @@ function buttonSearch(location) {
            map: map,
            position: origin,
            animation: google.maps.Animation.DROP,
-           label: label
+           label: label,
+           icon: image
        });
      } else {
        alert("Geocode was not successful for the following reason: " + status);
@@ -258,3 +261,52 @@ function toggleBounce(marker) {
     marker.setAnimation(google.maps.Animation.BOUNCE);
   }
 }
+
+// initilaze function for plotting map location by reading location from the database
+function plotlocation() {
+    var map1 = new google.maps.Map(document.getElementById('map2'), {
+    center: {lat: 36.580247, lng: -41.817628},
+    zoom: 6,
+    draggable: true,
+    styles: styles
+  });
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+
+      var infoWindow = new google.maps.InfoWindow({map: map1});
+      infoWindow.setContent('Current Location');
+      map1.setCenter(pos);
+
+      var marker = new google.maps.Marker({
+            map: map1,
+            position: pos,
+            animation: google.maps.Animation.DROP,
+            label: 'A'
+      });
+      infoWindow.open(map1, marker);
+       });
+    }
+    // getting the clues from database
+    var cluesdb = JSON.parse($('#cluesdb').val());
+    cluesdb.forEach((el)=>{
+      var position = {
+        lat: Number(el.lat),
+        lng: Number(el.lng)
+      }
+      console.log('line 298 map',position);
+      var label = el.clue_number.toString();
+      //plot the location on the map
+      var marker = new google.maps.Marker({
+          map: map1,
+          position: position,
+          animation: google.maps.Animation.DROP,
+          label: label,
+          icon: image
+      });
+    });
+  }

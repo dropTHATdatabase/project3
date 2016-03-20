@@ -79,13 +79,21 @@
 }
 
 .gameview {
-  width: 30%;
+  width: 25%;
   height: 400px;
   display: inline-block;
-  border: 2px solid black;
+  /*border: 2px solid black;*/
   margin-left: 30px;
 }
 
+.clues {
+  position: relative;
+  top: 1em;
+  left: -1em;
+}
+
 .status {
-  width: 350px;
+  position: relative;
+  top: -60em;
+  left: 62em;
 }
