@@ -1,5 +1,5 @@
 SELECT p.participant_id AS participant_id, u.username AS username,
-  SUM(case when clusers.completed then 1 else 0 end) AS progress
+  SUM(case when clusers.completed then 1 else 0 end)/COUNT(clusers.clue_id) AS progress
 FROM participants AS p
 LEFT JOIN users AS u
 ON p.participant_id = u.user_id
