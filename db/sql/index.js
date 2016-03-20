@@ -14,18 +14,30 @@ module.exports = {
   users: {
     create: sql('users/create.sql'),
     get: sql('users/get.sql'),
-    add: sql('users/add.sql')
+    add: sql('users/add.sql'),
+    list: sql('users/list.sql'),
+    findById: sql('users/findById.sql'),
+    listWithProgress: sql('users/listWithProgress.sql')
   },
   hunts: {
-    create: sql('hunts/create.sql')
+    create: sql('hunts/create.sql'),
+    add: sql('hunts/add.sql'),
+    list: sql('hunts/list.sql'),
+    get: sql('hunts/get.sql')
   },
   clues: {
-    create: sql('clues/create.sql')
+    create: sql('clues/create.sql'),
+    add: sql('clues/add.sql'),
+    listByHunt: sql('clues/listByHunt.sql'),
+    listCompleted: sql('clues/listCompleted.sql')
   },
   participants: {
-    create: sql('participants/create.sql')
+    create: sql('participants/create.sql'),
+    add: sql('participants/add.sql'),
+    get: sql('participants/get.sql')
   },
   clues_users: {
-    create: sql('clues_users/create.sql')
+    create: sql('clues_users/create.sql'),
+    add: sql('clues_users/add.sql')
   }
 };

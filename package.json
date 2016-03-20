@@ -6,8 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "bundle": "watchify -t [ babelify --presets [react es2015 ] ] assets/app.js -o public/js/bundle.js -d",
+    "deploy": "./node_modules/browserify/bin/cmd.js -t [ babelify --presets [ react es2015 ] ] -t uglifyify ./assets/app.js -o ./public/js/bundle.js -d",
     "createdb": "createdb project3_dev && node db/init.js",
-    "dropdb": "dropdb --if-exists project3_dev", 
+    "dropdb": "dropdb --if-exists project3_dev",
+    "postinstall": "./node_modules/browserify/bin/cmd.js -t [ babelify --presets [ react es2015 ] ] -t uglifyify -d -p [ minifyify --no-map ] ./assets/app.js -o ./public/js/bundle.js", 
     "start": "node server.js"
   },
   "author": "",
@@ -22,13 +24,19 @@
     "dotenv": "^2.0.0",
     "express": "^4.13.4",
     "express-jwt": "^3.3.0",
+    "jquery": "^2.2.2",
     "jsonwebtoken": "^5.7.0",
+    "loadjs": "^0.1.0",
     "morgan": "^1.7.0",
     "path": "^0.12.7",
     "pg-promise": "^3.3.0",
+    "points-cluster": "^0.1.4",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+    "react-google-maps": "^4.9.1",
+    "react-motion": "^0.4.2",
     "react-router": "^2.0.1",
+    "recompose": "^0.15.0",
     "watchify": "^3.7.0"
   }
 }

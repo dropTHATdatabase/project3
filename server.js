@@ -5,7 +5,10 @@ const logger      = require('morgan');
 const path        = require('path');
 const bodyParser  = require('body-parser');
 const app         = express();
-// add pg file
+
+const secret = process.env.SECRET;
+const expressJWT = require('express-jwt');
+const jwt = require('jsonwebtoken');
 
 const userRoutes = require( path.join(__dirname, '/routes/users'));
 const huntRoutes = require( path.join(__dirname, '/routes/hunts'));
@@ -19,9 +22,10 @@ app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/hunts', huntRoutes);
 
 // HOMEPAGE
-app.get('/', (req, res) => {
-  res.sendFile('index.html');
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'))
 });
+
 
 
 var port = process.env.PORT || 3000;

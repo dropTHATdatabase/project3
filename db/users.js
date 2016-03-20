@@ -28,7 +28,7 @@ function add(req, res, next) {
 function get(req, res, next){
   var username = req.body.username;
   var password = req.body.password;
-  
+
   auth.getHashedPassword(password)
     .then((hash) => {
       db.users.get(username)
@@ -62,7 +62,21 @@ function get(req, res, next){
     });
 }
 
+function list(req, res, next){
+  var query;
+
+  db.users.list().then((users) => {
+    res.data = users;
+    next();
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).json({success: false, data: 'Server error'});
+  });
+}
+
 module.exports = {
   get: get,
-  add: add
+  add: add,
+  list: list
 };
