@@ -1,10 +1,11 @@
 'use strict';
 
 const hunts = require('./transactions/hunts');
+const db = require('./index');
 
 var mockHunt = {
   hunt_id: 1,
-  isOwner: true,
+  isOwner: false,
   showNextClue: true,
   wager: "Loser buys a beer",
   deadline: "2016-12-17 07:37:16-08",
@@ -55,32 +56,84 @@ function add(req, res, next){
 }
 
 function list(req, res, next){
-  res.data = [
-    {
-      hunt_id: 1,
-      isOwner: true,
-      owner_id: 1,
-      wager: "Loser buys a beer",
-      winner: null,
-      deadline: "2016-12-17 07:37:16-08"
-    },
-    {
-      hunt_id: 2,
-      isOwner: false,
-      owner_id: 1,
-      wager: "Loser buys a beer",
-      winner: null,
-      deadline: "2016-05-17 07:37:16-08"
-    }
-  ];
+  var user_id = parseInt(req.user.user_id);
+  console.log('db/hunts.js user id: ', user_id)
 
-  next();
+  db.hunts.list(user_id)
+  .then((data) => {
+
+    data.forEach((el) => {
+      el.isOwner = false;
+      if(el.owner_id === user_id){
+        el.isOwner = true;
+      }
+
+      delete el.owner_id;
+    });
+
+    res.data = data;
+    next();
+  })
+  .catch((err) => {
+    console.error(err);
+    res.json({success: false, data: 'Server error'});
+  });
 }
 
 function get(req, res, next){
-  res.data = mockHunt;
+  var user_id = parseInt(req.user.user_id);
+  var hunt_id = parseInt(req.params.id);
 
-  next();
+  // Get the hunt
+  db.hunts.get(hunt_id)
+    .then((hunt) => {
+      res.data = hunt;
+      // Get all the participants in the hunt
+      db.participants.get(hunt_id)
+        .then((participants) => {
+          res.data.participants = participants;
+          // If user is owner get entire hunt
+          if(hunt.owner_id === user_id){
+            // Set isOwner to true
+            res.data.isOwner = true;
+            // Remove owner_id
+            delete res.data.owner_id;
+            // Get all the clues for a hunt
+            db.clues.listByHunt(hunt_id)
+              .then((clues) => {
+                res.data.clues = clues;
+                // set showNextClue to false
+                res.data.showNextClue = false;
+                next();
+              });
+          }
+          // Else render view for user
+          else {
+            res.data = mockHunt;
+            next(); // Move down when other logic is done;
+            // Set isOwner to false
+            res.data.isOwner = false;
+            // Add completed clues for user to res.data
+            db.clues.listCompleted({user_id: user_id, hunt_id: hunt_id})
+              .then((clues) => {
+                res.data.clues = clues;
+                // next();
+                // Get the next clue
+                // If the lat/lon from the next clue is
+                // within 100m of the add the next clue to
+                // to the list of clues
+                // set showNextClue to false
+              });
+          }
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({success: false, data: 'Server error'});
+    });
+  // res.data = mockHunt;
+
+  // next();
 }
 
 function update(req, res, next){

@@ -10,6 +10,9 @@ module.exports = function(db) {
     },
     add: function(values){
       return db.one(sql.participants.add, values);
+    },
+    get: function(hunt_id){
+      return db.any(sql.participants.get, hunt_id);
     }
   };
 };

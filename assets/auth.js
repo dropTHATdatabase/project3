@@ -1,5 +1,4 @@
 const auth = {
-
   getUsers(cb){
     $.ajax({
       url: "/api/v1/users",
@@ -7,8 +6,7 @@ const auth = {
       beforeSend: function( xhr ) {
         xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken() );
       }
-    })
-    .fail((error)=>{
+    }).fail((error)=>{
       console.log('error: ', error)
     })
   },

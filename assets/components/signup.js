@@ -1,5 +1,7 @@
 const React = require('react');
+import { browserHistory, Router, Route, Link, Redirect } from 'react-router'
 const auth = require('../auth');
+const Login = require('./login.js');
 
 const Signup = React.createClass({
   contextTypes: {
@@ -36,7 +38,7 @@ const Signup = React.createClass({
 
   render() {
     return (
-      <div className="container">
+      <div>
         <h3>Sign Up Now!</h3>
         <form onSubmit={this.handleSubmit}>
           <input ref="username" placeholder="Create a Username" required />
@@ -46,6 +48,7 @@ const Signup = React.createClass({
             <p id="invalid">Oops! Something went wrong, please try again!</p>
           )}
         </form>
+        <Link to="/login">Log In here</Link>
       </div>
     )
   }

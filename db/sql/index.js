@@ -22,15 +22,20 @@ module.exports = {
   hunts: {
     create: sql('hunts/create.sql'),
     add: sql('hunts/add.sql'),
-    list: sql('hunts/list.sql')
+    list: sql('hunts/list.sql'),
+    get: sql('hunts/get.sql')
   },
   clues: {
     create: sql('clues/create.sql'),
-    add: sql('clues/add.sql')
+    add: sql('clues/add.sql'),
+    listByHunt: sql('clues/listByHunt.sql'),
+    listCompleted: sql('clues/listCompleted.sql'),
+    findNextClue: sql('clues/findNextClue.sql')
   },
   participants: {
     create: sql('participants/create.sql'),
-    add: sql('participants/add.sql')
+    add: sql('participants/add.sql'),
+    get: sql('participants/get.sql')
   },
   clues_users: {
     create: sql('clues_users/create.sql'),

@@ -145,7 +145,7 @@ var cluesearch, map,clueinput,addclue,cluenumber;
 
 // initliazes the map
 function initMap() {
-   cluenumber = 1;
+    cluenumber = 1;
     map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 36.580247, lng: -41.817628},
     zoom: 6,

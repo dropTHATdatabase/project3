@@ -14,6 +14,9 @@ module.exports = function(db) {
     },
     list: function(user_id){
       return db.any(sql.hunts.list, user_id);
+    },
+    get: function(hunt_id){
+      return db.one(sql.hunts.get, hunt_id);
     }
   };
 };

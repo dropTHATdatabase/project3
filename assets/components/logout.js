@@ -1,5 +1,6 @@
 const React = require('react');
 const auth = require('../auth');
+// const App = require('../app.js');    // redirect to App
 
 const Logout = React.createClass({
   componentDidMount() {
@@ -9,7 +10,9 @@ const Logout = React.createClass({
 
   render() {
     return (
-      <div>Goodbye, friend!</div>
+      <div>
+        <h1> Goodbye, friend! </h1>
+      </div>
     )
   }
 })
