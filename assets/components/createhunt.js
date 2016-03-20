@@ -138,7 +138,6 @@ const Huntform = React.createClass({
             Add Members:
             {options}
           <button  className="waves-effect waves-light btn"id="startgame">Start Game</button>
-          </div>
         </form>
           <button  className="waves-effect waves-light btn"id="addclue">Add Clue</button>
       </div>
