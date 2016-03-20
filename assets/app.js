@@ -9,7 +9,7 @@ const SignUp = require('./components/signup.js');
 const Createhunt = require('./components/createhunt.js').Createhunt;
 const Login = require('./components/login.js');
 const Logout = require('./components/logout.js');
-
+const Gameview = require('./components/gameview.js')
 
 
 const App = React.createClass({
@@ -86,6 +86,7 @@ render((
       <Route path="logout" component={Logout} />
       <Route path="createhunt" component={Createhunt} />
       <Route path="homepage" component={Homepage} />
+      <Route path="gameview" component={Gameview} />
       {/* homepage, gameview,*/}
     </Route>
   </Router>
