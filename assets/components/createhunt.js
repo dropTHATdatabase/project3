@@ -118,9 +118,6 @@ const Huntform = React.createClass({
 
     }
 
-
-
-
   },
 
   render: function() {
@@ -139,23 +136,26 @@ const Huntform = React.createClass({
     return (
     <div id="hunt-form">
           <form id="participants" onSubmit={this.handleSubmit}>
-            <label htmlFor="wager">Scavenger Hunt Wager: </label>
-            <input id="wager"type="text" placeholder="Enter Wager"ref="wager" required />
-
-            <label htmlFor="timer">Set Timer: </label>
-            <input id="timer"type="datetime-local" placeholder="Set Timer" ref="timer" required/>
-
             <label htmlFor="cluedesc">Clue Description: </label>
             <input id="cluedesc"type="text" placeholder="Clue Description" />
 
             <label htmlFor="clueinput">Clue Location</label>
             <input id="clueinput" type="text" placeholder="Enter a Clue location" />
 
+            <div className="huntinfo">
+              <label htmlFor="wager">Scavenger Hunt Wager: </label>
+              <input id="wager"type="text" placeholder="Enter Wager"ref="wager" required />
+
+              <label htmlFor="timer">Set Timer: </label>
+              <input id="timer"type="datetime-local" placeholder="Set Timer" ref="timer" required/>
+
+
               Add Members:
               {options}
-            <button id="startgame">Start Game</button>
+            <button  className="waves-effect waves-light btn"id="startgame">Start Game</button>
+            </div>
           </form>
-            <button id="addclue">Add Clue</button>
+            <button  className="waves-effect waves-light btn"id="addclue">Add Clue</button>
       </div>
 
     );

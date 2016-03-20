@@ -72,7 +72,7 @@ const App = React.createClass({
 
 function requireAuth(nextState, replace) {
   if (!auth.loggedIn()) {
-    replace({                               // replace? is this a JS thing?
+    replace({                              
       pathname: '/login',
       state: { nextPathname: nextState.location.pathname }
     })

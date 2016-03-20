@@ -24,15 +24,22 @@ html, body {
 
 #startgame {
   position: relative;
-  left: 10em;
-  top: 2em;
+  left: 0em;
+  top: 0em;
 }
 
 #addclue {
   position: relative;
-  top: 4px;
+  top: -23em;
+  left: 0em;
+  width: 9em;
 }
 
 #container {
   padding-top: 10px;
+}
+
+.huntinfo {
+  position: relative;
+  top: 5em;
 }
