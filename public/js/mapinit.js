@@ -264,6 +264,7 @@ function toggleBounce(marker) {
 
 // initilaze function for plotting map location by reading location from the database
 function plotlocation() {
+    console.log('in plot location');
     var map1 = new google.maps.Map(document.getElementById('map2'), {
     center: {lat: 36.580247, lng: -41.817628},
     zoom: 6,
@@ -293,6 +294,7 @@ function plotlocation() {
     }
     // getting the clues from database
     var cluesdb = JSON.parse($('#cluesdb').val());
+    console.log(cluesdb);
     cluesdb.forEach((el)=>{
       var position = {
         lat: Number(el.lat),
