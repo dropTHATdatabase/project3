@@ -4,7 +4,7 @@ import { browserHistory, Router, Route, Link } from 'react-router'
 import auth from './auth'
 
 
-const Nav = require('./components/nav.js');
+const Homepage = require('./components/homepage.js');
 const SignUp = require('./components/signup.js');
 const Createhunt = require('./components/createhunt.js').Createhunt;
 const Login = require('./components/login.js');
@@ -37,22 +37,38 @@ const App = React.createClass({
   },
 
   render() {
+  if(this.state.loggedIn) {
     return (
-      <div>
-        <h1>CityDipity</h1>
-        <ul>
-          <li>
-            {this.state.loggedIn ? ( <Link to="/logout">Log out</Link> )
-                                 : ( <Link to="/login">Log In</Link> )}
-          </li>
-          <li><Link to="/signup">Sign Up</Link></li>
-          <li><Link to="/createhunt">Create hunt</Link></li>
-        </ul>
-        {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
-      </div>
-    )
-  }
-})
+        <div>
+          <nav className="#303f9f indigo darken-2">
+            <div className="nav=wrapper">
+              <ul className="nav nav-justified ">
+                <li><Link to="/homepage">Home Page</Link></li>
+                <li><Link to="/createhunt">Create hunt</Link></li>
+                <li className="right"><Link to="/logout">Logout</Link></li>
+              </ul>
+            </div>
+          </nav>
+          {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+        </div>
+      )
+      } else {
+      return (
+        <div className="welcome" >
+           <h1>Welcome to CityDipity</h1>
+           <ul>
+             <li>
+               {this.state.loggedIn ? ( <Link to="/logout">Log out</Link> )
+                                    : ( <Link to="/login">Log In</Link> )}
+             </li>
+             <li><Link to="/signup">Sign Up</Link></li>
+           </ul>
+           {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+         </div>
+       )
+     }
+   }
+});
 
 function requireAuth(nextState, replace) {
   if (!auth.loggedIn()) {
@@ -70,6 +86,7 @@ render((
       <Route path="login" component={Login} />
       <Route path="logout" component={Logout} />
       <Route path="createhunt" component={Createhunt} />
+      <Route path="homepage" component={Homepage} />
       {/* homepage, nav, gameview, form, map*/}
     </Route>
   </Router>

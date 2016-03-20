@@ -1,9 +1,17 @@
 
+html, body {
+  margin: 0;
+  padding: 0;
+}
 
+
+.welcome{
+  text-align: center;
+}
 
 #hunt-form{
   position: relative;
-  top: -27em;
+  top: -23em;
   left: 9em;
   width: 308px;
 }
@@ -25,7 +33,6 @@
   top: 4px;
 }
 
-#members {
-  overflow:scroll;
-
+#container {
+  padding-top: 10px;
 }
