@@ -26,7 +26,7 @@ hunts.get('/', db.list, (req,res)=>{
 
 // route to add a new hunt for the user
 hunts.post('/', db.add, (req,res)=>{
-  res.status(201).json({success: true, data: res.data});
+  res.status(201).json({data:res.data});
 });
 
 

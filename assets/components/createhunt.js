@@ -91,7 +91,9 @@ const Huntform = React.createClass({
        boxes.each(function(){
          participants.push(($(this).val()));
        })
-       this.state.hunt.participants = participants;
+       this.state.hunt.participants = participants.map((el)=>{
+         return parseInt(el);
+       });
 
        this.setState({hunt:this.state.hunt});
 
@@ -100,8 +102,10 @@ const Huntform = React.createClass({
       $.ajax({
         url:'/api/v1/hunts',
         method: 'POST',
+        data: JSON.stringify(newhunt),
+        contentType: 'application/json',
         beforeSend: function( xhr ) {
-          xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken(),{data:newhunt});
+          xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
         }
         }).done(()=>{
          console.log('hunt created');
