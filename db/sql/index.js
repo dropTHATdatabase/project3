@@ -39,6 +39,7 @@ module.exports = {
   },
   clues_users: {
     create: sql('clues_users/create.sql'),
-    add: sql('clues_users/add.sql')
+    add: sql('clues_users/add.sql'),
+    completeClue: sql('clues_users/completeClue.sql')
   }
 };

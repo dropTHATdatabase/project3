@@ -11,6 +11,10 @@ module.exports = function(db) {
     // Values: {clue_id:, user_id:}
     add: function(values){
       return db.one(sql.clues_users.add, values);
+    },
+    // Values = {clue_id:, user_id:}
+    completeClue: function(values){
+      return db.none(sql.clues_users.completeClue, values);
     }
   };
 };
