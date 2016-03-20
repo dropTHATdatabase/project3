@@ -46,7 +46,6 @@ const Login = React.createClass({
             <p id="invalid">Invalid login information!</p>
           )}
         </form>
-        <Link to="/signup">Sign Up here</Link>
       </div>
     )
   }

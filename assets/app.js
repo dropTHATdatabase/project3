@@ -9,7 +9,7 @@ const Logout = require('./components/logout.js');
 const Homepage = require('./components/homepage.js');
 const Nav = require('./components/nav.js');
 const Createhunt = require('./components/createhunt.js').Createhunt;
-// const Gameview = require('./components/gameview.js');
+const Gameview = require('./components/gameview.js');
 
 
 const App = React.createClass({
@@ -98,14 +98,11 @@ const Welcome = React.createClass({
 render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
-
-      <IndexRoute component={Welcome} />
       <Route path="/signup" component={Signup} />
       <Route path="/login" component={Login} />
       <Route path="/logout" component={Logout} />
-      <Route path="/nav" component={Nav} />
       <Route path="/homepage" component={Homepage} />
-      {/* <Route path="/gameview" component={Gameview} /> */}
+      <Route path="/gameview" component={Gameview} />
       <Route path="/createhunt" component={Createhunt} />
       <Route path="/deny" component={DenyAccess} />
     </Route>

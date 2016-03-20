@@ -1,4 +1,4 @@
-
+import { browserHistory, Router, Route, Link, IndexRoute } from 'react-router'
 const React = require('react');
 const auth = require('../auth');
 
@@ -114,15 +114,14 @@ const Huntform = React.createClass({
         beforeSend: function( xhr ) {
           xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
         }
-        }).done(()=>{
+      }).done((result)=>{
+         console.log('line118',result);
          console.log('hunt created');
        }).fail((data)=>{
          console.log('error in creating  hunt');
        })
 
     }
-
-
 
   },
 
@@ -157,10 +156,11 @@ const Huntform = React.createClass({
 
               Add Members:
               {options}
-            <button  className="waves-effect waves-light btn"id="startgame">Start Game</button>
+            <button  className="waves-effect waves-light btn"id="creategame">Create Game</button>
             </div>
           </form>
             <button  className="waves-effect waves-light btn"id="addclue">Add Clue</button>
+            <Link to="/gameview"><button  className="waves-effect waves-light btn"id="startgame">Start Game</button></Link>
       </div>
 
     );
