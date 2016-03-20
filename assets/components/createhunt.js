@@ -1,9 +1,11 @@
+
 const React = require('react');
 const auth = require('../auth');
 
 const Map = React.createClass({
 
   componentDidMount : function() {
+
    loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyB2U33goCrZ0Hilh_cdksT1_F8jBgUTl4w&libraries=places&callback=initMap');
   },
 
@@ -13,20 +15,20 @@ const Map = React.createClass({
       width: "680px",
       margin: '0 auto',
       position: 'relative'
+
     }
 
-    let sectionstyle = {
+    let sectionstyle ={
       position: 'relative',
       left: '13em',
       top: '4em'
     }
-
     return (
       <section style={sectionstyle}>
         <div id="map" style={divstyle}>
 
         </div>
-      </section>
+    </section>
     )
   }
 });
@@ -43,6 +45,7 @@ const Huntform = React.createClass({
       },
       data:{}  // capture all the users with their ids from the database
     }
+
   },
 
   componentDidMount:function() {
@@ -58,10 +61,14 @@ const Huntform = React.createClass({
       })
       this.setState({data: this.state.data});
     })
+
+
+
   },
 
   handleSubmit: function(event) {
     event.preventDefault();
+
     // get the hidden in input field which has all the clues data
     var cluesarr =JSON.parse($('#cluesdata').val());
 
@@ -112,10 +119,13 @@ const Huntform = React.createClass({
        }).fail((data)=>{
          console.log('error in creating  hunt');
        })
+
     }
+
   },
 
   render: function() {
+
     var options =[]
     var users = this.state.data;
     var count=0;
@@ -128,23 +138,29 @@ const Huntform = React.createClass({
     })
 
     return (
-      <div id="hunt-form">
-        <form id="participants" onSubmit={this.handleSubmit}>
-          <label htmlFor="wager">Scavenger Hunt Wager: </label>
-          <input id="wager"type="text" placeholder="Enter Wager"ref="wager" required />
+    <div id="hunt-form">
+          <form id="participants" onSubmit={this.handleSubmit}>
+            <label htmlFor="cluedesc">Clue Description: </label>
+            <input id="cluedesc"type="text" placeholder="Clue Description" />
 
-          <label htmlFor="timer">Set Timer: </label>
-          <input id="timer"type="datetime-local" placeholder="Set Timer" ref="timer" required/>
+            <label htmlFor="clueinput">Clue Location</label>
+            <input id="clueinput" type="text" placeholder="Enter a Clue location" />
 
-          <label htmlFor="cluedesc">Clue Description: </label>
-          <input id="cluedesc"type="text" placeholder="Clue Description" />
+            <div className="huntinfo">
+              <label htmlFor="wager">Scavenger Hunt Wager: </label>
+              <input id="wager"type="text" placeholder="Enter Wager"ref="wager" required />
 
-            Add Members:
-            {options}
-          <button  className="waves-effect waves-light btn"id="startgame">Start Game</button>
-        </form>
-          <button  className="waves-effect waves-light btn"id="addclue">Add Clue</button>
+              <label htmlFor="timer">Set Timer: </label>
+              <input id="timer"type="datetime-local" placeholder="Set Timer" ref="timer" required/>
+
+              Add Members:
+              {options}
+            <button  className="waves-effect waves-light btn"id="startgame">Start Game</button>
+            </div>
+          </form>
+            <button  className="waves-effect waves-light btn"id="addclue">Add Clue</button>
       </div>
+
     );
   }
 });
@@ -157,7 +173,6 @@ const Createhunt = React.createClass({
       me:''
     }
   },
-
   welcome: function(event) {
     event.preventDefault();
     $.ajax({
@@ -170,8 +185,8 @@ const Createhunt = React.createClass({
      this.setState({me: data.agent.email})
      console.log(this.state);
     })
-  },
 
+  },
   render() {
     const token = auth.getToken()
     const state = this.state.me
