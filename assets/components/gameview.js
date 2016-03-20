@@ -57,6 +57,7 @@ const Gameview = React.createClass({
         xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
       }
     }).done((data)=>{ 
+      localStorage.currentHuntId = this.context.currentHuntId
       this.state.game = data.data
       // setting the state of the game
       this.setState({ game: this.state.game })
@@ -75,6 +76,12 @@ const Gameview = React.createClass({
   },
   renderParticipant(participant) {
     return(<Participant key={participant.participant_id} details={participant} />)
+  },
+  handleCheckIn(event) {
+    event.preventDefault();
+    console.log('check in button clicked for clue: ', this.state.game.clues[-1])
+
+
   },
   render() {
     var clues = this.state.game.clues;
@@ -96,6 +103,11 @@ const Gameview = React.createClass({
               {/* List all clues here */}
               { clues ? clues.map((el)=> this.renderClue(el)) : console.log('no clues available') }
             </ul>
+            <div>
+              { this.state.game.isOwner 
+                  ? console.log('creator view') 
+                  : (<button onClick={this.handleCheckIn}>Check In</button>)}
+            </div>    
           </div>
 
           <div className="map">
