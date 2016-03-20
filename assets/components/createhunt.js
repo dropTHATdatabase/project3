@@ -119,6 +119,7 @@ const Huntform = React.createClass({
        })
 
     }
+    // alert the user that they created the game
 
   },
 

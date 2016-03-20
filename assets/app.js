@@ -14,7 +14,8 @@ const Gameview = require('./components/gameview.js');
 const App = React.createClass({
   getInitialState() {
     return {
-      loggedIn: auth.loggedIn()
+      loggedIn: auth.loggedIn(),
+      
     }
   },
   updateAuth(loggedIn) {
@@ -108,4 +109,3 @@ render((
     <Route path="*" component={Error} />
   </Router>
 ), document.getElementById('container'));
-
