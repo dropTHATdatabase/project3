@@ -45,29 +45,31 @@ const Gameview = React.createClass({
   componentWillMount() {
     console.log('gameview hunt_id: ', this.context.currentHuntId)
     // gets list of hunts from user token
-    // $.ajax({
-    //   url: "/api/v1/hunts/"+localStorage.hid,
-    //   type: "get",
-    //   beforeSend: function( xhr ) {
-    //     xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
-    //   }
-    // }).done((data)=>{ 
-    //   console.log('Gameview data: ', data) 
-    //   this.state.game = data.data
-    //   this.setState({ game: this.state.game })
-    //   console.log("this.state.game: ", this.state.game)
-    // }).fail((error)=>{ 
-    //   console.log('Gameview GET Error: ', error) 
-    // })
+    $.ajax({
+      url: "/api/v1/hunts/"+this.context.currentHuntId,
+      type: "get",
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
+      }
+    }).done((data)=>{ 
+      this.state.game = data.data
+      this.setState({ game: this.state.game })
+    }).fail((error)=>{ 
+      console.log('Gameview GET Error: ', error) 
+    })
   },
 
   componentDidMount() {
-    console.log('currently at Gameview component')
-    console.log('line12',localStorage.hid);
+    // console.log('currently at Gameview component')
+    // console.log('line12',localStorage.hid);
     
   },
 
   render() {
+    var clues = this.state.game.clues;
+    var participants = this.state.game.participants;
+    console.log('clues: ', this.state.game.clues)
+    console.log('participants: ', this.state.game.participants)
     return (
       <div>
         <div>
