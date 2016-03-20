@@ -4,7 +4,6 @@ import { browserHistory, Router, Route, Link } from 'react-router'
 import auth from '../auth'
 
 const $   = require('jquery');
-const Nav = require('./nav.js');
 const Createhunt = require('./createhunt.js');
 
 const Gameview = React.createClass({
@@ -15,7 +14,6 @@ const Gameview = React.createClass({
   render() {
     return (
       <div>
-        <Nav />
         <div>At Gameview component, son!</div>
       </div>
     )
