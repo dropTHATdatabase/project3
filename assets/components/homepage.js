@@ -8,7 +8,7 @@ const $   = require('jquery');
 const App = require('./../app.js');
 const Nav = require('./nav.js');
 const Createhunt = require('./createhunt.js').Createhunt;
-// const Gameview = require('./gameview.js');
+const Gameview = require('./gameview.js');
 // how do we get user info from token in front end?? currently stored in user:{} 
 
 const Homepage = React.createClass({
@@ -131,40 +131,5 @@ const Homepage = React.createClass({
     )
   }
 });
-
-// const Hunt = React.createClass({
-//   handleEdit(event) {
-//     event.preventDefault();
-//     console.log('edit button clicked')
-//     // send to App editHunt method
-//     // this.props.editHunt(this.props.details)
-//   },
-//   handleDelete(event) {
-//     event.preventDefault();
-//     console.log('delete button clicked')
-//     // send to App deleteHunt method
-//     // this.props.deleteHunt(this.props.details)
-//   },
-
-//   render() {
-//     // console.log('Hunt this.props: ', this.props.details)
-//     return (
-//       <tr>
-//         <td>{this.props.details.wager}</td>
-//         <td>??</td>   { status - in session|ended }
-//         <td>??</td>   {/* winner - user_id's username */}
-//         <td>{this.props.details.deadline}</td>
-//         <td id="btn">
-//           {/* if({this.props.details.isOwner}) {
-//               (<button id="edit" className="button-primary" onClick={this.handleEdit}>Edit</button>)
-//             } */}
-          
-//           <button id="view" className="button-primary"><Link to="/gameview">View</Link></button>
-//           <button id="delete" className="button-primary" onClick={this.handleDelete}>Delete</button>
-//         </td>
-//       </tr>
-//     )
-//   }
-// });
 
 module.exports = Homepage;
