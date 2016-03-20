@@ -37,7 +37,7 @@ const Gameview = React.createClass({
     user: React.PropTypes.object,
     router: React.PropTypes.object.isRequired,
     currentHuntId: React.PropTypes.number,
-    setCurrentHuntId: React.PropTypes.func 
+    setCurrentHuntId: React.PropTypes.func
   },
   getInitialState() {
     return {
@@ -56,19 +56,16 @@ const Gameview = React.createClass({
       beforeSend: function( xhr ) {
         xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
       }
-    }).done((data)=>{ 
+    }).done((data)=>{
       this.state.game = data.data
       // setting the state of the game
       this.setState({ game: this.state.game })
       console.log('hunt game: ', this.state.game)
-    }).fail((error)=>{ 
-      console.log('Gameview GET Error: ', error) 
+    }).fail((error)=>{
+      console.log('Gameview GET Error: ', error)
     })
   },
-  componentWillUnmount() {
-    // removes hunt id view
-    this.context.setCurrentHuntId(null)
-  },
+
   renderClue(clue) {
     // console.log('clue: ', clue)
     return(<Clue key={clue.clue_id} details={clue} />)
@@ -87,7 +84,7 @@ const Gameview = React.createClass({
           <span>{this.state.game.wager}</span>
           <span>Deadline: {this.state.game.deadline}</span>
         </div>
-        
+
         <div className="row">
           {/* List of all User hunts + Edit|View|Delete options per hunt */}
           <div className="gameview clues">
