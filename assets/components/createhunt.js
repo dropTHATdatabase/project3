@@ -116,6 +116,8 @@ const Huntform = React.createClass({
         }
       }).done((result)=>{
          console.log('line118',result);
+         console.log('line119',result.data.hunt_id);
+         localStorage.hid = result.data.hunt_id;
          console.log('hunt created');
        }).fail((data)=>{
          console.log('error in creating  hunt');
