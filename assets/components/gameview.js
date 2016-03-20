@@ -35,15 +35,19 @@ const Gameview = React.createClass({
   contextTypes: {
     user: React.PropTypes.object,
     router: React.PropTypes.object.isRequired,
-    currentHuntId: React.PropTypes.number
+    currentHuntId: React.PropTypes.number,
+    setCurrentHuntId: React.PropTypes.func 
   },
   getInitialState() {
     return {
-      game: {}
+      game: {
+        clues: [],
+        participants: []
+      }
     }
   },
   componentWillMount() {
-    console.log('gameview hunt_id: ', this.context.currentHuntId)
+    // console.log('gameview hunt_id: ', this.context.currentHuntId)
     // gets list of hunts from user token
     $.ajax({
       url: "/api/v1/hunts/"+this.context.currentHuntId,
@@ -54,39 +58,41 @@ const Gameview = React.createClass({
     }).done((data)=>{ 
       this.state.game = data.data
       this.setState({ game: this.state.game })
+      console.log('hunt game: ', this.state.game)
     }).fail((error)=>{ 
       console.log('Gameview GET Error: ', error) 
     })
   },
-
-  componentDidMount() {
-    // console.log('currently at Gameview component')
-    // console.log('line12',localStorage.hid);
-    
+  componentWillUnmount() {
+    // removes hunt id view
+    this.context.setCurrentHuntId(null)
   },
-
+  renderClue(clue) {
+    // console.log('clue: ', clue)
+    return(<Clue key={clue.clue_id} details={clue} />)
+  },
+  renderParticipant(participant) {
+    return(<Participant key={participant.participant_id} details={participant} />)
+  },
   render() {
     var clues = this.state.game.clues;
     var participants = this.state.game.participants;
-    console.log('clues: ', this.state.game.clues)
-    console.log('participants: ', this.state.game.participants)
+    // console.log('clues: ', this.state.game.clues)
+    // console.log('participants: ', this.state.game.participants)
     return (
       <div>
         <div>
-          <h1>Welcome back, username!<span>Enter time countdown here</span></h1>
+          <span>{this.state.game.wager}</span>
+          <span>Deadline: {this.state.game.deadline}</span>
         </div>
         
-
         <div className="row">
           {/* List of all User hunts + Edit|View|Delete options per hunt */}
           <div className="gameview clues">
             <h5>Clues:</h5>
             <ul>
-              <li>clue #1</li>
-              <li>clue #2</li>
-              <li>clue #3</li>
-              <li>clue #4</li>
               {/* List all clues here */}
+              { clues ? clues.map((el)=> this.renderClue(el)) : console.log('no clues available') }
             </ul>
           </div>
 
@@ -98,10 +104,8 @@ const Gameview = React.createClass({
           <div className="gameview status">
             <h5>Player Status:</h5>
             <div>
-              <div>Player 1</div>
-              <div>Player 2</div>
-              <div>Player 3</div>
               {/* List each player status here */}
+              { participants ? participants.map((el)=> this.renderParticipant(el)) : console.log('no participants available') }
             </div>
           </div>
         </div>
@@ -109,6 +113,23 @@ const Gameview = React.createClass({
       </div>
     )
   }
-})
+});
+
+const Clue = React.createClass({
+  render() {
+    return ( <li>{this.props.details.description}</li> )
+  }
+});
+
+const Participant = React.createClass({
+  render() {
+    return (
+      <div>
+        {this.props.details.username}: {this.props.details.progress}
+      </div>
+    )
+  }
+});
+
 
 module.exports = Gameview;

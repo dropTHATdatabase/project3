@@ -33,7 +33,7 @@ const Homepage = React.createClass({
         xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
       }
     }).done((data)=>{ 
-      console.log('Homepage hunts: ', data) 
+      // console.log('Homepage hunts: ', data) 
       this.state.hunts = data.data
       this.setState({ hunts: this.state.hunts })
     }).fail((error)=>{ 
@@ -67,7 +67,7 @@ const Homepage = React.createClass({
 
   render() {
     var hunts = [];
-    console.log('user info: ', this.context.user)
+    // console.log('user info: ', this.context.user)
     return (
       <div>
         <h1>Welcome back, {this.context.user.username}!</h1>
@@ -130,7 +130,7 @@ const Hunt = React.createClass({
   },
   render() {
     return (
-      <tr>
+      <tr key={this.props.details.hunt_id}>
         <td>{this.props.details.wager}</td>
         <td>??</td>
         <td>??</td>
