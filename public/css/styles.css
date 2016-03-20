@@ -19,15 +19,21 @@
   left: 14em
 }
 
-#startgame {
+#creategame {
   position: relative;
   left: 0em;
   top: 0em;
 }
 
+#startgame {
+  position: relative;
+  top: 40px;
+  left: 4em;
+}
+
 #addclue {
   position: relative;
-  top: -18em;
+  top: -22em;
   left: 0em;
   width: 9em;
 }

@@ -32,7 +32,9 @@ hunts.post('/', db.add, (req,res)=>{
 
 //route to get hunt and clues for the players( has to be one object)
 hunts.get('/:id', db.get, (req,res)=>{
+  console.log(res.data);
   res.json({success: true, data:res.data});
+
 });
 
 // route for the edit the hunt for the creator

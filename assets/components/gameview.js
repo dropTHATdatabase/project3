@@ -58,6 +58,8 @@ const Gameview = React.createClass({
 
   componentDidMount() {
     console.log('currently at Gameview component')
+    console.log('line12',localStorage.hid);
+    
   },
 
   render() {

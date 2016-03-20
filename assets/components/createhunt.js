@@ -108,7 +108,10 @@ const Huntform = React.createClass({
         beforeSend: function( xhr ) {
           xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
         }
-        }).done((result)=>{
+      }).done((result)=>{
+         console.log('line118',result);
+         console.log('line119',result.data.hunt_id);
+         localStorage.hid = result.data.hunt_id;
          console.log('hunt created');
          localStorage.hid = result.data.hunt_id;
        }).fail((data)=>{
@@ -150,10 +153,11 @@ const Huntform = React.createClass({
 
             Add Members:
             {options}
-            <Link to='gameview'><button  className="waves-effect waves-light btn"id="startgame">Start Game</button></Link>
+          <button  className="waves-effect waves-light btn"id="creategame">Create Game</button>
           </div>
         </form>
           <button  className="waves-effect waves-light btn"id="addclue">Add Clue</button>
+          <Link to="/gameview"><button  className="waves-effect waves-light btn"id="startgame">Start Game</button></Link>
       </div>
     );
   }
