@@ -17,6 +17,11 @@ module.exports = function(db) {
     // values = {user_id: , hunt_id: }
     listCompleted: function(values){
       return db.any(sql.clues.listCompleted, values);
+    },
+    // Gets a clue by clue number and hunt id
+    // values {hunt_id:, clue_number:}
+    findNextClue: function(values){
+      return db.oneOrNone(sql.clues.findNextClue, values);
     }
   };
 };
