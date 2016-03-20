@@ -11,16 +11,49 @@ const Nav = require('./components/nav.js');
 const Createhunt = require('./components/createhunt.js').Createhunt;
 const Gameview = require('./components/gameview.js');
 
+
 const App = React.createClass({
   getInitialState() {
     return {
-      loggedIn: auth.loggedIn()
+      loggedIn: auth.loggedIn(),
+      currentHuntId: null,
+      user: {}
     }
   },
+  childContextTypes: {
+    currentHuntId: React.PropTypes.number,
+    setCurrentHuntId: React.PropTypes.func,
+    user: React.PropTypes.object
+  },
+  getChildContext: function(){
+   return {
+     currentHuntId: this.state.currentHuntId,
+     setCurrentHuntId: this.setCurrentHuntId,
+     user: this.state.user
+   }
+ },
+ setCurrentHuntId: function(id){
+   this.setState({currentHuntId: id});
+ },
   updateAuth(loggedIn) {
-    this.setState({
-      loggedIn: loggedIn
-    })
+    this.setState({loggedIn: loggedIn});
+    if(loggedIn){
+      $.ajax({
+        url: '/api/v1/users?me=true',
+        method: 'GET',
+        beforeSend: function(xhr){
+          xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken() )
+        }
+      })
+      .done((result) => {
+        this.setState({
+          user: result.data
+        })
+      })
+      .fail((err) => {
+        console.log(err);
+      })
+    }
   },
   componentWillMount() {
     auth.onChange = this.updateAuth
@@ -108,4 +141,3 @@ render((
     <Route path="*" component={Error} />
   </Router>
 ), document.getElementById('container'));
-
