@@ -177,7 +177,17 @@ function remove(req, res, next){
 }
 
 function completeClue(req, res, next){
-  next();
+  var user_id = parseInt(req.user.user_id);
+  var clue_id = parseInt(req.params.id);
+  // Set clue to completed for user
+  db.clues_users.completeClue({user_id: user_id, clue_id: clue_id})
+    .then(() => {
+      next();
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({success: false, data: 'Server error'});
+    });
 }
 
 module.exports = {
