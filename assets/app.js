@@ -9,7 +9,7 @@ const Logout = require('./components/logout.js');
 const Homepage = require('./components/homepage.js');
 const Nav = require('./components/nav.js');
 const Createhunt = require('./components/createhunt.js').Createhunt;
-// const Gameview = require('./components/gameview.js');
+const Gameview = require('./components/gameview.js');
 
 const App = React.createClass({
   getInitialState() {
@@ -103,7 +103,7 @@ render((
       <Route path="/logout" component={Logout} /> 
       <Route path="/nav" component={Nav} />
       <Route path="/homepage" component={Homepage} /> 
-      {/* <Route path="/gameview" component={Gameview} /> */}
+      { <Route path="/gameview" component={Gameview} /> }
       <Route path="/createhunt" component={Createhunt} />
       <Route path="/deny" component={DenyAccess} />
     </Route>
@@ -111,27 +111,4 @@ render((
   </Router>
 ), document.getElementById('container'));
 
-
-
-// all nested components 
-
-// render((
-//   <Router history={browserHistory}>
-//     <Route path="/" component={App}>
-//       <Route path="signup" component={Signup} />
-//       <Route path="login" component={Login} />
-//       <Route path="logout" component={Logout} /> 
-//       <Route path="homepage" component={Homepage}> 
-//         <Route path="nav" component={Nav} />
-//         <Route path="createhunt" component={Createhunt}>
-//           <Route path="nav" component={Nav} />
-//         </Route>
-//         <Route path="gameview" component={Gameview}>
-//           <Route path="nav" component={Nav} />
-//         </Route>
-//       </Route>
-//       <Route path="*" component={Error} />
-//     </Route>
-//   </Router>
-// ), document.getElementById('container'))
 

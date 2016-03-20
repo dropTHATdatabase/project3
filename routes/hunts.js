@@ -26,7 +26,7 @@ hunts.get('/', db.list, (req,res)=>{
 
 // route to add a new hunt for the user
 hunts.post('/', db.add, (req,res)=>{
-  res.status(201).json({data:res.data});
+  res.json({data:res.data});
 });
 
 
@@ -42,12 +42,12 @@ hunts.put('/:id', db.update, (req,res)=>{
 
 // route to delete a hunt
 hunts.delete('/:id', db.remove, (req,res)=>{
-  res.status(201).json({success: true, data:'success'});
+  res.json({success: true, data:'success'});
 });
 
 // Route to complete a clue
 hunts.put('/:huntId/clues/:id', db.completeClue, (req, res) => {
-  res.status(201).json({success: true, data: res.data});
+  res.json({success: true, data: res.data});
 });
 
 

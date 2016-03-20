@@ -1,23 +1,19 @@
-
+import { browserHistory, Router, Route, Link } from 'react-router'
 const React = require('react');
 const auth = require('../auth');
+const Gameview = require('./gameview.js');
 
 const Map = React.createClass({
-
   componentDidMount : function() {
-
    loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyB2U33goCrZ0Hilh_cdksT1_F8jBgUTl4w&libraries=places&callback=initMap');
   },
-
   render : function() {
     let divstyle ={
       height: "600px",
       width: "680px",
       margin: '0 auto',
       position: 'relative'
-
     }
-
     let sectionstyle ={
       position: 'relative',
       left: '13em',
@@ -26,9 +22,8 @@ const Map = React.createClass({
     return (
       <section style={sectionstyle}>
         <div id="map" style={divstyle}>
-
         </div>
-    </section>
+      </section>
     )
   }
 });
@@ -45,7 +40,6 @@ const Huntform = React.createClass({
       },
       data:{}  // capture all the users with their ids from the database
     }
-
   },
 
   componentDidMount:function() {
@@ -114,8 +108,9 @@ const Huntform = React.createClass({
         beforeSend: function( xhr ) {
           xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
         }
-        }).done(()=>{
+        }).done((result)=>{
          console.log('hunt created');
+         localStorage.hid = result.data.hunt_id;
        }).fail((data)=>{
          console.log('error in creating  hunt');
        })
@@ -138,29 +133,28 @@ const Huntform = React.createClass({
     })
 
     return (
-    <div id="hunt-form">
-          <form id="participants" onSubmit={this.handleSubmit}>
-            <label htmlFor="cluedesc">Clue Description: </label>
-            <input id="cluedesc"type="text" placeholder="Clue Description" />
+      <div id="hunt-form">
+        <form id="participants" onSubmit={this.handleSubmit}>
+          <label htmlFor="cluedesc">Clue Description: </label>
+          <input id="cluedesc"type="text" placeholder="Clue Description" />
 
-            <label htmlFor="clueinput">Clue Location</label>
-            <input id="clueinput" type="text" placeholder="Enter a Clue location" />
+          <label htmlFor="clueinput">Clue Location</label>
+          <input id="clueinput" type="text" placeholder="Enter a Clue location" />
 
-            <div className="huntinfo">
-              <label htmlFor="wager">Scavenger Hunt Wager: </label>
-              <input id="wager"type="text" placeholder="Enter Wager"ref="wager" required />
+          <div className="huntinfo">
+            <label htmlFor="wager">Scavenger Hunt Wager: </label>
+            <input id="wager"type="text" placeholder="Enter Wager"ref="wager" required />
 
-              <label htmlFor="timer">Set Timer: </label>
-              <input id="timer"type="datetime-local" placeholder="Set Timer" ref="timer" required/>
+            <label htmlFor="timer">Set Timer: </label>
+            <input id="timer"type="datetime-local" placeholder="Set Timer" ref="timer" required/>
 
-              Add Members:
-              {options}
-            <button  className="waves-effect waves-light btn"id="startgame">Start Game</button>
-            </div>
-          </form>
-            <button  className="waves-effect waves-light btn"id="addclue">Add Clue</button>
+            Add Members:
+            {options}
+            <Link to='gameview'><button  className="waves-effect waves-light btn"id="startgame">Start Game</button></Link>
+          </div>
+        </form>
+          <button  className="waves-effect waves-light btn"id="addclue">Add Clue</button>
       </div>
-
     );
   }
 });

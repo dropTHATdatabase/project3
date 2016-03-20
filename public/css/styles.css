@@ -71,3 +71,15 @@
   position: fixed;
   top: -1em;
 }
+
+.gameview {
+  width: 30%;
+  height: 400px;
+  display: inline-block;
+  border: 2px solid black;
+  margin-left: 30px;
+}
+
+.status {
+  width: 350px;
+}
