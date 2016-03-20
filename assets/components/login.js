@@ -1,5 +1,5 @@
 const React = require('react');
-import { browserHistory, Router, Route, Link, Redirect } from 'react-router'
+import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
 const auth = require('../auth');
 const Homepage = require('./homepage.js');
 const Signup = require('./signup.js');
