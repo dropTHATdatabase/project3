@@ -8,7 +8,7 @@
 
 #hunt-form{
   position: relative;
-  top: -23em;
+  top: -37em;
   left: 9em;
   width: 308px;
 }
@@ -19,15 +19,21 @@
   left: 14em
 }
 
-#startgame {
+#creategame {
   position: relative;
   left: 0em;
   top: 0em;
 }
 
+#startgame {
+  position: relative;
+  top: 40px;
+  left: 4em;
+}
+
 #addclue {
   position: relative;
-  top: -23em;
+  top: -22em;
   left: 0em;
   width: 9em;
 }
