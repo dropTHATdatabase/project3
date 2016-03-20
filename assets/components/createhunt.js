@@ -135,14 +135,12 @@ const Huntform = React.createClass({
           <label htmlFor="cluedesc">Clue Description: </label>
           <input id="cluedesc"type="text" placeholder="Clue Description" />
 
-          <label htmlFor="clueinput">Clue Location</label>
-          <input id="clueinput" type="text" placeholder="Enter a Clue location" />
-
             Add Members:
             {options}
-          <button id="startgame">Start Game</button>
+          <button  className="waves-effect waves-light btn"id="startgame">Start Game</button>
+          </div>
         </form>
-          <button id="addclue">Add Clue</button>
+          <button  className="waves-effect waves-light btn"id="addclue">Add Clue</button>
       </div>
     );
   }

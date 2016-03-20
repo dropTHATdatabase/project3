@@ -27,25 +27,6 @@ const App = React.createClass({
     auth.login()
   },
   render() {
-    // var start;
-    // if(this.state.loggedIn) {
-    //   start = (
-    //     <div>
-    //       <Nav />
-    //       {this.props.children}
-    //     </div>
-    //   )
-    // } else {
-    //   start = (
-    //     <div>
-    //       <div>
-    //         <Login />
-    //         {this.props.children}
-    //       </div>
-    //     </div>
-    //   )
-    // }
-
     return (
       <div className="container">
         <Nav />
@@ -57,7 +38,7 @@ const App = React.createClass({
 
 function requireAuth(nextState, replace) {
   if (!auth.loggedIn()) {
-    replace({                              
+    replace({
       pathname: '/login',
       state: { nextPathname: nextState.location.pathname }
     })
@@ -84,7 +65,6 @@ const Welcome = React.createClass({
     return(<h2>Welcome to Citydipity!</h2>)    
   }
 });
-
 
 render((
   <Router history={browserHistory}>
