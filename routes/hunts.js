@@ -17,23 +17,17 @@ hunts.use(expressJWT({secret: secret}));
 
 // route to get list of hunts for user
 hunts.get('/', db.list, (req,res)=>{
-  // req.user = 1
-  // res.data = { user_id, username, pw_digest, hunts: completed, entered, won}
-  // console.log('hunt GET route: ', data)
-  console.log('hunts.get user: ', req.user)
-  res.json({success: true, data: res.data, user: req.user});
+  res.json({success: true, data: res.data});
 });
 
 // route to add a new hunt for the user
 hunts.post('/', db.add, (req,res)=>{
-  console.log(res.data);
-  res.json({data:res.data});
+  res.json({success: true, data:res.data});
 });
 
 
 //route to get hunt and clues for the players( has to be one object)
 hunts.get('/:id', db.get, (req,res)=>{
-  console.log(res.data);
   res.json({success: true, data:res.data});
 
 });
