@@ -14,26 +14,15 @@ const Gameview = require('./gameview.js');
 const Homepage = React.createClass({
   // set context from parent component  
   contextTypes: {
-    hunts: React.PropTypes.array,
     user: React.PropTypes.object,
-    router: React.PropTypes.object.isRequired
+    router: React.PropTypes.object.isRequired,
+    setCurrentHuntId: React.PropTypes.func
   },
   getInitialState() {
     return { 
-      hunts: []
+      hunts: [{}]
     }
   },
-  // // sets context type to be passed to child component
-  // childContextTypes: {
-  //   hunts: React.PropTypes.array,
-  //   user: React.PropTypes.object
-  // },
-  // // gets returned context data from child component
-  // getChildContext() {
-  //   return {
-  //     hunts: this.state.hunts
-  //   }
-  // },
   // BEFORE homepage is rendered
   componentWillMount() {      
     // gets list of hunts from user token
@@ -44,10 +33,9 @@ const Homepage = React.createClass({
         xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
       }
     }).done((data)=>{ 
-      // console.log('List Success: ', data.data) 
+      console.log('Homepage hunts: ', data) 
       this.state.hunts = data.data
       this.setState({ hunts: this.state.hunts })
-      // console.log("this.state.hunts: ", this.state.hunts)
     }).fail((error)=>{ 
       console.log('Hunt List Error: ', error) 
     })
@@ -64,24 +52,16 @@ const Homepage = React.createClass({
     console.log('making AJAX request to delete hunt')
     // AJAX DELETE request here
   },
+  handleGameview(event) {
+    event.preventDefault();
+    console.log('here: ', this.props.index)
+    // this.context.setCurrentHuntId()
+    this.context.router.replace('/gameview')
+  },
   // creates new row in table with hunt info
   renderHunt(hunt) {
-    // console.log('renderHunt: ', hunt)        // {hunt_id: 3, wager: "Loser buys DINNER!", deadline: "2016-03-18T15:00:00.000Z", winner: null, isOwner: true}
-    // return <Hunt key={hunt.hunt_id} index={hunt.hunt_id} details={hunt} deleteHunt={this.deleteHunt} editHunt={this.editHunt} />
     return (
-      <tr key={hunt.hunt_id} index={hunt.hunt_id}>
-        <td>{hunt.wager}</td>
-        <td>??</td>
-        <td>??</td>
-        <td>{hunt.deadline}</td>
-        <td id="btn">
-          {/* if({this.props.details.isOwner}) {
-              (<button id="edit" className="button-primary" onClick={this.handleEdit}>Edit</button>)
-            } */}
-          <button id="view" className="button-primary">View</button>
-          <button id="delete" className="button-primary" onClick={this.deleteHunt}>Delete</button>
-        </td>
-      </tr>
+      <Hunt key={hunt.hunt_id} details={hunt} />
     )
   },
 
@@ -110,7 +90,7 @@ const Homepage = React.createClass({
                 { this.state.hunts.length 
                   ? (this.state.hunts).forEach( (el)=> hunts.push(this.renderHunt(el)) ) 
                   : console.log('zero') }
-                { hunts }
+                {hunts }
               </tbody>
             </table>
           </section>
@@ -132,6 +112,37 @@ const Homepage = React.createClass({
         </div>
         {/* {this.props.children} */}
       </div>
+    )
+  }
+});
+
+const Hunt = React.createClass({
+  contextTypes: {
+    user: React.PropTypes.object,
+    router: React.PropTypes.object.isRequired,
+    setCurrentHuntId: React.PropTypes.func
+  },
+  handleGameview(event) {
+    event.preventDefault();
+    // console.log('here: ', this.props.details.hunt_id)
+    this.context.setCurrentHuntId(this.props.details.hunt_id)
+    this.context.router.replace('/gameview')
+  },
+  render() {
+    return (
+      <tr>
+        <td>{this.props.details.wager}</td>
+        <td>??</td>
+        <td>??</td>
+        <td>{this.props.details.deadline}</td>
+        <td id="btn">
+          {/* if({this.props.details.isOwner}) {
+              (<button id="edit" className="button-primary" onClick={this.handleEdit}>Edit</button>)
+            } */}
+          <button id="view" className="button-primary" onClick={this.handleGameview}>View</button>
+          <button id="delete" className="button-primary" onClick={this.deleteHunt}>Delete</button>
+        </td>
+      </tr>
     )
   }
 });
