@@ -27,12 +27,40 @@ const App = React.createClass({
     auth.login()
   },
   render() {
-    return (
-      <div className="container">
-        <Nav />
-        {this.props.children}
-      </div>
-    )
+    if(this.state.loggedIn) {
+      return (
+        <div>
+          <nav className="#303f9f indigo darken-2">
+            <div className="nav=wrapper">
+              <ul className="nav nav-justified ">
+                <li><Link to="/homepage">Home Page</Link></li>
+                <li><Link to="/createhunt">Create hunt</Link></li>
+                <li className="right"><Link to="/logout">Logout</Link></li>
+              </ul>
+            </div>
+          </nav>
+          {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+        </div>
+      )
+    } else {
+      return (
+        <div id="bg-container">
+          <div className="box">
+            <div className="welcome" >
+              <h2>Welcome to CityDipity</h2>
+              <ul>
+                <li>
+                  {this.state.loggedIn ? ( <Link to="/logout">Log out</Link> )
+                                       : ( <Link to="/login">Log In</Link> )}
+                </li>
+                <li><Link to="/signup">Sign Up</Link></li>
+              </ul>
+              {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+            </div>
+          </div>
+        </div>
+      )
+    }
   }
 });
 
@@ -75,14 +103,13 @@ render((
       <Route path="/logout" component={Logout} /> 
       <Route path="/nav" component={Nav} />
       <Route path="/homepage" component={Homepage} /> 
+      {/* <Route path="/gameview" component={Gameview} /> */}
       <Route path="/createhunt" component={Createhunt} />
       <Route path="/deny" component={DenyAccess} />
     </Route>
     <Route path="*" component={Error} />
   </Router>
-), document.getElementById('container'))
-
-
+), document.getElementById('container'));
 
 
 
