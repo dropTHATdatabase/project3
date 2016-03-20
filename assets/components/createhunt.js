@@ -29,7 +29,6 @@ const Map = React.createClass({
 });
 
 const Huntform = React.createClass({
-
   getInitialState: function() {
     return {
       hunt: {
@@ -55,9 +54,6 @@ const Huntform = React.createClass({
       })
       this.setState({data: this.state.data});
     })
-
-
-
   },
 
   handleSubmit: function(event) {
@@ -68,7 +64,7 @@ const Huntform = React.createClass({
 
     // replacing the + in clue description with spaces
     cluesarr.forEach((el)=>{
-          el.description= el.description.split('+').join(' ');
+      el.description= el.description.split('+').join(' ');
     })
 
     // have to set up logic if there are no clues, setting it to undefined does not work
@@ -165,6 +161,12 @@ const Huntform = React.createClass({
 
 
 const Createhunt = React.createClass({
+  // set context from parent component  
+  contextTypes: {
+    setCurrentHuntId: React.PropTypes.func,
+    currentHuntId: React.PropTypes.number,
+    router: React.PropTypes.object.isRequired
+  },
 
   getInitialState: function() {
     return {

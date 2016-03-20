@@ -12,23 +12,28 @@ const Gameview = require('./gameview.js');
 // how do we get user info from token in front end?? currently stored in user:{} 
 
 const Homepage = React.createClass({
+  // set context from parent component  
+  contextTypes: {
+    hunts: React.PropTypes.array,
+    user: React.PropTypes.object,
+    router: React.PropTypes.object.isRequired
+  },
   getInitialState() {
     return { 
-      hunts: [],
-      user:  {}         // bad practice? ill advised?
+      hunts: []
     }
   },
-  // sets context type to be passed to child component
-  childContextTypes: {
-    hunts: React.PropTypes.array,
-    user: React.PropTypes.object
-  },
-  // gets returned context data from child component
-  getChildContext() {
-    return {
-      hunts: this.state.hunts
-    }
-  },
+  // // sets context type to be passed to child component
+  // childContextTypes: {
+  //   hunts: React.PropTypes.array,
+  //   user: React.PropTypes.object
+  // },
+  // // gets returned context data from child component
+  // getChildContext() {
+  //   return {
+  //     hunts: this.state.hunts
+  //   }
+  // },
   // BEFORE homepage is rendered
   componentWillMount() {      
     // gets list of hunts from user token
@@ -41,8 +46,7 @@ const Homepage = React.createClass({
     }).done((data)=>{ 
       // console.log('List Success: ', data.data) 
       this.state.hunts = data.data
-      this.state.user = data.user
-      this.setState({ hunts: this.state.hunts, user: this.state.user })
+      this.setState({ hunts: this.state.hunts })
       // console.log("this.state.hunts: ", this.state.hunts)
     }).fail((error)=>{ 
       console.log('Hunt List Error: ', error) 
@@ -83,10 +87,10 @@ const Homepage = React.createClass({
 
   render() {
     var hunts = [];
-    // console.log('user info: ', this.state.user)
+    console.log('user info: ', this.context.user)
     return (
       <div>
-        <h1>Welcome back, {this.state.user.username}!</h1>
+        <h1>Welcome back, {this.context.user.username}!</h1>
 
         <div className="row">
           {/* List of all User hunts + Edit|View|Delete options per hunt */}
@@ -116,9 +120,9 @@ const Homepage = React.createClass({
             <div className="row">
               <h5>Hunt Record:</h5>
               <ul>
-                <li>Hunts Entered: {this.state.user.hunts_entered} </li>
-                <li>Hunts Completed: {this.state.user.hunts_completed} </li>
-                <li>Hunts Won: {this.state.user.hunts_won} </li>
+                <li>Hunts Entered: {this.context.user.hunts_entered} </li>
+                <li>Hunts Completed: {this.context.user.hunts_completed} </li>
+                <li>Hunts Won: {this.context.user.hunts_won} </li>
               </ul>
             </div>
             <button className="button-primary">
