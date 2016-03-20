@@ -27,6 +27,7 @@ const App = React.createClass({
     auth.login()
   },
   render() {
+  if(this.state.loggedIn) {
     return (
       <div className="container">
         <div>

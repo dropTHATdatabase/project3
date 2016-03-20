@@ -1,34 +1,45 @@
 
-#map {
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+.welcome{
   text-align: center;
 }
 
-.controls {
-  margin-top: 10px;
-  border: 1px solid transparent;
-  border-radius: 2px 0 0 2px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  height: 32px;
-  outline: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-/*
-#place-input {
-  background-color: #fff;
-  position: relative;
-  top: -27em;
-  left: 33em;
-  font-size: 15px;
-  padding: 0 11px 0 13px;
-  width: 400px;
-}*/
-
 #hunt-form{
   position: relative;
-  top: -27em;
+  top: -23em;
   left: 9em;
+  width: 308px;
+}
 
-width: 308px;
+[type="checkbox"]:not(:checked), [type="checkbox"]:checked{
+  position: absolute;
+  visibility: visible;
+  left: 14em
+}
+
+#startgame {
+  position: relative;
+  left: 0em;
+  top: 0em;
+}
+
+#addclue {
+  position: relative;
+  top: -23em;
+  left: 0em;
+  width: 9em;
+}
+
+#container {
+  padding-top: 10px;
+}
+
+.huntinfo {
+  position: relative;
+  top: 5em;
 }
