@@ -23,14 +23,19 @@ const App = React.createClass({
   childContextTypes: {
     currentHuntId: React.PropTypes.number,
     setCurrentHuntId: React.PropTypes.func,
-    user: React.PropTypes.object
+    user: React.PropTypes.object,
+    setUser: React.PropTypes.func
   },
   getChildContext: function(){
    return {
      currentHuntId: this.state.currentHuntId,
      setCurrentHuntId: this.setCurrentHuntId,
-     user: this.state.user
+     user: this.state.user,
+     setUser: this.setUser
    }
+ },
+ setUser: function(user){
+   this.setState({user: user});
  },
  setCurrentHuntId: function(id){
    this.setState({currentHuntId: id});
@@ -46,9 +51,7 @@ const App = React.createClass({
         }
       })
       .done((result) => {
-        this.setState({
-          user: result.data
-        })
+        this.setUser(result.data);
       })
       .fail((err) => {
         console.log(err);
