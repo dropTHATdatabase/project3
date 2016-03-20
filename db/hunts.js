@@ -109,20 +109,49 @@ function get(req, res, next){
           }
           // Else render view for user
           else {
-            res.data = mockHunt;
-            next(); // Move down when other logic is done;
             // Set isOwner to false
             res.data.isOwner = false;
             // Add completed clues for user to res.data
             db.clues.listCompleted({user_id: user_id, hunt_id: hunt_id})
               .then((clues) => {
                 res.data.clues = clues;
-                // next();
                 // Get the next clue
-                // If the lat/lon from the next clue is
-                // within 100m of the add the next clue to
-                // to the list of clues
-                // set showNextClue to false
+                db.clues.findNextClue(
+                  {hunt_id: hunt_id,
+                   clue_number: clues.length
+                 }).then((nextClue) => {
+                   if(nextClue){
+                     var lat1 = Number(req.query.lat) || 0;
+                     var lng1 = Number(req.query.lng) || 0;
+                     var lat2 = nextClue.lat;
+                     var lng2 = nextClue.lng;
+                     // Differene in degrees
+                     var dLat = lat1 - lat2;
+                     var dLng = lng1 - lng2;
+                     // Difference in meters
+                     // Lat = 40.7406458 deg Lat;
+                     // Only valid within NYC
+                     var dX = dLat * 111048.87011221221;
+                     var dY = dLng * 84464.08477820261;
+                     // Distance in meters
+                     var distance = Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
+                     // If the lat/lon from the next clue is
+                     // within 1000m of the lat and lon of the user
+                     // add the next clue to clues and set
+                     // showNextClue to true
+                     // else showNextClue to false
+                     if(distance < 1000){
+                       res.data.clues.push(nextClue);
+                       res.data.showNextClue = true;
+                     } else {
+                       res.data.showNextClue = false;
+                     }
+                     next();
+                   } else {
+                     res.data.showNextClue = false;
+                     next();
+                   }
+                 });
               });
           }
         });
