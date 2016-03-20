@@ -11,7 +11,7 @@ const Map = React.createClass({
 
   render : function() {
     let divstyle ={
-      height: "400px",
+      height: "600px",
       width: "680px",
       margin: '0 auto',
       position: 'relative'
