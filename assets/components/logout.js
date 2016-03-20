@@ -3,11 +3,15 @@ const auth = require('../auth');
 // const App = require('../app.js');    // redirect to App
 
 const Logout = React.createClass({
-  componentDidMount() {
-    auth.logout()
-  
+  contextTypes: {
+    setUser: React.PropTypes.func
   },
+  componentDidMount() {
+    auth.logout(this.context.setUser({}))
+  },
+  removeUser() {
 
+  },
   render() {
     return (
       <div>
