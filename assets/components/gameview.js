@@ -4,6 +4,7 @@ import { browserHistory, Router, Route, Link } from 'react-router'
 import auth from '../auth'
 
 const $   = require('jquery');
+const moment = require('moment');
 const Createhunt = require('./createhunt.js');
 
 const Map = React.createClass({
@@ -139,7 +140,7 @@ const Gameview = React.createClass({
       <div>
         <h2>
           <span>{this.state.game.wager}</span>
-          <span>Deadline: {this.state.game.deadline}</span>
+          <span>Deadline: {moment(this.state.game.deadline).fromNow()}</span>
         </h2>
         <div className="row">
           {/* List of all User hunts + Edit|View|Delete options per hunt */}
