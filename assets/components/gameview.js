@@ -57,7 +57,7 @@ const Gameview = React.createClass({
       beforeSend: function( xhr ) {
         xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
       }
-    }).done((data)=>{ 
+    }).done((data)=>{
       localStorage.currentHuntId = parseInt(this.context.currentHuntId)
       this.state.game = data.data
       // setting the state of the game
@@ -79,10 +79,10 @@ const Gameview = React.createClass({
 
       console.log('clues from the database', cluesdb);
       var cluesstring = JSON.stringify(cluesdb);
-      // console.log('json string',cluesstring);
+
       var $hiddenDiv = $('#hidden');
-      // console.log('hidden div ', $hiddenDiv);
-      // remove cluesdb if it alreadt
+
+      // remove cluesdb if it already exists
        $('#cluesdb').remove();
       // put the clues data from the database into hiddendiv to pass it to google maps script
       $hiddenDiv.append($('<input id="cluesdb" type="hidden" value='+cluesstring+'>'));
@@ -100,7 +100,6 @@ const Gameview = React.createClass({
   handleCheckIn(event) {
     event.preventDefault();
     navigator.geolocation.getCurrentPosition((position) => {
-      // console.log(position.coords.latitude, position.coords.longitude)
       var latitude = position.coords.latitude;
       var longitude = position.coords.longitude;
       $.ajax({
@@ -108,50 +107,36 @@ const Gameview = React.createClass({
         type: "get",
         beforeSend: function( xhr ) {
           xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
-        }        
+        }
       }).done((data)=>{
         console.log('booya: ', data)
       })
     })
-  
-    // gets current location
-    // $.ajax({
-    //   url: "/api/v1/hunts"
-    //   type: "get",
-    // })
     console.log('check in button clicked for clue: ', this.state.game.clues)
 
-    // $.ajax({
-    //   url: "/api/v1/hunts/1/clues/"+this.state.game.clues,
-    //   type: "PUT",
-    //   beforeSend: function( xhr ) {
-    //     xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
-    //   }
-    // }).done((data)=>{
-    //   console.log('you get: ', data)
-    // })
 
   },
   render() {
     var clues = this.state.game.clues;
     var participants = this.state.game.participants;
-    // console.log('deadline: ',this.state.game.deadline)
-    // console.log('clues: ', this.state.game.clues)
-    // console.log('participants: ', this.state.game.participants)
 
     return (
       <div>
-        <h2>{this.state.game.wager}</h2>
-        <h3 id="time">{moment(this.state.game.deadline).countdown().toString()}</h3>
-        
+        <div className="center-align">
+          <h2 id="wager">{this.state.game.wager}</h2>
+          <h3 id="time">{moment(this.state.game.deadline).countdown().toString()}</h3>
+        </div>
+
+
+
         <div className="row">
           {/* List of all User hunts + Edit|View|Delete options per hunt */}
-          <div className="gameview clues">
-            <h5>Clues:</h5>
-            <ul>
+          <div className="card-panel z-depth-5 gameview clues center-align">
+            <h5 className="#7986cb indigo lighten-2"id="clues">Clues:</h5>
+            <ul className="text collection">
               {/* List all clues here */}
               { clues ? clues.map((el)=> this.renderClue(el)) : console.log('no clues available') }
-            </ul>  
+            </ul>
           </div>
 
           <div className="map">
@@ -159,17 +144,17 @@ const Gameview = React.createClass({
           </div>
 
           {/* User Hunt Record + Create Hunt btn */}
-          <div className="gameview status">
-            <h5>Player Status:</h5>
-            <div>
+          <div className="card-panel z-depth-5 gameview status center-align">
+            <h5 id="clues"className="#7986cb indigo lighten-2">Player Status:</h5>
+            <ul className="text collection">
               {/* List each player status here */}
               { participants ? participants.map((el)=> this.renderParticipant(el)) : console.log('no participants available') }
-            </div>
+            </ul>
             <div>
-              { this.state.game.isOwner 
-                  ? console.log('creator view') 
+              { this.state.game.isOwner
+                  ? console.log('creator view')
                   : <button onClick={this.handleCheckIn}>Check In</button> }
-            </div>  
+            </div>
           </div>
         </div>
         {/* {this.props.children} */}
