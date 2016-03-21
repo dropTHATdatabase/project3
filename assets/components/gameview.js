@@ -138,12 +138,12 @@ const Gameview = React.createClass({
     console.log('deadline: ',this.state.game.deadline)
     // console.log('clues: ', this.state.game.clues)
     // console.log('participants: ', this.state.game.participants)
+
     return (
       <div>
-        <h2>
-          <span>{this.state.game.wager}</span>
-          <span>Deadline: {moment(this.state.game.deadline).countdown().toString()}</span>
-        </h2>
+        <h2>{this.state.game.wager}</h2>
+        <h3 id="time">{moment(this.state.game.deadline).countdown().toString()}</h3>
+        
         <div className="row">
           {/* List of all User hunts + Edit|View|Delete options per hunt */}
           <div className="gameview clues">
