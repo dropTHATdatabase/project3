@@ -140,7 +140,8 @@ var styles =[
 var wager, timer, cluedesc;
 var cluesarr =[];
 var cluesearch, map,clueinput,addclue,cluenumber;
-var image = 'http://www.googlemapsmarkers.com/v1/009900';
+var image = '../css/squat_marker_green.svg';
+
 
 
 
@@ -153,7 +154,7 @@ function initMap() {
     draggable: true,
     styles: styles
   });
-  
+
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = {
@@ -297,7 +298,7 @@ function plotlocation() {
       var position = {
         lat: Number(el.lat),
         lng: Number(el.lng)
-      }
+      };
       console.log('line 298 map',position);
       var label = el.clue_number.toString();
       //plot the location on the map
