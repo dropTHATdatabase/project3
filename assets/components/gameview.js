@@ -58,18 +58,19 @@ const Gameview = React.createClass({
         type: "get",
         beforeSend: function( xhr ) {
           xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
-        }
-      }).done((data)=>{
+        }        
+      }).done((data)=>{ 
       console.log('data returned ', data)
       this.state.game = data.data
       // setting the state of the game
       this.setState({ game: this.state.game })
-      loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyB2U33goCrZ0Hilh_cdksT1_F8jBgUTl4w&libraries=places&callback=plotlocation');
 
+      loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyB2U33goCrZ0Hilh_cdksT1_F8jBgUTl4w&libraries=places&callback=plotlocation');
       // grabbing the clues returned from the database
       // need clue number, lat and lng
       var clues = this.state.game.clues;
       var cluesdb =[];
+
       clues.forEach((el) => {
         var replacedec = el.description.split(' ').join('+');
         var clueobj ={
@@ -80,6 +81,7 @@ const Gameview = React.createClass({
         }
         cluesdb.push(clueobj)
       })
+
       // console.log('clues from the database', cluesdb);
       var cluesstring = JSON.stringify(cluesdb);
       // console.log('json string',cluesstring);
@@ -102,10 +104,12 @@ const Gameview = React.createClass({
   },
   handleCheckIn(event) {
     event.preventDefault();
+
     if(this.state.game.clues.length) {
       console.log('clue length: ', this.state.game.clues.length)
       console.log('check in button clicked for clue: ', this.state.game.clues[this.state.game.clues.length-1])    // is this the correct last clue?
     }
+
     $.ajax({
       url: "/api/v1/hunts/"+ this.context.currentHuntId +"/clues/"+this.state.game.clues[this.state.game.clues.length-1].clue_id,
       type: "PUT",
@@ -164,35 +168,40 @@ const Gameview = React.createClass({
     // console.log('deadline: ',this.state.game.deadline)
     console.log('hunt game: ', this.state.game)
     // console.log('participants: ', this.state.game.participants)
+
     return (
       <div>
-        <h2>{this.state.game.wager}</h2>
-        <h3 id="time">{moment(this.state.game.deadline).countdown().toString()}</h3>
+        <div className="center-align">
+          <h2>{this.state.game.wager}</h2>
+          <h4 id="time">Time Left: {moment(this.state.game.deadline).countdown().toString()}</h4>
+        </div>
 
         <div className="row">
           {/* List of all User hunts + Edit|View|Delete options per hunt */}
-          <div className="gameview clues">
-            <h5>Clues:</h5>
-            <ul>
+          <div className="card-panel z-depth-5 gameview clues center-align">
+            <h5 id="title">Clues:</h5>
+            <div className="text">
               {/* List all clues here */}
               { clues ? clues.map((el)=> this.renderClue(el)) : console.log('no clues available') }
-            </ul>
+            </div>  
           </div>
+
           <div className="map">
             <Map />
           </div>
+
           {/* User Hunt Record + Create Hunt btn */}
-          <div className="gameview status">
-            <h5>Player Status:</h5>
-            <div>
+          <div className="card-panel z-depth-5 gameview status center-align">
+            <h5 id="title">Player Status:</h5>
+            <div className="text">
               {/* List each player status here */}
               { participants ? participants.map((el)=> this.renderParticipant(el)) : console.log('no participants available') }
             </div>
             <div>
-              { this.state.game.showNextClue
-                  ? <button onClick={this.handleCheckIn}>Check In</button>
+              { this.state.game.showNextClue 
+                  ? <button style={{marginTop: '40px'}} onClick={this.handleCheckIn}>Check In</button> 
                   : console.log('showNextClue is false') }
-            </div>
+            </div>  
           </div>
         </div>
         {/* {this.props.children} */}
@@ -200,19 +209,20 @@ const Gameview = React.createClass({
     )
   }
 });
+
+
 const Clue = React.createClass({
   render() {
-    return ( <li>{this.props.details.description}</li> )
+    return ( <div className="listItem">{this.props.details.description}</div> )
   }
 });
+
+
 const Participant = React.createClass({
-    // $( "#progressbar" ).progressbar({
-    //   value: this.props.details.progress
-    // });
   render() {
     return (
-      <div>
-        {this.props.details.username}: <div><Progress completed={this.props.details.progress*100} /></div>
+      <div className="listItem">
+        {this.props.details.username}: <div id="progress"><Progress completed={this.props.details.progress*100} /></div>
       </div>
     )
   }
