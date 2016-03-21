@@ -146,7 +146,7 @@ function initMap() {
     cluenumber = 1;
     map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 36.580247, lng: -41.817628},
-    zoom: 6,
+    zoom: 12,
     draggable: true,
     styles: styles
   });
@@ -162,7 +162,7 @@ function initMap() {
       infoWindow.setContent('Current Location');
       map.setCenter(pos);
 
-       var marker = new google.maps.Marker({
+       var markercurrent = new google.maps.Marker({
             map: map,
             position: pos,
             animation: google.maps.Animation.DROP,
@@ -171,12 +171,11 @@ function initMap() {
                     scaledSize: new google.maps.Size(30, 40),
                     anchor: new google.maps.Point(20, 58)
                     },
-           labelAnchor: new google.maps.Point(10, 10),
-          labelClass: "label"
+           labelAnchor: new google.maps.Point(10, 10)
       });
 
       console.log('line 174');
-      infoWindow.open(map, marker);
+      infoWindow.open(map, markercurrent);
        });
 
     }
@@ -229,17 +228,23 @@ function buttonSearch(location) {
      // to check the status og
      if (status == google.maps.GeocoderStatus.OK) {
        map.setCenter(results[0].geometry.location);
-       var marker = new google.maps.Marker({
+       var markerclues = new google.maps.Marker({
            map: map,
            position: origin,
            animation: google.maps.Animation.DROP,
            label: label,
-           labelClass: "labels",
            icon: {
                    url: '../css/squat_marker_green.svg',
                    scaledSize: new google.maps.Size(40, 40),
                    anchor: new google.maps.Point(20, 58)
                    },
+           });
+           var infowindow = new google.maps.InfoWindow({ // Create a new InfoWindow
+             content:"<h6>Clue "+label+" "+cluedesc+"</h6><p>"+location+"</p>" // HTML contents of the InfoWindow
+           });
+
+            google.maps.event.addListener(markerclues, 'click', function() { // Add a Click Listener to our marker
+             infowindow.open(map,markerclues); // Open the InfoWindow
            });
      } else {
        alert("Geocode was not successful for the following reason: " + status);
@@ -248,6 +253,7 @@ function buttonSearch(location) {
      document.getElementById('cluedesc').value ="";
      document.getElementById('clueinput').value ="";
   });
+
 
 }
 
@@ -260,21 +266,12 @@ function addClick() {
  });
 }
 
-// for marker animation
-// function toggleBounce() {
-//   if (marker.getAnimation() !== null) {
-//     marker.setAnimation(null);
-//   } else {
-//     marker.setAnimation(google.maps.Animation.BOUNCE);
-//   }
-// }
-
 // initilaze function for plotting map location by reading location from the database
 function plotlocation() {
 
     var map1 = new google.maps.Map(document.getElementById('map2'), {
     center: {lat: 36.580247, lng: -41.817628},
-    zoom: 2,
+    zoom: 12,
     draggable: true,
     styles: styles
   });
@@ -290,7 +287,7 @@ function plotlocation() {
       infoWindow.setContent('Current Location');
       map1.setCenter(pos);
 
-      var marker = new google.maps.Marker({
+      var markerplot = new google.maps.Marker({
             map: map1,
             position: pos,
             animation: google.maps.Animation.DROP,
@@ -299,16 +296,16 @@ function plotlocation() {
                     scaledSize: new google.maps.Size(30, 40),
                     anchor: new google.maps.Point(20, 58)
                     },
-           labelAnchor: new google.maps.Point(10, 10),
-           labelClass: "label"
+           labelAnchor: new google.maps.Point(10, 10)
       });
-      infoWindow.open(map1, marker);
+      infoWindow.open(map1, markerplot);
        });
     }
 
       // getting the clues from database
       var cluesdb = JSON.parse($('#cluesdb').val());
       cluesdb.forEach((el)=>{
+        var desc = el.desc.split('+').join(' ');
         var position = {
           lat: Number(el.lat),
           lng: Number(el.lng)
@@ -316,17 +313,25 @@ function plotlocation() {
         console.log('line 298 map',position);
         var label = el.clue_number.toString();
         //plot the location on the map
-        var marker = new google.maps.Marker({
+        var markergame = new google.maps.Marker({
             map: map1,
             position: position,
             animation: google.maps.Animation.DROP,
-            labelClass: "labels",
             label: label,
             icon: {
                     url: '../css/squat_marker_green.svg',
                     scaledSize: new google.maps.Size(40, 40),
                     anchor: new google.maps.Point(20, 58)
                     }
+            });
+            var infowindow = new google.maps.InfoWindow({ // Create a new InfoWindow
+              content:"<h6>Clue"+label +"</h6><p>"+desc+"</p>" // HTML contents of the InfoWindow
+            });
+            console.log(infowindow);
+
+             google.maps.event.addListener(markergame, 'click', function() { // Add a Click Listener to our marker
+             console.log('in maps event');
+              infowindow.open(map1,markergame); // Open the InfoWindow
             });
       });
   }

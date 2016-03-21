@@ -71,8 +71,10 @@ const Gameview = React.createClass({
       var clues = this.state.game.clues;
       var cluesdb =[];
       clues.forEach((el) => {
+        var replacedec = el.description.split(' ').join('+');
         var clueobj ={
           'clue_number': el.clue_number,
+          'desc': replacedec,
           'lat': el.lat,
           'lng': el.lng
         }
