@@ -4,6 +4,7 @@ import { browserHistory, Router, Route, Link } from 'react-router'
 import auth from '../auth'
 
 const $   = require('jquery');
+const Progress = require('react-progressbar');
 const moment = require('moment');
 const moment_countdown = require('moment-countdown');
 const Createhunt = require('./createhunt.js');
@@ -174,14 +175,14 @@ const Clue = React.createClass({
 });
 
 const Participant = React.createClass({
-    $( "#progressbar" ).progressbar({
-      value: {this.props.details.progress}
-    });
+    // $( "#progressbar" ).progressbar({
+    //   value: this.props.details.progress
+    // });
 
   render() {
     return (
       <div>
-        {this.props.details.username}: <div id="progressbar"></div>
+        {this.props.details.username}: <div><Progress completed={this.props.details.progress} /></div>
       </div>
     )
   }
