@@ -64,12 +64,8 @@ const Gameview = React.createClass({
       this.state.game = data.data
       // setting the state of the game
       this.setState({ game: this.state.game })
-<<<<<<< HEAD
 
-=======
       loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyB2U33goCrZ0Hilh_cdksT1_F8jBgUTl4w&libraries=places&callback=plotlocation');
-      
->>>>>>> 3ad3914ce81f133b2a11015c49e0feda279ae3d0
       // grabbing the clues returned from the database
       // need clue number, lat and lng
       var clues = this.state.game.clues;
@@ -131,28 +127,32 @@ const Gameview = React.createClass({
 
     return (
       <div>
-        <h2>{this.state.game.wager}</h2>
-        <h3 id="time">{moment(this.state.game.deadline).countdown().toString()}</h3>
+        <div className="center-align">
+          <h2>{this.state.game.wager}</h2>
+          <h3 id="time">{moment(this.state.game.deadline).countdown().toString()}</h3>
+        </div>
 
         <div className="row">
           {/* List of all User hunts + Edit|View|Delete options per hunt */}
-          <div className="gameview clues">
-            <h5>Clues:</h5>
-            <ul>
+          <div className="card-panel z-depth-5 gameview clues center-align">
+            <h5 id="clues">Clues:</h5>
+            <ul className="text collection">
               {/* List all clues here */}
               { clues ? clues.map((el)=> this.renderClue(el)) : console.log('no clues available') }
             </ul>  
           </div>
+
           <div className="map">
             <Map />
           </div>
+
           {/* User Hunt Record + Create Hunt btn */}
-          <div className="gameview status">
-            <h5>Player Status:</h5>
-            <div>
+          <div className="card-panel z-depth-5 gameview status center-align">
+            <h5 id="clues">Player Status:</h5>
+            <ul className="text collection">
               {/* List each player status here */}
               { participants ? participants.map((el)=> this.renderParticipant(el)) : console.log('no participants available') }
-            </div>
+            </ul>
             <div>
               { this.state.game.showNextClue 
                   ? <button onClick={this.handleCheckIn}>Check In</button> 
@@ -165,17 +165,21 @@ const Gameview = React.createClass({
     )
   }
 });
+
+
 const Clue = React.createClass({
   render() {
     return ( <li>{this.props.details.description}</li> )
   }
 });
+
+
 const Participant = React.createClass({
   render() {
     return (
-      <div>
+      <li>
         {this.props.details.username}: <div><Progress completed={this.props.details.progress*100} /></div>
-      </div>
+      </li>
     )
   }
 });
