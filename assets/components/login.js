@@ -38,10 +38,10 @@ const Login = React.createClass({
     return (
       <div>
         <h3>Please Log In!</h3>
-        <form onSubmit={this.handleSubmit}>
+        <form className="homepage-form"onSubmit={this.handleSubmit}>
           <input ref="username" placeholder="Enter Username" required />
-          <input ref="password" placeholder="Password" required /><br/>
-          <button type="submit">Login</button>
+          <input type="password"ref="password" placeholder="Password" required /><br/>
+          <button className="waves-effect waves-light btn" type="submit">Login</button>
           {this.state.error && (
             <p id="invalid">Invalid login information!</p>
           )}
