@@ -120,7 +120,6 @@ function get(req, res, next){
                   {hunt_id: hunt_id,
                    clue_number: (clues.length+1)
                  }).then((nextClue) => {
-                  console.log('next clue: ', nextClue)
                    if(nextClue){
                      var lat1 = Number(req.query.lat) || 0;
                      var lng1 = Number(req.query.lng) || 0;
@@ -173,8 +172,16 @@ function update(req, res, next){
 }
 
 function remove(req, res, next){
-
-  next();
+  var user_id = parseInt(req.user.user_id);
+  var hunt_id = parseInt(req.params.id);
+  db.hunts.remove({hunt_id: hunt_id, user_id: user_id})
+    .then(() => {
+      next();
+    })
+    .catch((err) => {
+      console.error(err);
+      res.json({success: false, data: 'Server error'});
+    });
 }
 
 function completeClue(req, res, next){
