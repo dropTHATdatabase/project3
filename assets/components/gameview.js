@@ -5,6 +5,7 @@ import auth from '../auth'
 
 const $   = require('jquery');
 const moment = require('moment');
+const momentcd = require('moment-countdown');
 const Createhunt = require('./createhunt.js');
 
 const Map = React.createClass({
@@ -140,7 +141,7 @@ const Gameview = React.createClass({
       <div>
         <h2>
           <span>{this.state.game.wager}</span>
-          <span>Deadline: {moment(this.state.game.deadline).format('LLLL')}</span>
+          <span>Deadline: {moment(this.state.game.deadline).countdown().toString()}</span>
         </h2>
         <div className="row">
           {/* List of all User hunts + Edit|View|Delete options per hunt */}
