@@ -237,7 +237,7 @@ function buttonSearch(location) {
            labelClass: "labels",
            icon: {
                    url: '../css/squat_marker_green.svg',
-                   scaledSize: new google.maps.Size(60, 40),
+                   scaledSize: new google.maps.Size(40, 40),
                    anchor: new google.maps.Point(20, 58)
                    },
        });
@@ -321,9 +321,10 @@ function plotlocation() {
           position: position,
           animation: google.maps.Animation.DROP,
           labelClass: "labels",
+          label: label,
           icon: {
                   url: '../css/squat_marker_green.svg',
-                  scaledSize: new google.maps.Size(60, 40),
+                  scaledSize: new google.maps.Size(40, 40),
                   anchor: new google.maps.Point(20, 58)
                   }
       });
