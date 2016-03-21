@@ -174,10 +174,14 @@ const Clue = React.createClass({
 });
 
 const Participant = React.createClass({
+    $( "#progressbar" ).progressbar({
+      value: {this.props.details.progress}
+    });
+
   render() {
     return (
       <div>
-        {this.props.details.username}: {this.props.details.progress}
+        {this.props.details.username}: <div id="progressbar"></div>
       </div>
     )
   }
