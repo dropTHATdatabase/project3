@@ -118,9 +118,8 @@ function get(req, res, next){
                 // Get the next clue
                 db.clues.findNextClue(
                   {hunt_id: hunt_id,
-                   clue_number: clues.length
+                   clue_number: (clues.length+1)
                  }).then((nextClue) => {
-                  console.log('next clue: ', nextClue)
                    if(nextClue){
                      var lat1 = Number(req.query.lat) || 0;
                      var lng1 = Number(req.query.lng) || 0;
