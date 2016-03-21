@@ -40,15 +40,14 @@ const Signup = React.createClass({
     return (
       <div>
         <h3>Sign Up Now!</h3>
-        <form onSubmit={this.handleSubmit}>
+        <form className="homepage-form"onSubmit={this.handleSubmit}>
           <input ref="username" placeholder="Create a Username" required />
-          <input ref="password" placeholder="Create a Password" required /><br/>
-          <button type="submit">Sign Me Up!</button>
+          <input type="password" ref="password" placeholder="Create a Password" required /><br/>
+          <button className="waves-effect waves-light btn"type="submit">Sign Me Up!</button>
           {this.state.error && (
             <p id="invalid">Oops! Something went wrong, please try again!</p>
           )}
         </form>
-        <Link to="/login">Log In here</Link>
       </div>
     )
   }

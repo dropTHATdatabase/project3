@@ -23,7 +23,8 @@ module.exports = {
     create: sql('hunts/create.sql'),
     add: sql('hunts/add.sql'),
     list: sql('hunts/list.sql'),
-    get: sql('hunts/get.sql')
+    get: sql('hunts/get.sql'),
+    remove: sql('hunts/remove.sql')
   },
   clues: {
     create: sql('clues/create.sql'),
@@ -39,6 +40,8 @@ module.exports = {
   },
   clues_users: {
     create: sql('clues_users/create.sql'),
-    add: sql('clues_users/add.sql')
+    add: sql('clues_users/add.sql'),
+    completeClue: sql('clues_users/completeClue.sql'),
+    completeInitial: sql('clues_users/completeInitial.sql')
   }
 };

@@ -141,8 +141,6 @@ var wager, timer, cluedesc;
 var cluesarr =[];
 var cluesearch, map,clueinput,addclue,cluenumber;
 
-
-
 // initliazes the map
 function initMap() {
     cluenumber = 1;
@@ -164,13 +162,20 @@ function initMap() {
       infoWindow.setContent('Current Location');
       map.setCenter(pos);
 
-      var marker = new google.maps.Marker({
+       var marker = new google.maps.Marker({
             map: map,
             position: pos,
             animation: google.maps.Animation.DROP,
-            label: 'A'
+            icon: {
+                    url: '../css/mapicon.svg',
+                    scaledSize: new google.maps.Size(30, 40),
+                    anchor: new google.maps.Point(20, 58)
+                    },
+           labelAnchor: new google.maps.Point(10, 10),
+          labelClass: "label"
       });
-      // marker.addListener('click', toggleBounce(marker));
+
+      console.log('line 174');
       infoWindow.open(map, marker);
        });
 
@@ -196,7 +201,6 @@ function buttonSearch(location) {
 
   var geocoder = new google.maps.Geocoder();
   var address = {'address': location};
-  var image = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
 
   geocoder.geocode(address, function (results, status) {
     console.log(cluenumber);
@@ -229,7 +233,13 @@ function buttonSearch(location) {
            map: map,
            position: origin,
            animation: google.maps.Animation.DROP,
-           label: label
+           label: label,
+           labelClass: "labels",
+           icon: {
+                   url: '../css/squat_marker_green.svg',
+                   scaledSize: new google.maps.Size(40, 40),
+                   anchor: new google.maps.Point(20, 58)
+                   },
        });
      } else {
        alert("Geocode was not successful for the following reason: " + status);
@@ -251,10 +261,72 @@ function addClick() {
 }
 
 // for marker animation
-function toggleBounce(marker) {
-  if (marker.getAnimation() !== null) {
-    marker.setAnimation(null);
-  } else {
-    marker.setAnimation(google.maps.Animation.BOUNCE);
+// function toggleBounce() {
+//   if (marker.getAnimation() !== null) {
+//     marker.setAnimation(null);
+//   } else {
+//     marker.setAnimation(google.maps.Animation.BOUNCE);
+//   }
+// }
+
+// initilaze function for plotting map location by reading location from the database
+function plotlocation() {
+    console.log('in plot location');
+    var map1 = new google.maps.Map(document.getElementById('map2'), {
+    center: {lat: 36.580247, lng: -41.817628},
+    zoom: 6,
+    draggable: true,
+    styles: styles
+  });
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+
+      var infoWindow = new google.maps.InfoWindow({map: map1});
+      infoWindow.setContent('Current Location');
+      map1.setCenter(pos);
+
+      var marker = new google.maps.Marker({
+            map: map1,
+            position: pos,
+            animation: google.maps.Animation.DROP,
+            icon: {
+                    url: '../css/mapicon.svg',
+                    scaledSize: new google.maps.Size(30, 40),
+                    anchor: new google.maps.Point(20, 58)
+                    },
+           labelAnchor: new google.maps.Point(10, 10),
+           labelClass: "label"
+      });
+      infoWindow.open(map1, marker);
+       });
+    }
+    // getting the clues from database
+    var cluesdb = JSON.parse($('#cluesdb').val());
+    console.log(cluesdb);
+    cluesdb.forEach((el)=>{
+      var position = {
+        lat: Number(el.lat),
+        lng: Number(el.lng)
+      };
+      console.log('line 298 map',position);
+      var label = el.clue_number.toString();
+      //plot the location on the map
+      var marker = new google.maps.Marker({
+          map: map1,
+          position: position,
+          animation: google.maps.Animation.DROP,
+          labelClass: "labels",
+          label: label,
+          icon: {
+                  url: '../css/squat_marker_green.svg',
+                  scaledSize: new google.maps.Size(40, 40),
+                  anchor: new google.maps.Point(20, 58)
+                  }
+      });
+    });
   }
-}

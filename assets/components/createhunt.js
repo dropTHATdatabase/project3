@@ -1,23 +1,19 @@
-
+import { browserHistory, Router, Route, Link } from 'react-router'
 const React = require('react');
 const auth = require('../auth');
+const Gameview = require('./gameview.js');
 
 const Map = React.createClass({
-
   componentDidMount : function() {
-
    loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyB2U33goCrZ0Hilh_cdksT1_F8jBgUTl4w&libraries=places&callback=initMap');
   },
-
   render : function() {
     let divstyle ={
       height: "600px",
       width: "680px",
       margin: '0 auto',
       position: 'relative'
-
     }
-
     let sectionstyle ={
       position: 'relative',
       left: '13em',
@@ -26,15 +22,13 @@ const Map = React.createClass({
     return (
       <section style={sectionstyle}>
         <div id="map" style={divstyle}>
-
         </div>
-    </section>
+      </section>
     )
   }
 });
 
 const Huntform = React.createClass({
-
   getInitialState: function() {
     return {
       hunt: {
@@ -45,9 +39,11 @@ const Huntform = React.createClass({
       },
       data:{}  // capture all the users with their ids from the database
     }
-
   },
-
+  contextTypes: {
+    setCurrentHuntId: React.PropTypes.func,
+    router: React.PropTypes.object
+  },
   componentDidMount:function() {
     $.ajax({
       url:'/api/v1/users',
@@ -61,9 +57,6 @@ const Huntform = React.createClass({
       })
       this.setState({data: this.state.data});
     })
-
-
-
   },
 
   handleSubmit: function(event) {
@@ -74,7 +67,7 @@ const Huntform = React.createClass({
 
     // replacing the + in clue description with spaces
     cluesarr.forEach((el)=>{
-          el.description= el.description.split('+').join(' ');
+      el.description= el.description.split('+').join(' ');
     })
 
     // have to set up logic if there are no clues, setting it to undefined does not work
@@ -114,20 +107,21 @@ const Huntform = React.createClass({
         beforeSend: function( xhr ) {
           xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
         }
-        }).done(()=>{
-         console.log('hunt created');
+      }).done((result)=>{
+        // Set the hunt id of the App component
+         this.context.setCurrentHuntId(parseInt(result.data.hunt_id));
+         // Redirect to show page
+         this.context.router.replace('/gameview');
        }).fail((data)=>{
          console.log('error in creating  hunt');
        })
 
     }
-
-
+    // alert the user that they created the game
 
   },
 
   render: function() {
-
     var options =[]
     var users = this.state.data;
     var count=0;
@@ -140,35 +134,40 @@ const Huntform = React.createClass({
     })
 
     return (
-    <div id="hunt-form">
-          <form id="participants" onSubmit={this.handleSubmit}>
-            <label htmlFor="cluedesc">Clue Description: </label>
-            <input id="cluedesc"type="text" placeholder="Clue Description" />
+      <div id="hunt-form">
+        <form id="participants" onSubmit={this.handleSubmit}>
+          <label htmlFor="cluedesc">Clue Description: </label>
+          <input id="cluedesc"type="text" placeholder="Clue Description" />
 
-            <label htmlFor="clueinput">Clue Location</label>
-            <input id="clueinput" type="text" placeholder="Enter a Clue location" />
+          <label htmlFor="clueinput">Clue Location</label>
+          <input id="clueinput" type="text" placeholder="Enter a Clue location" />
 
-            <div className="huntinfo">
-              <label htmlFor="wager">Scavenger Hunt Wager: </label>
-              <input id="wager"type="text" placeholder="Enter Wager"ref="wager" required />
+          <div className="huntinfo">
+            <label htmlFor="wager">Scavenger Hunt Wager: </label>
+            <input id="wager"type="text" placeholder="Enter Wager"ref="wager" required />
 
-              <label htmlFor="timer">Set Timer: </label>
-              <input id="timer"type="datetime-local" placeholder="Set Timer" ref="timer" required/>
+            <label htmlFor="timer">Set Timer: </label>
+            <input id="timer"type="datetime-local" placeholder="Set Timer" ref="timer" required/>
 
-              Add Members:
-              {options}
-            <button  className="waves-effect waves-light btn"id="startgame">Start Game</button>
-            </div>
-          </form>
-            <button  className="waves-effect waves-light btn"id="addclue">Add Clue</button>
+            Add Members:
+            {options}
+          <button  className="waves-effect waves-light btn"id="creategame">Create Game</button>
+          </div>
+        </form>
+          <button  className="waves-effect waves-light btn"id="addclue">Add Clue</button>
       </div>
-
     );
   }
 });
 
 
 const Createhunt = React.createClass({
+  // set context from parent component  
+  contextTypes: {
+    setCurrentHuntId: React.PropTypes.func,
+    currentHuntId: React.PropTypes.number,
+    router: React.PropTypes.object.isRequired
+  },
 
   getInitialState: function() {
     return {
@@ -190,8 +189,6 @@ const Createhunt = React.createClass({
 
   },
   render() {
-    const token = auth.getToken()
-    const state = this.state.me
     return (
       <div>
         <Map />
