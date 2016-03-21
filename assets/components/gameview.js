@@ -2,13 +2,11 @@
 import React from 'react'
 import { browserHistory, Router, Route, Link } from 'react-router'
 import auth from '../auth'
-
 const $   = require('jquery');
 const Progress = require('react-progressbar');
 const moment = require('moment');
 const moment_countdown = require('moment-countdown');
 const Createhunt = require('./createhunt.js');
-
 const Map = React.createClass({
   componentDidMount : function() {
    loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyB2U33goCrZ0Hilh_cdksT1_F8jBgUTl4w&libraries=places&callback=plotlocation');
@@ -34,7 +32,6 @@ const Map = React.createClass({
     )
   }
 });
-
 const Gameview = React.createClass({
   contextTypes: {
     user: React.PropTypes.object,
@@ -68,7 +65,10 @@ const Gameview = React.createClass({
       this.state.game = data.data
       // setting the state of the game
       this.setState({ game: this.state.game })
+<<<<<<< HEAD
 
+=======
+>>>>>>> 37cdddad46917adec50ca276bd30aa394cbfc4e9
       // grabbing the clues returned from the database
       // need clue number, lat and lng
       var clues = this.state.game.clues;
@@ -105,12 +105,18 @@ const Gameview = React.createClass({
   },
   handleCheckIn(event) {
     event.preventDefault();
+<<<<<<< HEAD
 
+=======
+>>>>>>> 37cdddad46917adec50ca276bd30aa394cbfc4e9
     if(this.state.game.clues.length) {
       console.log('clue length: ', this.state.game.clues.length)
       console.log('check in button clicked for clue: ', this.state.game.clues[this.state.game.clues.length-1])    // is this the correct last clue?
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 37cdddad46917adec50ca276bd30aa394cbfc4e9
     $.ajax({
       url: "/api/v1/hunts/"+ this.context.currentHuntId +"/clues/"+this.state.game.clues[this.state.game.clues.length-1].clue_id,
       type: "PUT",
@@ -120,7 +126,10 @@ const Gameview = React.createClass({
     }).done((data)=>{
       console.log('next clue?: ', data)
     })
+<<<<<<< HEAD
 
+=======
+>>>>>>> 37cdddad46917adec50ca276bd30aa394cbfc4e9
   },
   render() {
     var clues = this.state.game.clues;
@@ -128,12 +137,19 @@ const Gameview = React.createClass({
     // console.log('deadline: ',this.state.game.deadline)
     console.log('hunt game: ', this.state.game)
     // console.log('participants: ', this.state.game.participants)
+<<<<<<< HEAD
 
+=======
+>>>>>>> 37cdddad46917adec50ca276bd30aa394cbfc4e9
     return (
       <div>
         <h2>{this.state.game.wager}</h2>
         <h3 id="time">{moment(this.state.game.deadline).countdown().toString()}</h3>
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 37cdddad46917adec50ca276bd30aa394cbfc4e9
         <div className="row">
           {/* List of all User hunts + Edit|View|Delete options per hunt */}
           <div className="gameview clues">
@@ -143,17 +159,23 @@ const Gameview = React.createClass({
               { clues ? clues.map((el)=> this.renderClue(el)) : console.log('no clues available') }
             </ul>  
           </div>
-
           <div className="map">
             <Map />
           </div>
-
           {/* User Hunt Record + Create Hunt btn */}
           <div className="gameview status">
             <h5>Player Status:</h5>
             <div>
               {/* List each player status here */}
               { participants ? participants.map((el)=> this.renderParticipant(el)) : console.log('no participants available') }
+<<<<<<< HEAD
+=======
+            </div>
+            <div>
+              { this.state.game.showNextClue
+                  ? <button onClick={this.handleCheckIn}>Check In</button>
+                  : console.log('showNextClue is false') }
+>>>>>>> 37cdddad46917adec50ca276bd30aa394cbfc4e9
             </div>
             <div>
               { this.state.game.showNextClue 
@@ -167,18 +189,19 @@ const Gameview = React.createClass({
     )
   }
 });
-
 const Clue = React.createClass({
   render() {
     return ( <li>{this.props.details.description}</li> )
   }
 });
-
 const Participant = React.createClass({
     // $( "#progressbar" ).progressbar({
     //   value: this.props.details.progress
     // });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 37cdddad46917adec50ca276bd30aa394cbfc4e9
   render() {
     return (
       <div>
@@ -187,6 +210,4 @@ const Participant = React.createClass({
     )
   }
 });
-
-
 module.exports = Gameview;
