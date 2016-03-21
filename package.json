@@ -10,7 +10,7 @@
     "createdb": "createdb project3_dev && node db/init.js",
     "dropdb": "dropdb --if-exists project3_dev",
     "seeddb": "psql -d project3_dev -f db/seeds.sql",
-    "postinstall": "watchify -t [ babelify --presets [react es2015 ] ] assets/app.js -o public/js/bundle.js -d",
+    "postinstall": "browserify -t [ babelify --presets [react es2015 ] ] assets/app.js -o public/js/bundle.js -d",
     "start": "node server.js"
   },
   "author": "",

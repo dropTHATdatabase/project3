@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const hunts = express.Router();
 const secret = process.env.SECRET;
