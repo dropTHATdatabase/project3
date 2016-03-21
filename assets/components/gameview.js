@@ -50,15 +50,20 @@ const Gameview = React.createClass({
     }
   },
   componentWillMount() {
+    localStorage.currentHuntId = parseInt(this.context.currentHuntId)
     // gets list of hunts from user token
-    $.ajax({
-      url: "/api/v1/hunts/"+this.context.currentHuntId,
-      type: "get",
-      beforeSend: function( xhr ) {
-        xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
-      }
-    }).done((data)=>{ 
-      localStorage.currentHuntId = parseInt(this.context.currentHuntId)
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log(position.coords.latitude, position.coords.longitude)
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+      $.ajax({
+        url: "/api/v1/hunts/"+this.context.currentHuntId+"?lat="+latitude+"&lng="+longitude,
+        type: "get",
+        beforeSend: function( xhr ) {
+          xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
+        }        
+      }).done((data)=>{ 
+      console.log('data returned ', data)
       this.state.game = data.data
       // setting the state of the game
       this.setState({ game: this.state.game })
@@ -77,7 +82,7 @@ const Gameview = React.createClass({
         cluesdb.push(clueobj)
       })
 
-      console.log('clues from the database', cluesdb);
+      // console.log('clues from the database', cluesdb);
       var cluesstring = JSON.stringify(cluesdb);
       // console.log('json string',cluesstring);
       var $hiddenDiv = $('#hidden');
@@ -86,10 +91,10 @@ const Gameview = React.createClass({
        $('#cluesdb').remove();
       // put the clues data from the database into hiddendiv to pass it to google maps script
       $hiddenDiv.append($('<input id="cluesdb" type="hidden" value='+cluesstring+'>'));
-
     }).fail((error)=>{
       console.log('Gameview GET Error: ', error)
     })
+  })
   },
   renderClue(clue) {
     return(<Clue key={clue.clue_id} details={clue} />)
@@ -99,44 +104,28 @@ const Gameview = React.createClass({
   },
   handleCheckIn(event) {
     event.preventDefault();
-    navigator.geolocation.getCurrentPosition((position) => {
-      // console.log(position.coords.latitude, position.coords.longitude)
-      var latitude = position.coords.latitude;
-      var longitude = position.coords.longitude;
-      $.ajax({
-        url: "/api/v1/hunts/"+this.context.currentHuntId+"?lat="+latitude+"&lng="+longitude,
-        type: "get",
-        beforeSend: function( xhr ) {
-          xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
-        }        
-      }).done((data)=>{
-        console.log('booya: ', data)
-      })
-    })
-  
-    // gets current location
-    // $.ajax({
-    //   url: "/api/v1/hunts"
-    //   type: "get",
-    // })
-    console.log('check in button clicked for clue: ', this.state.game.clues)
 
-    // $.ajax({
-    //   url: "/api/v1/hunts/1/clues/"+this.state.game.clues,
-    //   type: "PUT",
-    //   beforeSend: function( xhr ) {
-    //     xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
-    //   }
-    // }).done((data)=>{
-    //   console.log('you get: ', data)
-    // })
+    if(this.state.game.clues.length) {
+      console.log('clue length: ', this.state.game.clues.length)
+      console.log('check in button clicked for clue: ', this.state.game.clues[this.state.game.clues.length-1])    // is this the correct last clue?
+    }
+
+    $.ajax({
+      url: "/api/v1/hunts/"+ this.context.currentHuntId +"/clues/"+this.state.game.clues[this.state.game.clues.length-1].clue_id,
+      type: "PUT",
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
+      }
+    }).done((data)=>{
+      console.log('next clue?: ', data)
+    })
 
   },
   render() {
     var clues = this.state.game.clues;
     var participants = this.state.game.participants;
     // console.log('deadline: ',this.state.game.deadline)
-    // console.log('clues: ', this.state.game.clues)
+    console.log('hunt game: ', this.state.game)
     // console.log('participants: ', this.state.game.participants)
 
     return (
@@ -166,9 +155,9 @@ const Gameview = React.createClass({
               { participants ? participants.map((el)=> this.renderParticipant(el)) : console.log('no participants available') }
             </div>
             <div>
-              { this.state.game.isOwner 
-                  ? console.log('creator view') 
-                  : <button onClick={this.handleCheckIn}>Check In</button> }
+              { this.state.game.showNextClue 
+                  ? <button onClick={this.handleCheckIn}>Check In</button> 
+                  : console.log('showNextClue is false') }
             </div>  
           </div>
         </div>
