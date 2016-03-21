@@ -172,8 +172,14 @@ function update(req, res, next){
 }
 
 function remove(req, res, next){
-
-  next();
+  db.hunts.remove(parseInt(req.params.id))
+    .then(() => {
+      next();
+    })
+    .catch((err) => {
+      console.error(err);
+      res.json({success: false, data: 'Server error'});
+    });
 }
 
 function completeClue(req, res, next){
