@@ -65,14 +65,16 @@ const Gameview = React.createClass({
       // setting the state of the game
       this.setState({ game: this.state.game })
       loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyB2U33goCrZ0Hilh_cdksT1_F8jBgUTl4w&libraries=places&callback=plotlocation');
-      
+
       // grabbing the clues returned from the database
       // need clue number, lat and lng
       var clues = this.state.game.clues;
       var cluesdb =[];
       clues.forEach((el) => {
+        var replacedec = el.description.split(' ').join('+');
         var clueobj ={
           'clue_number': el.clue_number,
+          'desc': replacedec,
           'lat': el.lat,
           'lng': el.lng
         }
