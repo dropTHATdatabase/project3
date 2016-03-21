@@ -274,7 +274,7 @@ function plotlocation() {
 
     var map1 = new google.maps.Map(document.getElementById('map2'), {
     center: {lat: 36.580247, lng: -41.817628},
-    zoom: 6,
+    zoom: 2,
     draggable: true,
     styles: styles
   });
