@@ -18,8 +18,9 @@ module.exports = function(db) {
     get: function(hunt_id){
       return db.one(sql.hunts.get, hunt_id);
     },
-    remove: function(hunt_id){
-      return db.none(sql.hunts.remove, hunt_id);
+    // Values => {hunt_id:, user_id:}
+    remove: function(values){
+      return db.none(sql.hunts.remove, values);
     }
   };
 };

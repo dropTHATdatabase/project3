@@ -172,7 +172,9 @@ function update(req, res, next){
 }
 
 function remove(req, res, next){
-  db.hunts.remove(parseInt(req.params.id))
+  var user_id = parseInt(req.user.user_id);
+  var hunt_id = parseInt(req.params.id);
+  db.hunts.remove({hunt_id: hunt_id, user_id: user_id})
     .then(() => {
       next();
     })
