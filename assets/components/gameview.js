@@ -50,53 +50,53 @@ const Gameview = React.createClass({
       }
     }
   },
-  componentWillMount() {
-    localStorage.currentHuntId = parseInt(this.context.currentHuntId)
-    // gets list of hunts from user token
-    navigator.geolocation.getCurrentPosition((position) => {
-      console.log(position.coords.latitude, position.coords.longitude)
-      var latitude = position.coords.latitude;
-      var longitude = position.coords.longitude;
-      $.ajax({
-        url: "/api/v1/hunts/"+this.context.currentHuntId+"?lat="+latitude+"&lng="+longitude,
-        type: "get",
-        beforeSend: function( xhr ) {
-          xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
-        }        
-      }).done((data)=>{ 
-      console.log('data returned ', data)
-      this.state.game = data.data
-      // setting the state of the game
-      this.setState({ game: this.state.game })
+  // componentWillMount() {
+  //   localStorage.currentHuntId = parseInt(this.context.currentHuntId)
+  //   // gets list of hunts from user token
+  //   navigator.geolocation.getCurrentPosition((position) => {
+  //     console.log(position.coords.latitude, position.coords.longitude)
+  //     var latitude = position.coords.latitude;
+  //     var longitude = position.coords.longitude;
+  //     $.ajax({
+  //       url: "/api/v1/hunts/"+this.context.currentHuntId+"?lat="+latitude+"&lng="+longitude,
+  //       type: "get",
+  //       beforeSend: function( xhr ) {
+  //         xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
+  //       }        
+  //     }).done((data)=>{ 
+  //     console.log('data returned ', data)
+  //     this.state.game = data.data
+  //     // setting the state of the game
+  //     this.setState({ game: this.state.game })
 
-      // grabbing the clues returned from the database
-      // need clue number, lat and lng
-      var clues = this.state.game.clues;
-      var cluesdb =[];
+  //     // grabbing the clues returned from the database
+  //     // need clue number, lat and lng
+  //     var clues = this.state.game.clues;
+  //     var cluesdb =[];
 
-      clues.forEach((el) => {
-        var clueobj ={
-          'clue_number': el.clue_number,
-          'lat': el.lat,
-          'lng': el.lng
-        }
-        cluesdb.push(clueobj)
-      })
+  //     clues.forEach((el) => {
+  //       var clueobj ={
+  //         'clue_number': el.clue_number,
+  //         'lat': el.lat,
+  //         'lng': el.lng
+  //       }
+  //       cluesdb.push(clueobj)
+  //     })
 
-      // console.log('clues from the database', cluesdb);
-      var cluesstring = JSON.stringify(cluesdb);
-      // console.log('json string',cluesstring);
-      var $hiddenDiv = $('#hidden');
-      // console.log('hidden div ', $hiddenDiv);
-      // remove cluesdb if it alreadt
-       $('#cluesdb').remove();
-      // put the clues data from the database into hiddendiv to pass it to google maps script
-      $hiddenDiv.append($('<input id="cluesdb" type="hidden" value='+cluesstring+'>'));
-    }).fail((error)=>{
-      console.log('Gameview GET Error: ', error)
-    })
-  })
-  },
+  //     // console.log('clues from the database', cluesdb);
+  //     var cluesstring = JSON.stringify(cluesdb);
+  //     // console.log('json string',cluesstring);
+  //     var $hiddenDiv = $('#hidden');
+  //     // console.log('hidden div ', $hiddenDiv);
+  //     // remove cluesdb if it alreadt
+  //      $('#cluesdb').remove();
+  //     // put the clues data from the database into hiddendiv to pass it to google maps script
+  //     $hiddenDiv.append($('<input id="cluesdb" type="hidden" value='+cluesstring+'>'));
+  //   }).fail((error)=>{
+  //     console.log('Gameview GET Error: ', error)
+  //   })
+  // })
+  // },
   renderClue(clue) {
     return(<Clue key={clue.clue_id} details={clue} />)
   },
@@ -175,10 +175,6 @@ const Clue = React.createClass({
 });
 
 const Participant = React.createClass({
-    // $( "#progressbar" ).progressbar({
-    //   value: this.props.details.progress
-    // });
-
   render() {
     return (
       <div>
