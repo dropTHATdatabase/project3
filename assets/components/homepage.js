@@ -5,6 +5,7 @@ import { browserHistory, Router, Route, Link } from 'react-router'
 import auth from './../auth'
 
 const $   = require('jquery');
+const moment = require('moment');
 const App = require('./../app.js');
 const Nav = require('./nav.js');
 const Createhunt = require('./createhunt.js').Createhunt;
@@ -134,7 +135,7 @@ const Hunt = React.createClass({
         <td>{this.props.details.wager}</td>
         <td>??</td>
         <td>??</td>
-        <td>{this.props.details.deadline}</td>
+        <td>{moment(this.props.details.deadline).format('MMMM Do YYYY, h:mm:ss a')}</td>
         <td>
           {/* if({this.props.details.isOwner}) {
               (<button id="edit" className="button-primary" onClick={this.handleEdit}>Edit</button>)
