@@ -1,9 +1,8 @@
 
-
-
-
 .welcome{
+  position: relative;
   text-align: center;
+  top: 2em;
 }
 
 #hunt-form{
@@ -52,7 +51,7 @@
 	position: relative;
 	top: 60px;
 	height: auto;
-	min-height: 400px;
+	min-height: 450px;
 	width: 575px;
 	background-color: white;
 	opacity: 0.7;
@@ -96,4 +95,10 @@
   position: relative;
   top: -60em;
   left: 62em;
+}
+
+.homepage-form {
+  position: relative;
+  margin-left: 22px;
+  margin-right: 22px;
 }
