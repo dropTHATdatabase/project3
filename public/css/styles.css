@@ -102,3 +102,29 @@
   margin-left: 22px;
   margin-right: 22px;
 }
+
+#view {
+  position: relative;
+  left: -1em;
+}
+
+.homepage {
+  text-align: center;
+}
+
+.row .col.s9 {
+    margin-left: 28px;
+    width: 72%;
+    left: auto;
+    right: auto;
+}
+.row .col.s3 {
+    width: 24%;
+    height: 34%;
+    margin-left: 12px;
+  }
+
+#createhunt {
+  position: relative;
+  top: -1em;
+}

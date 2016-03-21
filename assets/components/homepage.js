@@ -9,22 +9,22 @@ const App = require('./../app.js');
 const Nav = require('./nav.js');
 const Createhunt = require('./createhunt.js').Createhunt;
 const Gameview = require('./gameview.js');
-// how do we get user info from token in front end?? currently stored in user:{} 
+// how do we get user info from token in front end?? currently stored in user:{}
 
 const Homepage = React.createClass({
-  // set context from parent component  
+  // set context from parent component
   contextTypes: {
     user: React.PropTypes.object,
     router: React.PropTypes.object.isRequired,
     setCurrentHuntId: React.PropTypes.func
   },
   getInitialState() {
-    return { 
+    return {
       hunts: [{}]
     }
   },
   // BEFORE homepage is rendered
-  componentWillMount() {      
+  componentWillMount() {
     // gets list of hunts from user token
     $.ajax({
       url: "/api/v1/hunts",
@@ -32,12 +32,12 @@ const Homepage = React.createClass({
       beforeSend: function( xhr ) {
         xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
       }
-    }).done((data)=>{ 
-      // console.log('Homepage hunts: ', data) 
+    }).done((data)=>{
+      // console.log('Homepage hunts: ', data)
       this.state.hunts = data.data
       this.setState({ hunts: this.state.hunts })
-    }).fail((error)=>{ 
-      console.log('Hunt List Error: ', error) 
+    }).fail((error)=>{
+      console.log('Hunt List Error: ', error)
     })
   },
   // AFTER homepage is rendered - when new hunt is added?
@@ -47,7 +47,7 @@ const Homepage = React.createClass({
     console.log('making AJAX request to edit hunt')
     // AJAX PUT request here
   },
-  // Delete button - deletes /hunts/:id from user's hunts 
+  // Delete button - deletes /hunts/:id from user's hunts
   deleteHunt(hunt) {
     console.log('making AJAX request to delete hunt')
     // AJAX DELETE request here
@@ -69,34 +69,37 @@ const Homepage = React.createClass({
     var hunts = [];
     // console.log('user info: ', this.context.user)
     return (
-      <div>
+      <div className="homepage">
         <h1>Welcome back, {this.context.user.username}!</h1>
 
         <div className="row">
           {/* List of all User hunts + Edit|View|Delete options per hunt */}
-          <section className="eight columns">
-            <h5>Hunt History:</h5>
-            <table className="u-full-width">
+          <section className="card-panel col s9">
+            <h5>Hunt History</h5>
+            <table className="striped centered">
               <thead>
                 <tr>
-                  <th>Hunt Wager</th>
-                  <th>Status</th>
-                  <th>Winner</th>
-                  <th>Deadline</th>
-                  <th>Edit|View|Delete</th>
+                  <th data-field="hunt-wager">Hunt Wager</th>
+                  <th data-field="status">Status</th>
+                  <th data-field="winner">Winner</th>
+                  <th data-field="deadline">Deadline</th>
+                  <th data-field="evd">Edit|View|Delete</th>
                 </tr>
               </thead>
               <tbody>
-                { this.state.hunts.length 
-                  ? (this.state.hunts).forEach( (el)=> hunts.push(this.renderHunt(el)) ) 
-                  : console.log('zero') }
-                {hunts }
+
+                 { this.state.hunts.length
+                    ? (this.state.hunts).forEach( (el)=> hunts.push(this.renderHunt(el)) )
+                    : console.log('zero') }
+                  {hunts }
+
               </tbody>
             </table>
+
           </section>
 
           {/* User Hunt Record + Create Hunt btn */}
-          <section className="three columns">
+          <section className="card-panel col s3">
             <div className="row">
               <h5>Hunt Record:</h5>
               <ul>
@@ -105,9 +108,7 @@ const Homepage = React.createClass({
                 <li>Hunts Won: {this.context.user.hunts_won} </li>
               </ul>
             </div>
-            <button className="button-primary">
-              <Link to='createhunt'>Create A Hunt!</Link>
-            </button>
+            <Link to='createhunt'><button id="createhunt"className="waves-effect waves-light btn">Create A Hunt!</button></Link>
           </section>
         </div>
         {/* {this.props.children} */}
@@ -124,7 +125,6 @@ const Hunt = React.createClass({
   },
   handleGameview(event) {
     event.preventDefault();
-    // console.log('here: ', this.props.details.hunt_id)
     this.context.setCurrentHuntId(this.props.details.hunt_id)
     this.context.router.replace('/gameview')
   },
@@ -135,12 +135,12 @@ const Hunt = React.createClass({
         <td>??</td>
         <td>??</td>
         <td>{this.props.details.deadline}</td>
-        <td id="btn">
+        <td>
           {/* if({this.props.details.isOwner}) {
               (<button id="edit" className="button-primary" onClick={this.handleEdit}>Edit</button>)
             } */}
-          <button id="view" className="button-primary" onClick={this.handleGameview}>View</button>
-          <button id="delete" className="button-primary" onClick={this.deleteHunt}>Delete</button>
+          <button id="view" className="btn waves-effect waves-light orange darken-2" onClick={this.handleGameview}>View</button>
+          <button id="delete" className="btn waves-effect waves-light red accent-4" onClick={this.deleteHunt}>Delete</button>
         </td>
       </tr>
     )
