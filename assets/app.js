@@ -67,11 +67,12 @@ const App = React.createClass({
       return (
         <div>
           <nav className="#303f9f indigo darken-2">
-            <div className="nav=wrapper">
-              <ul className="nav nav-justified ">
+            <div className="nav-wrapper">
+             <a href="#" className="brand-logo">CityDipity</a>
+              <ul className="right hide-on-med-and-down">
                 <li><Link to="/homepage">Home Page</Link></li>
                 <li><Link to="/createhunt">Create hunt</Link></li>
-                <li className="right"><Link to="/logout">Logout</Link></li>
+                <li><Link to="/logout">Logout</Link></li>
               </ul>
             </div>
           </nav>

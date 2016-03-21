@@ -1,3 +1,6 @@
+html {
+   font-family: GillSans, Calibri, Trebuchet, sans-serif;
+ }
 
 .welcome{
   position: relative;
@@ -127,4 +130,32 @@
 #createhunt {
   position: relative;
   top: -1em;
+}
+
+.labels {
+  color: red;
+  background-color: white;
+  font-family: "Lucida Grande", "Arial", sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  width: 40px;
+  border: 2px solid black;
+  white-space: nowrap;
+}
+
+#wager {
+  color:#d50000;
+}
+
+#time {
+  color:#d50000;
+}
+
+#clues {
+  text-shadow: 1px 2px 3px #666;
+}
+
+.text {
+  font-weight: 600;
 }
