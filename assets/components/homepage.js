@@ -50,9 +50,30 @@ const Homepage = React.createClass({
     // AJAX PUT request here
   },
   // Delete button - deletes /hunts/:id from user's hunts
-  deleteHunt(hunt) {
-    console.log('making AJAX request to delete hunt')
-    // AJAX DELETE request here
+  deleteHunt(hunt_id) {
+    $.ajax({
+      url: '/api/v1/hunts/'+hunt_id,
+      method: 'DELETE',
+      beforeSend: function(xhr){
+        xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
+      }
+    }).done(() => {
+      $.ajax({
+        url: "/api/v1/hunts",
+        type: "get",
+        beforeSend: function( xhr ) {
+          xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
+        }
+      }).done((data)=>{
+        // console.log('Homepage hunts: ', data)
+        this.state.hunts = data.data
+        this.setState({ hunts: this.state.hunts })
+      }).fail((error)=>{
+        console.log('Hunt List Error: ', error)
+      })
+    }).fail((err) => {
+      console.log(err);
+    });
   },
   handleGameview(event) {
     event.preventDefault();
@@ -63,7 +84,7 @@ const Homepage = React.createClass({
   // creates new row in table with hunt info
   renderHunt(hunt) {
     return (
-      <Hunt key={hunt.hunt_id} details={hunt} />
+      <Hunt key={hunt.hunt_id} details={hunt} deleteHunt={this.deleteHunt}/>
     )
   },
 
@@ -123,12 +144,17 @@ const Hunt = React.createClass({
   contextTypes: {
     user: React.PropTypes.object,
     router: React.PropTypes.object.isRequired,
-    setCurrentHuntId: React.PropTypes.func
+    setCurrentHuntId: React.PropTypes.func,
+    deleteHunt: React.PropTypes.func
   },
   handleGameview(event) {
     event.preventDefault();
     this.context.setCurrentHuntId(this.props.details.hunt_id)
     this.context.router.replace('/gameview')
+  },
+  deleteHunt(event){
+    event.preventDefault();
+    this.props.deleteHunt(this.props.details.hunt_id);
   },
   render() {
     return (
