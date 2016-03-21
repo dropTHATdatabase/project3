@@ -240,7 +240,7 @@ function buttonSearch(location) {
                    scaledSize: new google.maps.Size(40, 40),
                    anchor: new google.maps.Point(20, 58)
                    },
-       });
+           });
      } else {
        alert("Geocode was not successful for the following reason: " + status);
      }
@@ -271,7 +271,7 @@ function addClick() {
 
 // initilaze function for plotting map location by reading location from the database
 function plotlocation() {
-    console.log('in plot location');
+
     var map1 = new google.maps.Map(document.getElementById('map2'), {
     center: {lat: 36.580247, lng: -41.817628},
     zoom: 6,
@@ -305,28 +305,28 @@ function plotlocation() {
       infoWindow.open(map1, marker);
        });
     }
-    // getting the clues from database
-    var cluesdb = JSON.parse($('#cluesdb').val());
-    console.log(cluesdb);
-    cluesdb.forEach((el)=>{
-      var position = {
-        lat: Number(el.lat),
-        lng: Number(el.lng)
-      };
-      console.log('line 298 map',position);
-      var label = el.clue_number.toString();
-      //plot the location on the map
-      var marker = new google.maps.Marker({
-          map: map1,
-          position: position,
-          animation: google.maps.Animation.DROP,
-          labelClass: "labels",
-          label: label,
-          icon: {
-                  url: '../css/squat_marker_green.svg',
-                  scaledSize: new google.maps.Size(40, 40),
-                  anchor: new google.maps.Point(20, 58)
-                  }
+
+      // getting the clues from database
+      var cluesdb = JSON.parse($('#cluesdb').val());
+      cluesdb.forEach((el)=>{
+        var position = {
+          lat: Number(el.lat),
+          lng: Number(el.lng)
+        };
+        console.log('line 298 map',position);
+        var label = el.clue_number.toString();
+        //plot the location on the map
+        var marker = new google.maps.Marker({
+            map: map1,
+            position: position,
+            animation: google.maps.Animation.DROP,
+            labelClass: "labels",
+            label: label,
+            icon: {
+                    url: '../css/squat_marker_green.svg',
+                    scaledSize: new google.maps.Size(40, 40),
+                    anchor: new google.maps.Point(20, 58)
+                    }
+            });
       });
-    });
   }
