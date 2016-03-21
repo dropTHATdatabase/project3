@@ -51,55 +51,73 @@ const Gameview = React.createClass({
   },
   componentWillMount() {
     // gets list of hunts from user token
-    $.ajax({
-      url: "/api/v1/hunts/"+this.context.currentHuntId,
-      type: "get",
-      beforeSend: function( xhr ) {
-        xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
-      }
-    }).done((data)=>{
-      localStorage.currentHuntId = parseInt(this.context.currentHuntId)
-      this.state.game = data.data
-      // setting the state of the game
-      this.setState({ game: this.state.game })
-
-      // grabbing the clues returned from the database
-      // need clue number, lat and lng
-      var clues = this.state.game.clues;
-      var cluesdb =[];
-
-      clues.forEach((el) => {
-        var clueobj ={
-          'clue_number': el.clue_number,
-          'lat': el.lat,
-          'lng': el.lng
-        }
-        cluesdb.push(clueobj)
-      })
-
-      console.log('clues from the database', cluesdb);
-      var cluesstring = JSON.stringify(cluesdb);
-
-      var $hiddenDiv = $('#hidden');
-
-      // remove cluesdb if it already exists
-       $('#cluesdb').remove();
-      // put the clues data from the database into hiddendiv to pass it to google maps script
-      $hiddenDiv.append($('<input id="cluesdb" type="hidden" value='+cluesstring+'>'));
-
-    }).fail((error)=>{
-      console.log('Gameview GET Error: ', error)
-    })
-  },
-  renderClue(clue) {
-    return(<Clue key={clue.clue_id} details={clue} />)
-  },
-  renderParticipant(participant) {
-    return(<Participant key={participant.participant_id} details={participant} />)
-  },
-  handleCheckIn(event) {
-    event.preventDefault();
+  //   $.ajax({
+  //     url: "/api/v1/hunts/"+this.context.currentHuntId,
+  //     type: "get",
+  //     beforeSend: function( xhr ) {
+  //       xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
+  //     }
+  //   }).done((data)=>{
+  //     localStorage.currentHuntId = parseInt(this.context.currentHuntId)
+  //     this.state.game = data.data
+  //     // setting the state of the game
+  //     this.setState({ game: this.state.game })
+  //
+  //     // grabbing the clues returned from the database
+  //     // need clue number, lat and lng
+  //     var clues = this.state.game.clues;
+  //     var cluesdb =[];
+  //
+  //     clues.forEach((el) => {
+  //       var clueobj ={
+  //         'clue_number': el.clue_number,
+  //         'lat': el.lat,
+  //         'lng': el.lng
+  //       }
+  //       cluesdb.push(clueobj)
+  //     })
+  //
+  //     console.log('clues from the database', cluesdb);
+  //     var cluesstring = JSON.stringify(cluesdb);
+  //
+  //     var $hiddenDiv = $('#hidden');
+  //
+  //     // remove cluesdb if it already exists
+  //      $('#cluesdb').remove();
+  //     // put the clues data from the database into hiddendiv to pass it to google maps script
+  //     $hiddenDiv.append($('<input id="cluesdb" type="hidden" value='+cluesstring+'>'));
+  //
+  //   }).fail((error)=>{
+  //     console.log('Gameview GET Error: ', error)
+  //   })
+  // },
+  // renderClue(clue) {
+  //   return(<Clue key={clue.clue_id} details={clue} />)
+  // },
+  // renderParticipant(participant) {
+  //   return(<Participant key={participant.participant_id} details={participant} />)
+  // },
+  // handleCheckIn(event) {
+  //   event.preventDefault();
+  //   navigator.geolocation.getCurrentPosition((position) => {
+  //     var latitude = position.coords.latitude;
+  //     var longitude = position.coords.longitude;
+  //     $.ajax({
+  //       url: "/api/v1/hunts/"+this.context.currentHuntId+"?lat="+latitude+"&lng="+longitude,
+  //       type: "get",
+  //       beforeSend: function( xhr ) {
+  //         xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
+  //       }
+  //     }).done((data)=>{
+  //       console.log('booya: ', data)
+  //     })
+  //   })
+  //   console.log('check in button clicked for clue: ', this.state.game.clues)
+  //
+  localStorage.currentHuntId = parseInt(this.context.currentHuntId)
+    // gets list of hunts from user token
     navigator.geolocation.getCurrentPosition((position) => {
+      console.log('line120',position.coords.latitude, position.coords.longitude)
       var latitude = position.coords.latitude;
       var longitude = position.coords.longitude;
       $.ajax({
@@ -109,11 +127,41 @@ const Gameview = React.createClass({
           xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
         }
       }).done((data)=>{
-        console.log('booya: ', data)
+      console.log('data returned ', data)
+      console.log('line131');
+      this.state.game = data.data
+      // setting the state of the game
+      // this.setState({ game: this.state.game })
+      console.log('line134',this.state.game )
+      // grabbing the clues returned from the database
+      // need clue number, lat and lng
+      $('#cluesdb').remove();
+      var clues = this.state.game.clues;
+      console.log('line137', clues);
+      var cluesdb =[];
+      clues.forEach((el) => {
+        var clueobj ={
+          'clue_number': el.clue_number,
+          'lat': el.lat,
+          'lng': el.lng
+        }
+        cluesdb.push(clueobj)
       })
-    })
-    console.log('check in button clicked for clue: ', this.state.game.clues)
+      // console.log('clues from the database', cluesdb);
+      var cluesstring = JSON.stringify(cluesdb);
+      // console.log('json string',cluesstring);
+      var $hiddenDiv = $('#hidden');
+      // console.log('hidden div ', $hiddenDiv);
+      // remove cluesdb if it alreadt
 
+      // put the clues data from the database into hiddendiv to pass it to google maps script
+      $hiddenDiv.append($('<input id="cluesdb" type="hidden" value='+cluesstring+'>'));
+
+      this.forceUpdate();
+    }).fail((error)=>{
+      console.log('Gameview GET Error: ', error)
+    })
+  })
 
   },
   render() {
@@ -132,7 +180,7 @@ const Gameview = React.createClass({
         <div className="row">
           {/* List of all User hunts + Edit|View|Delete options per hunt */}
           <div className="card-panel z-depth-5 gameview clues center-align">
-            <h5 className="#7986cb indigo lighten-2"id="clues">Clues:</h5>
+            <h5 id="clues">Clues:</h5>
             <ul className="text collection">
               {/* List all clues here */}
               { clues ? clues.map((el)=> this.renderClue(el)) : console.log('no clues available') }
@@ -145,7 +193,7 @@ const Gameview = React.createClass({
 
           {/* User Hunt Record + Create Hunt btn */}
           <div className="card-panel z-depth-5 gameview status center-align">
-            <h5 id="clues"className="#7986cb indigo lighten-2">Player Status:</h5>
+            <h5 id="clues">Player Status:</h5>
             <ul className="text collection">
               {/* List each player status here */}
               { participants ? participants.map((el)=> this.renderParticipant(el)) : console.log('no participants available') }
@@ -153,7 +201,7 @@ const Gameview = React.createClass({
             <div>
               { this.state.game.isOwner
                   ? console.log('creator view')
-                  : <button onClick={this.handleCheckIn}>Check In</button> }
+                  : <button className="waves-effect waves-light btn" onClick={this.handleCheckIn}>Check In</button> }
             </div>
           </div>
         </div>
