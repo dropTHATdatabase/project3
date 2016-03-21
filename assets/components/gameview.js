@@ -177,11 +177,11 @@ const Gameview = React.createClass({
         <div className="row">
           {/* List of all User hunts + Edit|View|Delete options per hunt */}
           <div className="card-panel z-depth-5 gameview clues center-align">
-            <h5 id="clues">Clues:</h5>
-            <ul className="text collection">
+            <h5 id="title">Clues:</h5>
+            <div className="text collection">
               {/* List all clues here */}
               { clues ? clues.map((el)=> this.renderClue(el)) : console.log('no clues available') }
-            </ul>  
+            </div>  
           </div>
 
           <div className="map">
@@ -190,11 +190,11 @@ const Gameview = React.createClass({
 
           {/* User Hunt Record + Create Hunt btn */}
           <div className="card-panel z-depth-5 gameview status center-align">
-            <h5 id="clues">Player Status:</h5>
-            <ul className="text collection">
+            <h5 id="title">Player Status:</h5>
+            <div className="text collection">
               {/* List each player status here */}
               { participants ? participants.map((el)=> this.renderParticipant(el)) : console.log('no participants available') }
-            </ul>
+            </div>
             <div>
               { this.state.game.showNextClue 
                   ? <button onClick={this.handleCheckIn}>Check In</button> 
@@ -211,7 +211,7 @@ const Gameview = React.createClass({
 
 const Clue = React.createClass({
   render() {
-    return ( <li>{this.props.details.description}</li> )
+    return ( <div className="listItem">{this.props.details.description}</div> )
   }
 });
 
@@ -219,9 +219,9 @@ const Clue = React.createClass({
 const Participant = React.createClass({
   render() {
     return (
-      <li>
-        {this.props.details.username}: <div><Progress completed={this.props.details.progress*100} /></div>
-      </li>
+      <div className="listItem">
+        {this.props.details.username}: <div id="progress"><Progress completed={this.props.details.progress*100} /></div>
+      </div>
     )
   }
 });
