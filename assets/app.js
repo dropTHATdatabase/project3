@@ -16,7 +16,7 @@ const App = React.createClass({
   getInitialState() {
     return {
       loggedIn: auth.loggedIn(),
-      currentHuntId: localStorage.currentHuntId || 0,
+      currentHuntId: parseInt(localStorage.currentHuntId) || 0,
       user: {}
     }
   },
