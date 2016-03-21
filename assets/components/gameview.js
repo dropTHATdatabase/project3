@@ -171,14 +171,14 @@ const Gameview = React.createClass({
       <div>
         <div className="center-align">
           <h2>{this.state.game.wager}</h2>
-          <h3 id="time">{moment(this.state.game.deadline).countdown().toString()}</h3>
+          <h4 id="time">Time Left: {moment(this.state.game.deadline).countdown().toString()}</h4>
         </div>
 
         <div className="row">
           {/* List of all User hunts + Edit|View|Delete options per hunt */}
           <div className="card-panel z-depth-5 gameview clues center-align">
             <h5 id="title">Clues:</h5>
-            <div className="text collection">
+            <div className="text">
               {/* List all clues here */}
               { clues ? clues.map((el)=> this.renderClue(el)) : console.log('no clues available') }
             </div>  
@@ -191,13 +191,13 @@ const Gameview = React.createClass({
           {/* User Hunt Record + Create Hunt btn */}
           <div className="card-panel z-depth-5 gameview status center-align">
             <h5 id="title">Player Status:</h5>
-            <div className="text collection">
+            <div className="text">
               {/* List each player status here */}
               { participants ? participants.map((el)=> this.renderParticipant(el)) : console.log('no participants available') }
             </div>
             <div>
               { this.state.game.showNextClue 
-                  ? <button onClick={this.handleCheckIn}>Check In</button> 
+                  ? <button style={{marginTop: '40px'}} onClick={this.handleCheckIn}>Check In</button> 
                   : console.log('showNextClue is false') }
             </div>  
           </div>

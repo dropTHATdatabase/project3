@@ -16,7 +16,7 @@ const Map = React.createClass({
     }
     let sectionstyle ={
       position: 'relative',
-      left: '13em',
+      left: '27em',
       top: '4em'
     }
     return (

@@ -105,9 +105,8 @@ const Homepage = React.createClass({
                 <tr>
                   <th data-field="hunt-wager">Hunt Wager</th>
                   <th data-field="status">Status</th>
-                  <th data-field="winner">Winner</th>
                   <th data-field="deadline">Deadline</th>
-                  <th data-field="evd">Edit|View|Delete</th>
+                  <th data-field="evd"></th>
                 </tr>
               </thead>
               <tbody>
@@ -158,11 +157,18 @@ const Hunt = React.createClass({
     this.props.deleteHunt(this.props.details.hunt_id);
   },
   render() {
+    var timeLeft = (moment(this.props.details.deadline)-moment.now())
+    // console.log(moment(this.props.details.deadline)-moment.now())
+    var status;
+    if(timeLeft > 0) {
+      status = 'In Session'
+    } else {
+      status = 'Ended'
+    }
     return (
       <tr key={this.props.details.hunt_id}>
         <td>{this.props.details.wager}</td>
-        <td>??</td>
-        <td>??</td>
+        <td>{status}</td>
         <td>{moment(this.props.details.deadline).format('MMMM Do YYYY, h:mm:ss a')}</td>
         <td>
           {/* if({this.props.details.isOwner}) {
