@@ -182,7 +182,7 @@ const Participant = React.createClass({
   render() {
     return (
       <div>
-        {this.props.details.username}: <div><Progress completed={this.props.details.progress} /></div>
+        {this.props.details.username}: <div><Progress completed={this.props.details.progress*100} /></div>
       </div>
     )
   }
