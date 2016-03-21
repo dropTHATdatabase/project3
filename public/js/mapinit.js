@@ -153,7 +153,7 @@ function initMap() {
     draggable: true,
     styles: styles
   });
-
+  
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = {
@@ -165,13 +165,13 @@ function initMap() {
       infoWindow.setContent('Current Location');
       map.setCenter(pos);
 
-      var marker = new google.maps.Marker({
+       marker = new google.maps.Marker({
             map: map,
             position: pos,
             animation: google.maps.Animation.DROP,
             label: 'A'
       });
-      // marker.addListener('click', toggleBounce(marker));
+      console.log('line 174');
       infoWindow.open(map, marker);
        });
 
@@ -197,8 +197,6 @@ function buttonSearch(location) {
 
   var geocoder = new google.maps.Geocoder();
   var address = {'address': location};
-
-
 
   geocoder.geocode(address, function (results, status) {
     console.log(cluenumber);
@@ -254,16 +252,17 @@ function addClick() {
 }
 
 // for marker animation
-function toggleBounce(marker) {
-  if (marker.getAnimation() !== null) {
-    marker.setAnimation(null);
-  } else {
-    marker.setAnimation(google.maps.Animation.BOUNCE);
-  }
-}
+// function toggleBounce() {
+//   if (marker.getAnimation() !== null) {
+//     marker.setAnimation(null);
+//   } else {
+//     marker.setAnimation(google.maps.Animation.BOUNCE);
+//   }
+// }
 
 // initilaze function for plotting map location by reading location from the database
 function plotlocation() {
+    console.log('in plot location');
     var map1 = new google.maps.Map(document.getElementById('map2'), {
     center: {lat: 36.580247, lng: -41.817628},
     zoom: 6,
@@ -293,6 +292,7 @@ function plotlocation() {
     }
     // getting the clues from database
     var cluesdb = JSON.parse($('#cluesdb').val());
+    console.log(cluesdb);
     cluesdb.forEach((el)=>{
       var position = {
         lat: Number(el.lat),
