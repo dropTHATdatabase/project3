@@ -9,7 +9,6 @@ const moment_countdown = require('moment-countdown');
 const Createhunt = require('./createhunt.js');
 const Map = React.createClass({
   componentDidMount : function() {
-   loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyB2U33goCrZ0Hilh_cdksT1_F8jBgUTl4w&libraries=places&callback=plotlocation');
   },
   render : function() {
     let divstyle = {
@@ -65,6 +64,8 @@ const Gameview = React.createClass({
       this.state.game = data.data
       // setting the state of the game
       this.setState({ game: this.state.game })
+      loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyB2U33goCrZ0Hilh_cdksT1_F8jBgUTl4w&libraries=places&callback=plotlocation');
+      
       // grabbing the clues returned from the database
       // need clue number, lat and lng
       var clues = this.state.game.clues;
