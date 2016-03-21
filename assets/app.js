@@ -6,10 +6,7 @@ import auth from './auth'
 const Signup = require('./components/signup.js');
 const Login = require('./components/login.js');
 const Logout = require('./components/logout.js');
-const Homepage = require('./components/homepage.js');
-const Nav = require('./components/nav.js');
-const Createhunt = require('./components/createhunt.js').Createhunt;
-// const Gameview = require('./components/gameview.js');
+const Gameview = require('./components/gameview.js')
 
 const App = React.createClass({
   getInitialState() {
@@ -97,15 +94,13 @@ const Welcome = React.createClass({
 render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
-      <IndexRoute component={Welcome} />
-      <Route path="/signup" component={Signup} /> 
-      <Route path="/login" component={Login} />
-      <Route path="/logout" component={Logout} /> 
-      <Route path="/nav" component={Nav} />
-      <Route path="/homepage" component={Homepage} /> 
-      {/* <Route path="/gameview" component={Gameview} /> */}
-      <Route path="/createhunt" component={Createhunt} />
-      <Route path="/deny" component={DenyAccess} />
+      <Route path="signup" component={SignUp} />
+      <Route path="login" component={Login} />
+      <Route path="logout" component={Logout} />
+      <Route path="createhunt" component={Createhunt} />
+      <Route path="homepage" component={Homepage} />
+      <Route path="gameview" component={Gameview} />
+      {/* homepage, gameview,*/}
     </Route>
     <Route path="*" component={Error} />
   </Router>
@@ -113,25 +108,4 @@ render((
 
 
 
-// all nested components 
-
-// render((
-//   <Router history={browserHistory}>
-//     <Route path="/" component={App}>
-//       <Route path="signup" component={Signup} />
-//       <Route path="login" component={Login} />
-//       <Route path="logout" component={Logout} /> 
-//       <Route path="homepage" component={Homepage}> 
-//         <Route path="nav" component={Nav} />
-//         <Route path="createhunt" component={Createhunt}>
-//           <Route path="nav" component={Nav} />
-//         </Route>
-//         <Route path="gameview" component={Gameview}>
-//           <Route path="nav" component={Nav} />
-//         </Route>
-//       </Route>
-//       <Route path="*" component={Error} />
-//     </Route>
-//   </Router>
-// ), document.getElementById('container'))
 
