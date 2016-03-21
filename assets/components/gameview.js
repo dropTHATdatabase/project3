@@ -110,10 +110,10 @@ const Gameview = React.createClass({
   //   }).fail((error)=>{
   //     console.log('Gameview GET Error: ', error)
   //   })
-  // },
-  // renderClue(clue) {
-  //   return(<Clue key={clue.clue_id} details={clue} />)
-  // },
+  },
+  renderClue(clue) {
+    return(<Clue key={clue.clue_id} details={clue} />)
+  },
   // renderParticipant(participant) {
   //   return(<Participant key={participant.participant_id} details={participant} />)
   // },
