@@ -41,7 +41,9 @@ const Homepage = React.createClass({
     })
   },
   // AFTER homepage is rendered - when new hunt is added?
-  componentDidMount() {},
+  componentDidMount() {
+    $('#cluesdb').val('');
+  },
   // Edit button - edits hunts/:id info (for owner_id ONLY)
   editHunt(hunt) {
     console.log('making AJAX request to edit hunt')
