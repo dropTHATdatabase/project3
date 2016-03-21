@@ -140,7 +140,7 @@ const Gameview = React.createClass({
       <div>
         <h2>
           <span>{this.state.game.wager}</span>
-          <span>Deadline: {moment(this.state.game.deadline).fromNow()}</span>
+          <span>Deadline: {moment(this.state.game.deadline).format('LLLL')}</span>
         </h2>
         <div className="row">
           {/* List of all User hunts + Edit|View|Delete options per hunt */}
