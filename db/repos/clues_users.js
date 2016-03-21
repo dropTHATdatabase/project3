@@ -15,6 +15,9 @@ module.exports = function(db) {
     // Values = {clue_id:, user_id:}
     completeClue: function(values){
       return db.none(sql.clues_users.completeClue, values);
+    },
+    completeInitial: function(clue_id){
+      return db.none(sql.clues_users.completeInitial, clue_id);
     }
   };
 };

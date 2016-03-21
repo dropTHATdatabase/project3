@@ -13,9 +13,9 @@ VALUES
 
 INSERT INTO clues(hunt_id, clue_number, description, lat, lng)
 VALUES
-(1, 0, 'Where GA is', 1, 1),
-(1, 1, 'Where harry lives', 2, 2),
-(2, 0, 'Where the statue of liberty is', 3,3);
+(1, 1, 'Where GA is', 1, 1),
+(1, 2, 'Where harry lives', 2, 2),
+(2, 1, 'Where the statue of liberty is', 3,3);
 
 INSERT INTO participants(hunt_id, participant_id)
 VALUES

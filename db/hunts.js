@@ -136,7 +136,6 @@ function get(req, res, next){
                      var dY = dLng * 84464.08477820261;
                      // Distance in meters
                      var distance = Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
-                     console.log('distance: ', distance)
                      // If the lat/lon from the next clue is
                      // within 1000m of the lat and lon of the user
                      // add the next clue to clues and set
