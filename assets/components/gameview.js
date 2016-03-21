@@ -51,7 +51,7 @@ const Gameview = React.createClass({
     }
   },
       // Peter;s code
-  // componentWillMount() {
+  componentWillMount() {
   //   localStorage.currentHuntId = parseInt(this.context.currentHuntId)
   //   // gets list of hunts from user token
   //   navigator.geolocation.getCurrentPosition((position) => {
