@@ -168,7 +168,7 @@ const Hunt = React.createClass({
               (<button id="edit" className="button-primary" onClick={this.handleEdit}>Edit</button>)
             } */}
           <button id="view" className="btn waves-effect waves-light orange darken-2" onClick={this.handleGameview}>View</button>
-          <button id="delete" className="btn waves-effect waves-light red accent-4" onClick={this.deleteHunt}>Delete</button>
+          {this.props.details.isOwner ? <button id="delete" className="btn waves-effect waves-light red accent-4" onClick={this.deleteHunt}>Delete</button> : ''}
         </td>
       </tr>
     )
