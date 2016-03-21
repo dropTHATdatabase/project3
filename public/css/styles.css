@@ -1,4 +1,6 @@
-
+html {
+   font-family: GillSans, Calibri, Trebuchet, sans-serif;
+ }
 
 .welcome{
   position: relative;
@@ -35,7 +37,7 @@
   position: relative;
   top: -22em;
   left: 0em;
-  width: 9em;
+  width: 10em;
 }
 
 #container {
@@ -140,4 +142,20 @@
   width: 40px;
   border: 2px solid black;
   white-space: nowrap;
+}
+
+#wager {
+  color:#d50000;
+}
+
+#time {
+  color:#d50000;
+}
+
+#clues {
+  text-shadow: 1px 2px 3px #666;
+}
+
+.text {
+  font-weight: 600;
 }

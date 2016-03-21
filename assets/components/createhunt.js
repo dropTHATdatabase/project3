@@ -45,6 +45,7 @@ const Huntform = React.createClass({
     router: React.PropTypes.object
   },
   componentDidMount:function() {
+    $('#cluesdb').val('');
     $.ajax({
       url:'/api/v1/users',
       method: 'GET',
@@ -162,7 +163,7 @@ const Huntform = React.createClass({
 
 
 const Createhunt = React.createClass({
-  // set context from parent component  
+  // set context from parent component
   contextTypes: {
     setCurrentHuntId: React.PropTypes.func,
     currentHuntId: React.PropTypes.number,
