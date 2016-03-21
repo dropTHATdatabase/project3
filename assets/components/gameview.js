@@ -135,6 +135,7 @@ const Gameview = React.createClass({
   render() {
     var clues = this.state.game.clues;
     var participants = this.state.game.participants;
+    console.log('deadline: ',this.state.game.deadline)
     // console.log('clues: ', this.state.game.clues)
     // console.log('participants: ', this.state.game.participants)
     return (
