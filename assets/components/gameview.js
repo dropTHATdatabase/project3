@@ -5,7 +5,7 @@ import auth from '../auth'
 
 const $   = require('jquery');
 const moment = require('moment');
-const momentcd = require('moment-countdown');
+const moment_countdown = require('moment-countdown');
 const Createhunt = require('./createhunt.js');
 
 const Map = React.createClass({
@@ -135,7 +135,7 @@ const Gameview = React.createClass({
   render() {
     var clues = this.state.game.clues;
     var participants = this.state.game.participants;
-    console.log('deadline: ',this.state.game.deadline)
+    // console.log('deadline: ',this.state.game.deadline)
     // console.log('clues: ', this.state.game.clues)
     // console.log('participants: ', this.state.game.participants)
 
