@@ -16,7 +16,7 @@ const App = React.createClass({
   getInitialState() {
     return {
       loggedIn: auth.loggedIn(),
-      currentHuntId: localStorage.currentHuntId || 0,
+      currentHuntId: parseInt(localStorage.currentHuntId) || 0,
       user: {}
     }
   },
@@ -34,12 +34,12 @@ const App = React.createClass({
      setUser: this.setUser
    }
  },
- setUser: function(user){
+  setUser: function(user){
    this.setState({user: user});
- },
- setCurrentHuntId: function(id){
+  },
+  setCurrentHuntId: function(id){
    this.setState({currentHuntId: id});
- },
+  },
   updateAuth(loggedIn) {
     this.setState({loggedIn: loggedIn});
     if(loggedIn){

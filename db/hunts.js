@@ -120,6 +120,7 @@ function get(req, res, next){
                   {hunt_id: hunt_id,
                    clue_number: clues.length
                  }).then((nextClue) => {
+                  console.log('next clue: ', nextClue)
                    if(nextClue){
                      var lat1 = Number(req.query.lat) || 0;
                      var lng1 = Number(req.query.lng) || 0;
@@ -135,6 +136,7 @@ function get(req, res, next){
                      var dY = dLng * 84464.08477820261;
                      // Distance in meters
                      var distance = Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
+                     console.log('distance: ', distance)
                      // If the lat/lon from the next clue is
                      // within 1000m of the lat and lon of the user
                      // add the next clue to clues and set
