@@ -65,10 +65,10 @@ const App = React.createClass({
   render() {
     if(this.state.loggedIn) {
       return (
-        <div>
-          <nav className="#303f9f indigo darken-2">
+        <div id="page_bg">
+          <nav>
             <div className="nav-wrapper">
-             <a href="#" className="brand-logo">CityDipity</a>
+             <a href="#" className="brand-logo #bbdefb blue-text text-lighten-4">CityDipity</a>
               <ul className="right hide-on-med-and-down">
                 <li><Link to="/homepage">Home Page</Link></li>
                 <li><Link to="/createhunt">Create hunt</Link></li>
