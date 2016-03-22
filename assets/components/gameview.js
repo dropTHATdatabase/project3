@@ -20,8 +20,8 @@ const Map = React.createClass({
     }
     let sectionstyle = {
       position: 'relative',
-      left: '1em',
-      top: '-399px'
+      left: '0em',
+      top: '-403px'
     }
     return (
       <section style={sectionstyle}>
@@ -58,8 +58,8 @@ const Gameview = React.createClass({
         type: "get",
         beforeSend: function( xhr ) {
           xhr.setRequestHeader("Authorization", "Bearer " + auth.getToken());
-        }        
-      }).done((data)=>{ 
+        }
+      }).done((data)=>{
       console.log('data returned ', data)
       this.state.game = data.data
       // setting the state of the game
@@ -183,7 +183,7 @@ const Gameview = React.createClass({
             <div className="text">
               {/* List all clues here */}
               { clues ? clues.map((el)=> this.renderClue(el)) : console.log('no clues available') }
-            </div>  
+            </div>
           </div>
 
           <div className="map">
@@ -198,10 +198,10 @@ const Gameview = React.createClass({
               { participants ? participants.map((el)=> this.renderParticipant(el)) : console.log('no participants available') }
             </div>
             <div>
-              { this.state.game.showNextClue 
-                  ? <button style={{marginTop: '40px'}} onClick={this.handleCheckIn}>Check In</button> 
+              { this.state.game.showNextClue
+                  ? <button style={{marginTop: '40px'}} onClick={this.handleCheckIn}>Check In</button>
                   : console.log('showNextClue is false') }
-            </div>  
+            </div>
           </div>
         </div>
         {/* {this.props.children} */}
