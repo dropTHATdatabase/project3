@@ -4,6 +4,10 @@ GA-Bowie Group Project
 
 #![](http://salidarec.com/wp-content/uploads/2014/07/scavenger-hunt.gif)
 
+### Visit The Website
+
+[citydipity.herokuapp.com](http://citydipity.herokuapp.com)
+
 ### Mission Statement
 Fun way of exploring the areas around you with your friends
 
