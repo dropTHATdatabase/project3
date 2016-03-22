@@ -35,7 +35,7 @@ html {
 
 #addclue {
   position: relative;
-  top: -26em;
+  top: -30em;
   left: 5em;
   width: 10em;
 }
@@ -54,7 +54,7 @@ html {
     position: relative;
     top: 60px;
     height: auto;
-    min-height: 450px;
+    min-height: 525px;
     width: 575px;
     background-color: white;
     opacity: 0.7;
@@ -65,8 +65,8 @@ html {
 .box h1 {
     position: relative;
     font-size: 40px;
-  width: 12em;
-  left: -2em;
+    width: 12em;
+    left: -2em;
     padding: 40px 0 0 177px;
 
 }
@@ -82,16 +82,18 @@ html {
 
 #page_bg {
   background: url(citydipity.jpeg) no-repeat;
-  background-size: 100%;
+  background-size: cover;
   width: 100%;
   height: 100%;
-/*  position: fixed;*/
+  /*position: fixed;*/
   top: 1em;
 }
 
 form#participants {
   padding: 35px;
   background-color: white;
+  padding-bottom: 84px;
+  width: 122%;
 }
 
 .gameview {
@@ -176,13 +178,13 @@ h1 span {
 .clues {
   position: relative;
   top: 1em;
-  left: -1em;
+  left: -4em;
 }
 
 .status {
   position: relative;
-  top: -60em;
-  left: 62em;
+  top: -908px;
+  left: 59em;
 }
 
 .homepage-form {

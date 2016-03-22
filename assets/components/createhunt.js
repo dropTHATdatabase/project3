@@ -9,15 +9,15 @@ const Map = React.createClass({
   },
   render : function() {
     let divstyle ={
-      height: "600px",
+      height: "620px",
       width: "680px",
       margin: '0 auto',
       position: 'relative'
     }
     let sectionstyle ={
       position: 'relative',
-      left: '27em',
-      top: '4em'
+      left: '28em',
+      top: '5em'
     }
     return (
       <section style={sectionstyle}>
