@@ -8,6 +8,11 @@ GA-Bowie Group Project
 
 [citydipity.herokuapp.com](http://citydipity.herokuapp.com)
 
+```javascript
+demo username: peter
+demo password: peter
+```
+
 ### Mission Statement
 Fun way of exploring the areas around you with your friends
 
